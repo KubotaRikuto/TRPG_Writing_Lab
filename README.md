@@ -1,4 +1,4 @@
-# <TRPG writing Lab>
+# TRPG writing Lab
 
 ## サイト概要
 ### サイトテーマ
