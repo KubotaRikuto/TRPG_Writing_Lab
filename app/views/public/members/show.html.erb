@@ -1,2 +1,16 @@
-<h1>Public::Members#show</h1>
-<p>Find me in app/views/public/members/show.html.erb</p>
+<h1>ユーザー情報</h1>
+ログイン：<%= current_member.name%>
+<p><%= @member.name %></p>
+<p><%= @member.introduction %></p>
+<p>
+  <% if @member.last_sign_in_at > 7.days.ago %>
+    <%= "最終ログイン: #{time_ago_in_words(@member.last_sign_in_at)}前" %>
+  <% else %>
+    <%= "最終ログイン: #{@member.last_sign_in_at.strftime('%Y年%m月%d日')}" %>
+  <% end %>
+</p>
+<br>
+
+<% if current_member.id == @member.id %>
+  <%= link_to "ユーザー情報の編集"%>
+<% end %>

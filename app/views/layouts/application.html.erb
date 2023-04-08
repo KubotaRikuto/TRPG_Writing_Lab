@@ -11,6 +11,29 @@
   </head>
 
   <body>
-    <%= yield %>
+    <!-- ヘッダー -->
+    <header>
+      <nav>
+        <div>
+          <%= link_to root_path do %>
+            <h1>ロゴ</h1>
+          <% end %>
+        </div>
+        <% if member_signed_in? %>
+          <%= link_to "ログアウト", destroy_member_session_path, method: :delete %>
+        <% elsif admin_signed_in? %>
+        b
+        <% else %>
+          <%= link_to "アカウントを作成", new_member_registration_path %>
+          <%= link_to "ログイン", new_member_session_path %>
+        <% end %>
+      </nav>
+    </header>
+    <!-- メイン -->
+    <main>
+      <%= yield %>
+    </main>
+    <!-- フッター -->
+    <footer></footer>
   </body>
 </html>
