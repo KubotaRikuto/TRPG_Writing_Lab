@@ -1,0 +1,2 @@
+module Admin::PostLikesHelper
+end
