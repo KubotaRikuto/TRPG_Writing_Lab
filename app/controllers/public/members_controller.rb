@@ -1,31 +1,52 @@
 class Public::MembersController < ApplicationController
+  # ログアウト中はサインイン画面にリダイレクト
   before_action :authenticate_member!
-  helper_method :current_sign_in_at, :last_sign_in_at
+  # helper_method :current_sign_in_at, :last_sign_in_at
 
   def index
+    @members = Member.active.page(params[:page])
   end
 
   def show
     @member = Member.find(params[:id])
-    @last_sign_in = @member.last_sign_in_at
   end
 
   def edit
+    @member = current_member
   end
 
   def update
+    @member = current_member
+    if @member.update!(member_params)
+      flash[:notice] = "プロフィールを変更しました"
+      redirect_to member_path(@member.id)
+    else
+      flash[:notice] = "プロフィールの変更に失敗しました"
+      render :edit
+    end
+  end
+
+  # 退会処理
+  def withdrawl
+    @member = current_member
+    @member.update(is_deleted: true)
+    # 退会後はsessionIDのresetを実行
+    reset_session
+    redirect_to root_path
   end
 
   private
 
   def member_params
-    params.require(:member).permit(:name, :email, :introduction, :is_deleted, :last_sign_in_at)
-  end
-  def current_sign_in_at
-    current_member.current_sign_in_at if current_member
+    params.require(:member).permit(:name, :email, :introduction, :profile_image, :is_deleted)
   end
 
-  def last_sign_in_at
-    current_member.last_sign_in_at if current_member
-  end
+  # ログイン日時メソッド
+  # def current_sign_in_at
+  #   current_member.current_sign_in_at if current_member
+  # end
+
+  # def last_sign_in_at
+  #   current_member.last_sign_in_at if current_member
+  # end
 end

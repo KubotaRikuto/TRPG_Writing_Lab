@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     resources :members, only: [:index, :show, :edit, :update ]
-    get 'members/withdrawl' => 'members#withdrawl'
+    patch 'members/withdrawl/:id' => 'members#withdrawl', as: 'members_withdrawl'
 
   end
   # ------

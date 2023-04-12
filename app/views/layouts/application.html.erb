@@ -19,10 +19,20 @@
             <h1>ロゴ</h1>
           <% end %>
         </div>
+        <!-- 会員側 -->
         <% if member_signed_in? %>
+          <%= link_to "メンバー", members_path %>
+          <!--シナリオ・ルール -->
+          <!-- テストプレイ -->
           <%= link_to "ログアウト", destroy_member_session_path, method: :delete %>
+        <!-- 管理者 -->
         <% elsif admin_signed_in? %>
-        b
+          <!-- メンバー -->
+          <!-- シナリオ・ルール -->
+          <!-- テストプレイ -->
+          <!-- ログアウト -->
+
+        <!-- ログアウト時 -->
         <% else %>
           <%= link_to "アカウントを作成", new_member_registration_path %>
           <%= link_to "ログイン", new_member_session_path %>

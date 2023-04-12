@@ -1,2 +1,11 @@
-<h1>Public::Members#index</h1>
-<p>Find me in app/views/public/members/index.html.erb</p>
+<h1>メンバー一覧</h1>
+
+<div>
+  <% @members.each do |member| %>
+    <%= image_tag member.get_profile_image(100,100) %>
+    <%= member.name %><br>
+  <% end %>
+</div>
+<div>
+<%= paginate @members %>
+</div>

@@ -2,10 +2,30 @@ class Member < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
-  validates_format_of :password, with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i, message: "は半角英数字で入力してください"
-
+  # --- Devise機能 ---
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
+  #-----------------
+
+  # --- Active Storage ---
+  has_one_attached :profile_image
+  #-----------------
+
+  # --- スコープ ---
+  # 退会ユーザーは非表示
+  scope :active, -> { where(is_deleted: false) }
+  #-----------------
+
+
+  # --- カスタムメソッド ---
+  # プロファイル画像のサイズ変更
+  def get_profile_image(width,height)
+    unless profile_image.attached?
+      file_path = Rails.root.join('app/assets/images/no_image.jpg')
+      profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+    end
+    profile_image.variant(resize_to_limit: [width, height]).processed
+  end
 
   # 不要なら削除
   # def last_sign_in_time_ago
