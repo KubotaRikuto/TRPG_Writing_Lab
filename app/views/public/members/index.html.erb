@@ -2,10 +2,12 @@
 
 <div>
   <% @members.each do |member| %>
-    <%= image_tag member.get_profile_image(100,100) %>
-    <%= member.name %><br>
+    <%= link_to member_path(member.id) do %>
+      <%= image_tag member.get_profile_image(100,100) %>
+      <%= member.name %><br>
+    <% end %>
   <% end %>
 </div>
 <div>
-<%= paginate @members %>
+  <%= paginate @members %>
 </div>

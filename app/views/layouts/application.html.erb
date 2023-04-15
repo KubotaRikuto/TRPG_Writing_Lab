@@ -35,9 +35,14 @@
         <!-- ログアウト時 -->
         <% else %>
           <%= link_to "アカウントを作成", new_member_registration_path %>
+          <%= link_to "ゲストログイン", member_guest_sign_in_path, method: :post %>
           <%= link_to "ログイン", new_member_session_path %>
         <% end %>
       </nav>
+      <div>
+        <%= flash[:notice] %>
+        <%= flash[:alert] %>
+      </div>
     </header>
     <!-- メイン -->
     <main>

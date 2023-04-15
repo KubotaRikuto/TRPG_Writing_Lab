@@ -20,6 +20,13 @@ class Public::SessionsController < Devise::SessionsController
     super
   end
 
+  # ゲストログイン
+  def new_guest
+    member = Member.guest
+    sign_in member
+    redirect_to members_path, notice: 'ゲストユーザーとしてログインしました。'
+  end
+
   protected
 
   # If you have extra params to permit, append them to the sanitizer.

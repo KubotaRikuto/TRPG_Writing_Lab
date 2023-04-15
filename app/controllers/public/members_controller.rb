@@ -1,6 +1,8 @@
 class Public::MembersController < ApplicationController
-  # ログアウト中はサインイン画面にリダイレクト
+  # ログイン確認
   before_action :authenticate_member!
+  # ゲストユーザID編集・削除不可
+  before_action :check_guest, only:[ :update, :withdrawl]
   # helper_method :current_sign_in_at, :last_sign_in_at
 
   def index
@@ -17,13 +19,13 @@ class Public::MembersController < ApplicationController
 
   def update
     @member = current_member
-    if @member.update!(member_params)
-      flash[:notice] = "プロフィールを変更しました"
-      redirect_to member_path(@member.id)
-    else
-      flash[:notice] = "プロフィールの変更に失敗しました"
-      render :edit
-    end
+      if @member.update!(member_params)
+        flash[:notice] = "プロフィールを変更しました"
+        redirect_to member_path(@member.id)
+      else
+        flash[:notice] = "プロフィールの変更に失敗しました"
+        render :edit
+      end
   end
 
   # 退会処理

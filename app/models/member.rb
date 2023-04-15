@@ -7,6 +7,13 @@ class Member < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable
   #-----------------
 
+  # --- バリデーション ---
+  #-----------------
+
+  # --- association　---
+  has_many :works, dependent: :destroy
+  #-----------------
+
   # --- Active Storage ---
   has_one_attached :profile_image
   #-----------------
@@ -16,8 +23,16 @@ class Member < ApplicationRecord
   scope :active, -> { where(is_deleted: false) }
   #-----------------
 
-
   # --- カスタムメソッド ---
+  # ゲストログイン
+  def self.guest
+    find_or_create_by(email: 'guest@example.com') do |member|
+      member.password = SecureRandom.urlsafe_base64
+      member.name = "ゲストプレイヤー"
+      # member.confirmabled_at = Time.now
+    end
+  end
+
   # プロファイル画像のサイズ変更
   def get_profile_image(width,height)
     unless profile_image.attached?

@@ -21,6 +21,9 @@
   <div class="actions">
     <%= f.submit "ログイン" %>
   </div>
+  <div>
+  <%= link_to "ゲストログイン", member_guest_sign_in_path, method: :post %>
+  </div>
 <% end %>
 
 <%= render "public/shared/links" %>

@@ -11,9 +11,17 @@ Rails.application.routes.draw do
     passwords: 'public/passwords'
   }
 
+  devise_scope :member do
+    # ゲストログイン
+    post '/member/guest_sign_in' => 'public/sessions#new_guest'
+  end
+
   scope module: :public do
+    # members
     resources :members, only: [:index, :show, :edit, :update ]
     patch 'members/withdrawl/:id' => 'members#withdrawl', as: 'members_withdrawl'
+    # works
+    resources :works
 
   end
   # ------
