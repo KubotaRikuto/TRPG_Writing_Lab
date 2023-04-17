@@ -1,0 +1,2 @@
+class TrpgRule < ApplicationRecord
+end

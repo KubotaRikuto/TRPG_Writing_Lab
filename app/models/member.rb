@@ -33,6 +33,11 @@ class Member < ApplicationRecord
     end
   end
 
+  # 最終ログイン日
+  def last_sign_in_date
+    self[:last_sign_in_at].strftime("%Y/%m/%d")
+  end
+
   # プロファイル画像のサイズ変更
   def get_profile_image(width,height)
     unless profile_image.attached?
@@ -41,24 +46,4 @@ class Member < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
-
-  # 不要なら削除
-  # def last_sign_in_time_ago
-  #   return "未ログイン" unless last_sign_in_at.present?
-
-  #   time_ago_in_words(last_sign_in_at) + "前"
-  # end
-
-  # def last_sign_in_date_or_time
-  #   return "未ログイン" unless last_sign_in_at.present?
-
-  #   if last_sign_in_at > 1.day.ago
-  #     last_sign_in_at.strftime("%H:%M")
-  #   elsif last_sign_in_at > 7.days.ago
-  #     last_sign_in_at.strftime("%-m/%-d")
-  #   else
-  #     last_sign_in_at.strftime("%Y/%-m/%-d")
-  #   end
-  # end
-
 end

@@ -22,21 +22,21 @@
         <!-- 会員側 -->
         <% if member_signed_in? %>
           <%= link_to "メンバー", members_path %>
-          <!--シナリオ・ルール -->
+          <%= link_to "シナリオ・ルール", works_path %>
           <!-- テストプレイ -->
           <%= link_to "ログアウト", destroy_member_session_path, method: :delete %>
         <!-- 管理者 -->
         <% elsif admin_signed_in? %>
           <!-- メンバー -->
-          <!-- シナリオ・ルール -->
+          <%= link_to "シナリオ・ルール", admin_works_path %>
           <!-- テストプレイ -->
-          <!-- ログアウト -->
+          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
 
         <!-- ログアウト時 -->
         <% else %>
           <%= link_to "アカウントを作成", new_member_registration_path %>
-          <%= link_to "ゲストログイン", member_guest_sign_in_path, method: :post %>
           <%= link_to "ログイン", new_member_session_path %>
+          <%= link_to "ゲストログイン", member_guest_sign_in_path, method: :post %>
         <% end %>
       </nav>
       <div>

@@ -75,5 +75,10 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
   config.hosts.clear
 
+  # ActiveStrageのエラー回避
   config.active_job.queue_adapter = :inline
+
+  # passwrordのMissing host to link to!エラー回避
+  host = 'samplehost'
+  Rails.application.routes.default_url_options[:host] = host
 end

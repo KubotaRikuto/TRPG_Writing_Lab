@@ -1,12 +1,44 @@
 <h1>メンバー一覧</h1>
 
 <div>
-  <% @members.each do |member| %>
-    <%= link_to member_path(member.id) do %>
-      <%= image_tag member.get_profile_image(100,100) %>
-      <%= member.name %><br>
+  <table>
+    <thead>
+      <tr>
+        <th colspan="2">メンバー名</th>
+        <th>好きなTRPG</th>
+        <th>いいね！</th>
+        <th>最終ログイン日</th>
+      </tr>
+    </thead>
+    <% @members.each do |member| %>
+    <tbody>
+      <tr>
+        <td rowspan="2">
+          <%= link_to member_path(member.id) do %>
+            <%= image_tag member.get_profile_image(100,100) %>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to member_path(member.id) do %>
+            <%= member.name %>
+          <% end %>
+        </td>
+        <td rowspan="2">
+          好きなTRPG
+        </td>
+        <td rowspan="2">
+          いいね数
+        </td>
+        <td rowspan="2">
+          <%= member.last_sign_in_date %>
+        </td>
+      </tr>
+      <tr>
+        <td>自己紹介</td>
+      </tr>
+    </tbody>
     <% end %>
-  <% end %>
+  </table>
 </div>
 <div>
   <%= paginate @members %>

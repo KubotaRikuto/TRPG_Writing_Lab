@@ -1,0 +1,32 @@
+<h1>シナリオ・ルール一覧</h1>
+
+<%= link_to new_work_path do %>
+  新規作成
+<% end %>
+  <table>
+    <thead>
+      <tr>
+        <th>タイトル</th>
+        <th>シナリオ・ルール</th>
+        <th>作者名</th>
+        <th>人数</th>
+        <th>時間</th>
+        <th>難しさ</th>
+        <th>いいね！</th>
+        <th>更新日</th>
+      </tr>
+    </thead>
+    <% @works.each do |works| %>
+      <tbody>
+        <tr>
+          <td><%= image_tag works.get_thumbnail_image(100,100) %><%= works.title %></td>
+          <td><%= works.work_type %></td>
+          <td><%= works.member.name %></td>
+          <td><%= works.min_players %> ~ <%= works.max_players %>人</td>
+          <td></td>
+          <td></td>
+          <td><%= works.updated_at.strftime('%Y/%m/%d') %></td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>

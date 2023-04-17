@@ -1,0 +1,49 @@
+<h1><%= @work.title%>の内容</h1>
+<div>
+  <%= image_tag @work.get_thumbnail_image(100,100) %>
+</div>
+<!-- work情報-->
+<div>
+  <div>
+    <div>
+      タイトル：
+    </div>
+    <%= @work.title %>
+  </div>
+  <div>
+    <div>TRPGルール：</div>
+
+  </div>
+  <div>
+    <div>シナリオ・ルール</div>
+    <%= @work.work_type %>
+  </div>
+  <div>
+    <div>想定人数：</div>
+    <%= @work.min_players %> ~ <%= @work.max_players%> 人
+  </div>
+  <div>
+    <div>想定時間：</div>
+    <%= @work.min_play_time %> ~ <%= @work.max_play_time %>時間
+  </div>
+  <div>
+    <div>難しさ</div>
+    <%= @work.difficulty %>
+  </div>
+  <!--タグ欄-->
+  <div>タグ欄</div>
+  <div>
+    更新日：<%= @work.updated_at.strftime('%Y年%m月%d日 %H:%M')%>
+  </div>
+</div>
+<!---->
+<!-- 概要 -->
+<div>
+  <div>概要：</div>
+  <div>
+    <%= @work.summary %>
+  </div>
+</div>
+<% if　member_signed_in? && current_member.id == @work.user_id %>
+  <%= link_to "作品の編集", edit_work_path(@work.id), class: "" %>
+<% end %>

@@ -1,0 +1,65 @@
+<h1>シナリオ・ルールを新しく作る</h1>
+
+<%= form_with model: @work, method: :post, class: ""  do |f| %>
+  <table>
+    <thead>
+      <th>
+        シナリオ・ルール情報(*は必須項目)
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>タイトル名</td>
+        <td>
+          <%= f.text_field :title, class: "", placeholder: "タイトル名" %>
+        </td>
+      </tr>
+      <tr>
+        <td>サムネイル画像</td>
+        <td>
+          <%= f.file_field :work_image, accept: "image/*", class: "" %>
+        </td>
+        <!--<td>プレビュー表示</td>-->
+        <!--<td></td>-->
+      </tr>
+      <tr>
+        <td>シナリオ・ルール</td>
+        <td>
+          <%= f.select :work_type, options_for_select({"シナリオ" => true, "ルール" => false}) %>
+        </td>
+        <td>TRPGルール</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>シナリオ・ルール</br>データの添付</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>想定人数</td>
+        <td>
+          <%= f.text_field :min_players, placeholder: "00" %> ~ <%= f.text_field :max_players, placeholder: "00" %> 人
+        </td>
+        <td>想定時間<span>*</span></td>
+        <td>
+          <%= f.text_field :min_play_time, placeholder: "00" %> ~ <%= f.text_field :max_play_time, placeholder: "00" %> 時間
+        </td>
+      </tr>
+      <tr>
+        <td>想定難易度</td>
+        <td><%= f.text_field :difficulty %></td>
+      </tr>
+      <tr>
+        <td>概要</td>
+        <td>
+          作品の概要を記述できます。</br>
+          <%= f.text_area :summary %>
+        </td>
+      </tr>
+      <tr>
+        <td>タグ</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <%= f.submit "新規作成", class: "" %>
+<% end %>

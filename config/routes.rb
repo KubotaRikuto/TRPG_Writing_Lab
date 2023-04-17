@@ -25,11 +25,17 @@ Rails.application.routes.draw do
 
   end
   # ------
+  # ------
 
   # ---管理者側---
   devise_for :admin, skip: [:registrations, :passwords] , controllers: {
     sessions: "admin/sessions"
   }
+
+  namespace :admin do
+    # works
+    resources :works, only: [:index]
+  end
   # ------
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
