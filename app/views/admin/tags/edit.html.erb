@@ -1,0 +1,9 @@
+<div>
+  <h1>タグ編集画面</h1>
+</div>
+<div>
+  <%= form_with model: @tag, url: admin_tag_path(@tag.id), method: :patch, class: "" do |f| %>
+    <%= f.text_field :name, autofocus: true, placeholder: "タグ名", class: "" %>
+    <%= f.submit "変更を保存", class: "" %>
+  <% end %>
+</div>

@@ -7,11 +7,11 @@ class Member < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable
   #-----------------
 
-  # --- バリデーション ---
+  # --- association　---
+  has_many :writings, dependent: :destroy
   #-----------------
 
-  # --- association　---
-  has_many :works, dependent: :destroy
+  # --- validation ---
   #-----------------
 
   # --- Active Storage ---

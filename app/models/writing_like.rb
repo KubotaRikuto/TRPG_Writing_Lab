@@ -1,0 +1,2 @@
+class WritingLike < ApplicationRecord
+end

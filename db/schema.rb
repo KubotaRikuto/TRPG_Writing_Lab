@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_17_135706) do
+ActiveRecord::Schema.define(version: 2023_04_19_115546) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -72,18 +72,8 @@ ActiveRecord::Schema.define(version: 2023_04_17_135706) do
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
   end
 
-  create_table "post_comments", force: :cascade do |t|
-    t.integer "member_id", null: false
-    t.integer "work_id", null: false
-    t.string "comment", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "post_likes", force: :cascade do |t|
-    t.integer "member_id", null: false
-    t.integer "work_id", null: false
-    t.integer "like_count", default: 0, null: false
+  create_table "tags", force: :cascade do |t|
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -94,19 +84,44 @@ ActiveRecord::Schema.define(version: 2023_04_17_135706) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "works", force: :cascade do |t|
-    t.integer "trpg_rule_id", null: false
-    t.integer "post_searchability_id", null: false
-    t.string "title", null: false
-    t.text "summary"
-    t.boolean "work_type", default: true, null: false
-    t.integer "difficulty", null: false
+  create_table "writing_comments", force: :cascade do |t|
+    t.integer "member_id", null: false
+    t.integer "writing_id", null: false
+    t.string "comment", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "writing_likes", force: :cascade do |t|
+    t.integer "member_id", null: false
+    t.integer "work_id", null: false
+    t.integer "like_count", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "writing_tags", force: :cascade do |t|
+    t.integer "writing_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["writing_id", "tag_id"], name: "index_writing_tags_on_writing_id_and_tag_id", unique: true
+  end
+
+  create_table "writings", force: :cascade do |t|
+    t.integer "member_id", null: false
+    t.integer "trpg_rule_id", null: false
+    t.integer "writing_tag_id", null: false
+    t.string "title", null: false
+    t.text "summary"
+    t.boolean "writing_type", default: true, null: false
     t.integer "max_play_time", null: false
     t.integer "min_play_time", null: false
     t.integer "max_players", null: false
     t.integer "min_players", null: false
+    t.integer "difficulty", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

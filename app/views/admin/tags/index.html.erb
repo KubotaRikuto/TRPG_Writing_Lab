@@ -1,0 +1,41 @@
+<!--admin/tags/indexページ-->
+<div>
+  <h1>タグ登録画面</h1>
+
+
+  <!-- 新規登録 -->
+  <%= form_with model: @tag, url: admin_tags_path, method: :post do |f| %>
+    <div class="">
+      <div class="">
+        <label>タグ名</label>
+      </div>
+      <%= f.text_field :name, autofocus: true, :placeholder => "タグ名", class: "" %>
+      <%= f.submit  "新規登録", class: ""%>
+    </div>
+  <% end %>
+
+  <!-- 一覧 -->
+  <div>
+    <table class="">
+      <thead class="">
+        <tr>
+          <th  class="" style="width: 50%">タグ名</th>
+          <th style="width: 50%"></th>
+        </tr>
+      </thead>
+      <% @tags.each do |tags| %>
+        <tbody>
+          <tr>
+            <td>
+              <%= tags.name %>
+            </td>
+            <td>
+              <%= link_to "編集", edit_admin_tag_path(tags.id), class: "" %></br>
+              <%= link_to "削除", admin_tag_path(tags.id), method: :delete, class: "" %>
+            </td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+  </div>
+</div>

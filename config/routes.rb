@@ -20,8 +20,8 @@ Rails.application.routes.draw do
     # members
     resources :members, only: [:index, :show, :edit, :update ]
     patch 'members/withdrawl/:id' => 'members#withdrawl', as: 'members_withdrawl'
-    # works
-    resources :works
+    # writings
+    resources :writings
 
   end
   # ------
@@ -33,8 +33,9 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    # works
-    resources :works, only: [:index]
+    # writings
+    resources :writings, only: [:index]
+    resources :tags, only: [:index, :edit, :create, :update, :destroy]
   end
   # ------
 

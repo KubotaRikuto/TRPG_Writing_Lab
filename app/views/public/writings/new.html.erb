@@ -1,6 +1,6 @@
 <h1>シナリオ・ルールを新しく作る</h1>
 
-<%= form_with model: @work, method: :post, class: ""  do |f| %>
+<%= form_with model: @writing, method: :post, class: ""  do |f| %>
   <table>
     <thead>
       <th>
@@ -17,7 +17,7 @@
       <tr>
         <td>サムネイル画像</td>
         <td>
-          <%= f.file_field :work_image, accept: "image/*", class: "" %>
+          <%= f.file_field :writing_image, accept: "image/*", class: "" %>
         </td>
         <!--<td>プレビュー表示</td>-->
         <!--<td></td>-->
@@ -25,10 +25,10 @@
       <tr>
         <td>シナリオ・ルール</td>
         <td>
-          <%= f.select :work_type, options_for_select({"シナリオ" => true, "ルール" => false}) %>
+          <%= f.select :writing_type, options_for_select({"シナリオ" => true, "ルール" => false}) %>
         </td>
         <td>TRPGルール</td>
-        <td></td>
+        <td><%= f.collection_select :trpg_rule_id, @trpg_rules, :id, :title %></td>
       </tr>
       <tr>
         <td>シナリオ・ルール</br>データの添付</td>

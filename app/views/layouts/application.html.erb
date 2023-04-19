@@ -18,18 +18,22 @@
           <%= link_to root_path do %>
             <h1>ロゴ</h1>
           <% end %>
+          <% if member_signed_in? %>
+            <p>ようこそ、<%= current_member.name %>さん！</p>
+          <% end %>
         </div>
         <!-- 会員側 -->
         <% if member_signed_in? %>
           <%= link_to "メンバー", members_path %>
-          <%= link_to "シナリオ・ルール", works_path %>
+          <%= link_to "シナリオ・ルール", writings_path %>
           <!-- テストプレイ -->
           <%= link_to "ログアウト", destroy_member_session_path, method: :delete %>
         <!-- 管理者 -->
         <% elsif admin_signed_in? %>
           <!-- メンバー -->
-          <%= link_to "シナリオ・ルール", admin_works_path %>
+          <%= link_to "シナリオ・ルール", admin_writings_path %>
           <!-- テストプレイ -->
+          <%= link_to "タグ", admin_tags_path %>
           <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
 
         <!-- ログアウト時 -->

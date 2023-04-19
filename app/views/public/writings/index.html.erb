@@ -1,6 +1,6 @@
 <h1>シナリオ・ルール一覧</h1>
 
-<%= link_to new_work_path do %>
+<%= link_to new_writing_path do %>
   新規作成
 <% end %>
   <table>
@@ -16,16 +16,16 @@
         <th>更新日</th>
       </tr>
     </thead>
-    <% @works.each do |works| %>
+    <% @writings.each do |writings| %>
       <tbody>
         <tr>
-          <td><%= image_tag works.get_thumbnail_image(100,100) %><%= works.title %></td>
-          <td><%= works.work_type %></td>
-          <td><%= works.member.name %></td>
-          <td><%= works.min_players %> ~ <%= works.max_players %>人</td>
+          <td><%= image_tag writings.get_thumbnail_image(100,100) %><%= writings.title %></td>
+          <td><%= writings.writing_type %></td>
+          <td><%= writings.member.name %></td>
+          <td><%= writings.min_players %> ~ <%= writings.max_players %>人</td>
           <td></td>
           <td></td>
-          <td><%= works.updated_at.strftime('%Y/%m/%d') %></td>
+          <td><%= writings.updated_at.strftime('%Y/%m/%d') %></td>
         </tr>
       </tbody>
     <% end %>
