@@ -13,6 +13,7 @@
         <th>時間</th>
         <th>難しさ</th>
         <th>いいね！</th>
+        <th>タグ</th>
         <th>更新日</th>
       </tr>
     </thead>
@@ -25,6 +26,11 @@
           <td><%= writings.min_players %> ~ <%= writings.max_players %>人</td>
           <td></td>
           <td></td>
+          <td>
+            <% @tag_list.each do |list| %>
+              <%= list.name%>
+            <% end %>
+          </td>
           <td><%= writings.updated_at.strftime('%Y/%m/%d') %></td>
         </tr>
       </tbody>

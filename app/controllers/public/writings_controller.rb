@@ -7,6 +7,9 @@ class Public::WritingsController < ApplicationController
 
   def index
     @writings = Writing.page(params[:page])
+    if params[:tag_id]
+      @tag_llist = Tag.all
+    end
   end
 
   def show
@@ -19,17 +22,19 @@ class Public::WritingsController < ApplicationController
 
   def edit
     @writing = current_member.writings.find(params[:id])
+    @tag_list = @writing.tags.pluck(:name).join(',')
   end
 
   def create
     @writing = Writing.new(writing_paramas)
     @writing.member_id = current_member.id
+    tag_list = params[:tag][:name].delete(' ').delete('　').split(',')
     if @writing.save
+      @writing.save_writings(tag_list)
       flash[:notice] = "作品を新しく投稿しました。"
       redirect_to writing_path(@writing.id)
     else
-      @writing = Writing.new(writing_paramas)
-      @writing.member_id = current_member.id
+      @writing = Writing.new
       flash[:notice] = "作品投稿に失敗しました。"
       render :new
     end
@@ -37,7 +42,9 @@ class Public::WritingsController < ApplicationController
 
   def update
     @writing = current_member.writings.find(params[:id])
+    tag_list = params[:writing][:name].delete(' ').delete('　').split(',')
     if @writing.update(params[:id])
+      @writing.save_writings(tag_list)
       flash[:notice] = "作品が更新されました。"
       redirect_to writing_path(@writing.id)
     else
@@ -55,7 +62,7 @@ class Public::WritingsController < ApplicationController
 
   private
 
-  def work_paramas
+  def writing_paramas
     params.require(:writing).permit(:title, :summary, :writing_type, :max_players, :min_players, :max_play_time, :min_play_time, :difficulty, :trpg_rule_id, :writing_tag_id)
   end
 
