@@ -20,16 +20,20 @@
     <% @writings.each do |writings| %>
       <tbody>
         <tr>
-          <td><%= image_tag writings.get_thumbnail_image(100,100) %><%= writings.title %></td>
+          <td>
+            <%= link_to writing_path(writings.id) do %>
+              <%= image_tag writings.get_thumbnail_image(100,100) %><%= writings.title %>
+            <% end %>
+          </td>
           <td><%= writings.writing_type %></td>
           <td><%= writings.member.name %></td>
           <td><%= writings.min_players %> ~ <%= writings.max_players %>人</td>
           <td></td>
           <td></td>
           <td>
-            <% @tag_list.each do |list| %>
-              <%= list.name%>
-            <% end %>
+            <!--% @tag_list.each do |list| %>-->
+            <!--  %= list.name%>-->
+            <!--% end %>-->
           </td>
           <td><%= writings.updated_at.strftime('%Y/%m/%d') %></td>
         </tr>
