@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_19_115546) do
+ActiveRecord::Schema.define(version: 2023_05_10_105410) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 2023_04_19_115546) do
 
   create_table "tags", force: :cascade do |t|
     t.string "name", null: false
+    t.boolean "admin_created", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -94,18 +95,20 @@ ActiveRecord::Schema.define(version: 2023_04_19_115546) do
 
   create_table "writing_likes", force: :cascade do |t|
     t.integer "member_id", null: false
-    t.integer "work_id", null: false
+    t.integer "writing_id", null: false
     t.integer "like_count", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "writing_tags", force: :cascade do |t|
-    t.integer "writing_id", null: false
-    t.integer "tag_id", null: false
+    t.integer "writing_id_id", null: false
+    t.integer "tag_id_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["writing_id", "tag_id"], name: "index_writing_tags_on_writing_id_and_tag_id", unique: true
+    t.index "\"writing_id\", \"tag_id\"", name: "index_writing_tags_on_writing_id_and_tag_id", unique: true
+    t.index ["tag_id_id"], name: "index_writing_tags_on_tag_id_id"
+    t.index ["writing_id_id"], name: "index_writing_tags_on_writing_id_id"
   end
 
   create_table "writings", force: :cascade do |t|
