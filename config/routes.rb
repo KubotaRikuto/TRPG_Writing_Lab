@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    get 'tags/index'
+    get 'tags/edit'
+  end
   # TOPページ
   root to: 'public/homes#top'
 

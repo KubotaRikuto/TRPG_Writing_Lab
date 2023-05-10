@@ -2,10 +2,12 @@ class Writing < ApplicationRecord
 
   # --- association ---
   belongs_to :member
+  belongs_to :trpg_rule
   has_many :writing_comments, dependent: :destroy
   has_many :writing_likes, dependent: :destroy
-  has_many :writing_tags, dependent: :destroy
-  has_many :tags, through: :writing_tags
+
+  # has_many :writing_tags, dependent: :destroy
+  # has_many :tags, through: :writing_tags
   #-----------------
 
   # --- validation  ---
@@ -18,6 +20,10 @@ class Writing < ApplicationRecord
 
   # --- Active Storage ---
   has_one_attached :writing_image
+  #-----------------
+
+  # --- acts_as_taggable ---
+  acts_as_taggable_on :tags
   #-----------------
 
   # 作品サムネイル画像のサイズ変更
@@ -37,18 +43,18 @@ class Writing < ApplicationRecord
   # 平均プレイ人数
 
   # tag
-  def save_writings(tags)
-    current_tags = self.tags.pluck(:name) unless self.tags.nil?
-    old_tags = current_tags - tags
-    new_tags = tags - current_tags
+  # def save_writings(tags)
+  #   current_tags = self.tags.pluck(:name) unless self.tags.nil?
+  #   old_tags = current_tags - tags
+  #   new_tags = tags - current_tags
 
-    old_tags.each do |old_name|
-      self.tags.delete Tag.find_by(name: old_name)
-    end
+  #   old_tags.each do |old_name|
+  #     self.tags.delete Tag.find_by(name: old_name)
+  #   end
 
-    new_tags.each do |new_name|
-      writing_tag = Tag.find_or_create_by(name: new_name)
-      self.tags << writing_tag
-    end
-  end
+  #   new_tags.each do |new_name|
+  #     writing_tag = Tag.find_or_create_by(name: new_name)
+  #     self.tags << writing_tag
+  #   end
+  # end
 end

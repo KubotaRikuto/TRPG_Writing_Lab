@@ -7,13 +7,12 @@ class Public::WritingsController < ApplicationController
 
   def index
     @writings = Writing.page(params[:page])
-    if params[:tag_id]
-      @tag_llist = Tag.all
-    end
+    @tags = Writing.tag_counts_on(:tags).most_used(20)    # タグ一覧表示
   end
 
   def show
-    @writing = Member.writings.find(params[:id])
+    @writing = Writing.find(params[:id])
+    @tags = @writing.tag_counts_on(:tags)
   end
 
   def new
@@ -26,11 +25,12 @@ class Public::WritingsController < ApplicationController
   end
 
   def create
-    @writing = Writing.new(writing_paramas)
+    @writing = Writing.new(writing_params)
     @writing.member_id = current_member.id
-    tag_list = params[:tag][:name].delete(' ').delete('　').split(',')
+    @writing.tag_list = params[:writing][:tag_list]
+    # tag_list = params[:tag][:name].delete(' ').delete('　').split(',') # GEM無し
     if @writing.save
-      @writing.save_writings(tag_list)
+      # @writing.save_writings(tag_list) # GEM無し
       flash[:notice] = "作品を新しく投稿しました。"
       redirect_to writing_path(@writing.id)
     else
@@ -42,9 +42,9 @@ class Public::WritingsController < ApplicationController
 
   def update
     @writing = current_member.writings.find(params[:id])
-    tag_list = params[:writing][:name].delete(' ').delete('　').split(',')
+    # tag_list = params[:writing][:name].delete(' ').delete('　').split(',') # GEM無し
     if @writing.update(params[:id])
-      @writing.save_writings(tag_list)
+      # @writing.save_writings(tag_list) # GEM無し
       flash[:notice] = "作品が更新されました。"
       redirect_to writing_path(@writing.id)
     else
@@ -62,8 +62,8 @@ class Public::WritingsController < ApplicationController
 
   private
 
-  def writing_paramas
-    params.require(:writing).permit(:title, :summary, :writing_type, :max_players, :min_players, :max_play_time, :min_play_time, :difficulty, :trpg_rule_id, :writing_tag_id)
+  def writing_params
+    params.require(:writing).permit(:title, :summary, :writing_type, :max_players, :min_players, :max_play_time, :min_play_time, :trpg_rule_id,:difficulty, :tag_list)
   end
 
   def is_matching_login_user

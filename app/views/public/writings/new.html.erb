@@ -1,6 +1,6 @@
 <h1>シナリオ・ルールを新しく作る</h1>
 
-<%= form_with model: @writing, method: :post, class: ""  do |f| %>
+<%= form_with model: @writing, method: :post, local: true , class: ""  do |f| %>
   <table>
     <thead>
       <th>
@@ -58,7 +58,7 @@
       <tr>
         <td>タグ</td>
         <td>
-          <%= f.text_field :name, value: @tag_list %>
+          <%= f.text_field :tag_list, value: @writing.tag_list.join(","), class: "" %>
         </td>
       </tr>
     </tbody>
