@@ -1,0 +1,2 @@
+class WritingTag < ApplicationRecord
+end

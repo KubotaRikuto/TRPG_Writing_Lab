@@ -7,12 +7,12 @@ class Public::WritingsController < ApplicationController
 
   def index
     @writings = Writing.page(params[:page])
-    @tags = Writing.tag_counts_on(:tags).most_used(20)    # タグ一覧表示
+    # @tags = Writing.tag_counts_on(:tags).most_used(20)    # タグ一覧表示
   end
 
   def show
     @writing = Writing.find(params[:id])
-    @tags = @writing.tag_counts_on(:tags)
+    # @tags = @writing.tag_counts_on(:tags)
   end
 
   def new
@@ -27,7 +27,7 @@ class Public::WritingsController < ApplicationController
   def create
     @writing = Writing.new(writing_params)
     @writing.member_id = current_member.id
-    @writing.tag_list = params[:writing][:tag_list]
+    # @writing.tag_list = params[:writing][:tag_list]
     # tag_list = params[:tag][:name].delete(' ').delete('　').split(',') # GEM無し
     if @writing.save
       # @writing.save_writings(tag_list) # GEM無し
