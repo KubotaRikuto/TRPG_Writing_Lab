@@ -1,8 +1,8 @@
+<!-- 作品詳細画面-->
 <h1><%= @writing.title%>の内容</h1>
 <div>
   <%= image_tag @writing.get_thumbnail_image(100,100) %>
 </div>
-<!-- writing情報-->
 <div>
   <div>
     <div>
@@ -35,9 +35,9 @@
   <!--タグ欄-->
   <div>タグ欄</div>
   <div>
-    <% if @tags.present? %>
-      <% @tags.each do |tag| %>
-        <%= "#{tag.name}(#{tag.taggings_count})" %>
+    <% if @writing_tags.present? %>
+      <% @writing_tags.each do |tag| %>
+        <%= "#{tag.tag_name}(#{tag.writings.count})" %>
       <% end %>
     <% end%>
   </div>
@@ -57,3 +57,30 @@
   <%= link_to "作品の編集", edit_writing_path(@writing.id), class: "" %>
   <%= link_to "作品を削除", writing_path(@writing.id), class: "" %>
 <% end %>
+<!-- コメント欄 -->
+<div>
+  <h3>コメント<span><%= @writing.writing_comments.count %>件</span></h3>
+</div>
+<!-- コメントフォーム -->
+<div>
+  <%= form_with model: [@writing, @writing_comment] do |f| %>
+    <%= f.text_area :comment, placeholder: "コメントをする" %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>
+<!-- コメント一覧 -->
+<div>
+  <% @writing.writing_comments.each do |writing_comment| %>
+    <p><%= image_tag writing_comment.member.get_profile_image(100,100) %></p>
+    <p>
+      <%= writing_comment.member.name %></br>
+      <%= writing_comment.comment %></br>
+      <%= time_ago_in_words(writing_comment.created_at) %>前
+    </p>
+    <p>
+      <%= link_to "編集", writing_writing_comment_path(writing_comment.id), class: "" %>
+      |
+      <%= link_to "削除", writing_writing_comment_path(writing_comment.id), class: "" %>
+    </p>
+  <% end %>
+</div>

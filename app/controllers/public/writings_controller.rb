@@ -7,34 +7,37 @@ class Public::WritingsController < ApplicationController
 
   def index
     @writings = Writing.page(params[:page])
-    # @tags = Writing.tag_counts_on(:tags).most_used(20)    # タグ一覧表示
+    @tag_list = Tag.all
   end
 
   def show
     @writing = Writing.find(params[:id])
-    # @tags = @writing.tag_counts_on(:tags)
+    @writing_tags = @writing.tags
+    @writing_comment = WritingComment.new
   end
 
   def new
     @writing = Writing.new
+    @tag_list = Tag.all
   end
 
   def edit
     @writing = current_member.writings.find(params[:id])
-    @tag_list = @writing.tags.pluck(:name).join(',')
+    @tag_list = Tag.all
+    @writing_tags = @writing.tags.pluck(:tag_name).join(',')
   end
 
   def create
     @writing = Writing.new(writing_params)
     @writing.member_id = current_member.id
-    # @writing.tag_list = params[:writing][:tag_list]
-    # tag_list = params[:tag][:name].delete(' ').delete('　').split(',') # GEM無し
+    tag_list = params[:writing][:tag_name].delete(' ').delete('　').split(',')
     if @writing.save
-      # @writing.save_writings(tag_list) # GEM無し
+      @writing.save_tag(tag_list)
       flash[:notice] = "作品を新しく投稿しました。"
       redirect_to writing_path(@writing.id)
     else
       @writing = Writing.new
+      @tag_list = Tag.all
       flash[:notice] = "作品投稿に失敗しました。"
       render :new
     end
@@ -42,9 +45,9 @@ class Public::WritingsController < ApplicationController
 
   def update
     @writing = current_member.writings.find(params[:id])
-    # tag_list = params[:writing][:name].delete(' ').delete('　').split(',') # GEM無し
-    if @writing.update(params[:id])
-      # @writing.save_writings(tag_list) # GEM無し
+    tag_list = params[:writing][:tag_name].delete(' ').delete('　').split(',')
+    if @writing.update(writing_params)
+      @writing.save_tag(tag_list)
       flash[:notice] = "作品が更新されました。"
       redirect_to writing_path(@writing.id)
     else
@@ -63,7 +66,7 @@ class Public::WritingsController < ApplicationController
   private
 
   def writing_params
-    params.require(:writing).permit(:title, :summary, :writing_type, :max_players, :min_players, :max_play_time, :min_play_time, :trpg_rule_id,:difficulty, :tag_list)
+    params.require(:writing).permit(:title, :summary, :writing_type, :max_players, :min_players, :max_play_time, :min_play_time, :difficulty, :trpg_rule_id)
   end
 
   def is_matching_login_user

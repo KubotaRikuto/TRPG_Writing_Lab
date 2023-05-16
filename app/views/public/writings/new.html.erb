@@ -52,13 +52,15 @@
         <td>概要</td>
         <td>
           作品の概要を記述できます。</br>
-          <%= f.text_area :summary %>
+          <%= f.text_area :summary, rows: '10', placeholder: "作品概要をここに記述してください。" %>
         </td>
       </tr>
       <tr>
         <td>タグ</td>
         <td>
-          <!--%= f.text_field :tag_list, value: @writing.tag_list.join(","), class: "" %>-->
+          <p>カンマで区切ることで複数のタグを付けることができます。タグにスペースはご使用できません。</br>
+          例：音楽,文芸,スポーツ</p>
+          <%= f.text_field :tag_name %>
         </td>
       </tr>
     </tbody>

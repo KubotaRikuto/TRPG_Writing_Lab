@@ -1,2 +1,14 @@
-<h1>Admin::Tags#edit</h1>
-<p>Find me in app/views/admin/tags/edit.html.erb</p>
+<!--admin/tags/editページ-->
+<div>
+  <h1>タグ編集画面</h1>
+
+  <!-- タグ編集 -->
+  <%= form_with model: @tag, url: admin_tag_path(@tag.id), method: :patch, local: true do |f| %>
+    <div class="">
+      <div class="">
+        <label>タグ名</label>
+      </div>
+      <%= f.text_field :tag_name, autofocus: true, :placeholder => "タグ名", class: "" %>
+      <%= f.submit  "更新して保存", class: ""%>
+    </div>
+  <% end %>

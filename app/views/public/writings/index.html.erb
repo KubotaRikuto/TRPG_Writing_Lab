@@ -31,9 +31,9 @@
           <td></td>
           <td></td>
           <td>
-            <!--% @tag_list.each do |list| %>-->
-            <!--  %= list.name%>-->
-            <!--% end %>-->
+            <% @tag_list.each do |list| %>
+              <%= list.tag_name %>
+            <% end %>
           </td>
           <td><%= writings.updated_at.strftime('%Y/%m/%d') %></td>
         </tr>

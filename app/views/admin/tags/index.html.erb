@@ -9,7 +9,8 @@
       <div class="">
         <label>タグ名</label>
       </div>
-      <%= f.text_field :tag_list, value: @tag.tag_list.join(","), autofocus: true, :placeholder => "タグ名", class: "" %>
+      <%= f.text_field :tag_name, autofocus: true, :placeholder => "タグ名", class: "" %>
+      <%= f.hidden_field :admin_created, :value => true %>
       <%= f.submit  "新規登録", class: ""%>
     </div>
   <% end %>
@@ -27,7 +28,7 @@
         <tbody>
           <tr>
             <td>
-              <%= tags.name %>
+              <%= tags.tag_name %>
             </td>
             <td>
               <%= link_to "編集", edit_admin_tag_path(tags.id), class: "" %></br>

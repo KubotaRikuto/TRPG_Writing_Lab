@@ -9,6 +9,8 @@ class Member < ApplicationRecord
 
   # --- association　---
   has_many :writings, dependent: :destroy
+  has_many :writing_comments, dependent: :destroy
+  has_many :writing_likes, dependent: :destroy
   #-----------------
 
   # --- validation ---

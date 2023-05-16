@@ -22,10 +22,14 @@ Rails.application.routes.draw do
 
   scope module: :public do
     # members
-    resources :members, only: [:index, :show, :edit, :update ]
+    resources :members, only: [:index, :show, :edit, :update]
     patch 'members/withdrawl/:id' => 'members#withdrawl', as: 'members_withdrawl'
     # writings
-    resources :writings
+    resources :writings do
+      resources :writing_comments, only: [:create, :destroy]
+    end
+    # tags
+    resources :tags
 
   end
   # ------

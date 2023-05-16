@@ -1,33 +1,56 @@
 class Admin::TagsController < ApplicationController
 
   def index
-    @tag = Writing.new
-    @tags = Writing.tag_counts_on(:tags)
+    @tag = Tag.new
+    @tags = Tag.all
   end
 
   def edit
+    @tag = Tag.find(params[:id])
   end
 
   def create
-    @tag = Writing.new(tag_params)
-    @tag.member_id = current_admin.id
-    @tag.tag_list = params[:writing][:tag_list]
+    @tag =Tag.new(tag_params)
+    @tag.admin_created = true
     if @tag.save!
-      flash[:notice] = "作品を新しく投稿しました。"
+      flash[:notice] = "タグを新しく投稿しました。"
       redirect_to admin_tags_path
     else
-      @tags = Writing.tag_counts_on(:tags)
-      flash[:notice] = "作品投稿に失敗しました。"
+      @tag = Tag.new
+      @tags = Tag.all
+      flash[:notice] = "タグ投稿に失敗しました。"
       render :index
     end
   end
 
   def update
+    @tag =Tag.find(params[:id])
+    if @tag.update!(tag_params)
+      flash[:notice] = "タグを更新しました。"
+      redirect_to admin_tags_path
+    else
+      @tag = Tag.find(params[:id])
+      flash[:notice] = "タグの更新に失敗しました。"
+      render :edit
+    end
+  end
+
+  def destroy
+    @tag = Tag.find(params[:id])
+    if @tag.destroy
+      flash[:notice] = "タグを削除しました。"
+      redirect_to admin_tags_path
+    else
+      @tag = Tag.new
+      @tags =Tag.all
+      flash[:notice] = "タグの削除に失敗しました。"
+      render :index
+    end
   end
 
   private
 
   def tag_params
-    params.require(:writing).permit(:tag_list)
+    params.require(:tag).permit(:tag_name)
   end
 end
