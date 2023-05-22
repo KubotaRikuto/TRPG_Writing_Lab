@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     patch 'members/withdrawl/:id' => 'members#withdrawl', as: 'members_withdrawl'
     # writings
     resources :writings do
+      resource :writing_likes, only: [:create, :destroy]
       resources :writing_comments, only: [:create, :destroy]
     end
     # tags

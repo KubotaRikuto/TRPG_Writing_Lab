@@ -9,11 +9,11 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
 // jquery,popper.js,bootstrap,fontawesomeを追加
-import "jquery";
-import "popper.js";
-import "bootstrap";
+import "jquery"; // @^3.7.0
+import "popper.js"; // @^1.16.1
+import "bootstrap"; // @^5.2.3
 import "../stylesheets/application"
-import '@fortawesome/fontawesome-free/js/all'
+import '@fortawesome/fontawesome-free/js/all' // @6.4.0
 
 Rails.start()
 Turbolinks.start()

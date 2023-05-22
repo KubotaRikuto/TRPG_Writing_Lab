@@ -42,7 +42,12 @@ class Writing < ApplicationRecord
 
   # 平均プレイ人数
 
-  # tag
+  # いいね機能
+  def liked_by?(member)
+    writing_likes.exists?(member_id: member.id)
+  end
+
+  # tag機能
   def save_tag(sent_tags)
     current_tags = self.tags.pluck(:tag_name) unless self.tags.nil?
     old_tags = current_tags - sent_tags

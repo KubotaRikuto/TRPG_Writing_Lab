@@ -2,6 +2,21 @@
 <h1><%= @writing.title%>の内容</h1>
 <div>
   <%= image_tag @writing.get_thumbnail_image(100,100) %>
+  <div>
+    <% if @writing.liked_by?(current_member) %>
+      <p>
+        <%= link_to writing_writing_likes_path(@writing), method: :delete do %>
+          ♥<%= @writing.writing_likes.count %> いいね
+        <% end %>
+      </p>
+      <% else %>
+      <p>
+        <%= link_to writing_writing_likes_path(@writing), method: :post do %>
+          ♡<%= @writing.writing_likes.count %> いいね
+        <% end %>
+      </p>
+    <% end %>
+  </div>
 </div>
 <div>
   <div>
