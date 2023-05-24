@@ -6,40 +6,4 @@
 <%= link_to new_writing_path do %>
   新規作成
 <% end %>
-  <table>
-    <thead>
-      <tr>
-        <th>タイトル</th>
-        <th>シナリオ・ルール</th>
-        <th>作者名</th>
-        <th>人数</th>
-        <th>時間</th>
-        <th>難しさ</th>
-        <th>いいね！</th>
-        <th>タグ</th>
-        <th>更新日</th>
-      </tr>
-    </thead>
-    <% @writings.each do |writings| %>
-      <tbody>
-        <tr>
-          <td>
-            <%= link_to writing_path(writings.id) do %>
-              <%= image_tag writings.get_thumbnail_image(100,100) %><%= writings.title %>
-            <% end %>
-          </td>
-          <td><%= writings.writing_type %></td>
-          <td><%= writings.member.name %></td>
-          <td><%= writings.min_players %> ~ <%= writings.max_players %>人</td>
-          <td></td>
-          <td></td>
-          <td>
-            <% @tag_list.each do |list| %>
-              <%= list.tag_name %>
-            <% end %>
-          </td>
-          <td><%= writings.updated_at.strftime('%Y/%m/%d') %></td>
-        </tr>
-      </tbody>
-    <% end %>
-  </table>
+<%= render 'list', writings: @writings %>

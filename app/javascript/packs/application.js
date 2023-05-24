@@ -10,7 +10,7 @@ import "channels"
 
 // jquery,popper.js,bootstrap,fontawesomeを追加
 import "jquery"; // @^3.7.0
-// import "popper.js"; // @^1.16.1
+
 import '@popperjs/core'
 import "bootstrap"; // @^5.2.3
 import "../stylesheets/application"

@@ -7,7 +7,6 @@ class Public::WritingsController < ApplicationController
 
   def index
     @writings = Writing.page(params[:page])
-    @tag_list = Tag.all
   end
 
   def show
@@ -65,9 +64,9 @@ class Public::WritingsController < ApplicationController
 
   def word_search
     @tag_list = Tag.all
-    search_word = params[:word]
-    @writings = Writing.where("title LIKE ?","%#{search_word}%")
-    if @writings.count > 0 && search_word.present?
+    keyword = params[:word]
+    @writings = Writing.joins(:member, :trpg_rule).where("writings.title LIKE ? OR members.name LIKE ? OR trpg_rules.title LIKE ?", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%")
+    if @writings.count > 0 && keyword.present?
       flash.now[:notice] = "#{@writings.count}件の作品が見つかりました。"
     else
       flash[:alert] = "作品が見つかりませんでした。"
