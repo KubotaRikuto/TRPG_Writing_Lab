@@ -65,7 +65,7 @@ class Public::WritingsController < ApplicationController
   def word_search
     @tag_list = Tag.all
     keyword = params[:word]
-    @writings = Writing.joins(:member, :trpg_rule).where("writings.title LIKE ? OR members.name LIKE ? OR trpg_rules.title LIKE ?", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%")
+    @writings = Writing.joins(:member, :trpg_rule).search(keyword)
     if @writings.count > 0 && keyword.present?
       flash.now[:notice] = "#{@writings.count}件の作品が見つかりました。"
     else

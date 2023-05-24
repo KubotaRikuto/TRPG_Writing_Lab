@@ -62,4 +62,9 @@ class Writing < ApplicationRecord
       self.tags << new_writing_tag
     end
   end
+
+  # 検索機能
+  def self.search(search_word)
+    Writing.where("writings.title LIKE ? OR members.name LIKE ? OR trpg_rules.title LIKE ?", "%#{search_word}%", "%#{search_word}%", "%#{search_word}%")
+  end
 end
