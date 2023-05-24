@@ -29,8 +29,13 @@ Rails.application.routes.draw do
       resource :writing_likes, only: [:create, :destroy]
       resources :writing_comments, only: [:create, :destroy]
     end
+    # search(key_word)
+    get 'search' => 'writings#word_search'
     # tags
-    resources :tags
+    resources :tags do
+      # search(tag)
+      get 'writings' => 'writings#tag_search', as: 'search'
+    end
 
   end
   # ------

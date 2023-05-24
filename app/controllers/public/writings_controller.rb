@@ -63,6 +63,21 @@ class Public::WritingsController < ApplicationController
     redirect_to writings_path
   end
 
+  def word_search
+    @tag_list = Tag.all
+    search_word = params[:word]
+    @writings = Writing.where("title LIKE ?","%#{search_word}%")
+    if @writings.count > 0 && search_word.present?
+      flash.now[:notice] = "#{@writings.count}件の作品が見つかりました。"
+    else
+      flash[:alert] = "作品が見つかりませんでした。"
+      redirect_to writings_path
+    end
+  end
+
+  def tag_search
+  end
+
   private
 
   def writing_params
