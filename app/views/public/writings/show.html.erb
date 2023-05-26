@@ -35,7 +35,7 @@
   </div>
   <div>
     <div>シナリオ・ルール</div>
-    <%= @writing.writing_type %>
+    <%= @writing.writing_type ? 'シナリオ' : 'ルール'  %>
   </div>
   <div>
     <div>想定人数：</div>

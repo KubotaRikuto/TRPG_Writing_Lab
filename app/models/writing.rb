@@ -22,9 +22,11 @@ class Writing < ApplicationRecord
   has_one_attached :writing_image
   #-----------------
 
-  # --- acts_as_taggable ---
-  # acts_as_taggable_on :tags
-  #-----------------
+  # --- scope ---
+  # 公開・非公開機能
+  scope :published, -> {where(is_public: true)}
+  scope :unpublished, -> {where(is_public: false)}
+  # ------
 
   # 作品サムネイル画像のサイズ変更
   def get_thumbnail_image(width,height)

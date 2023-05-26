@@ -48,7 +48,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     # writings
-    resources :writings, only: [:index]
+    resources :writings, only: [:index, :show, :update] do
+      resources :writing_comments, only: [:destroy]
+    end
     resources :tags, only: [:index, :edit, :create, :update, :destroy]
   end
   # ------

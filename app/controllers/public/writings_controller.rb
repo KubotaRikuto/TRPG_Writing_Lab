@@ -1,12 +1,12 @@
 class Public::WritingsController < ApplicationController
   # ログイン確認
   before_action :authenticate_member!
-  before_action :is_matching_login_user, only: [:edit, :update]
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
   before_action :select_trpg_rules, only: [:new, :edit, :create, :update]
 
 
   def index
-    @writings = Writing.page(params[:page])
+    @writings = Writing.published.page(params[:page])
   end
 
   def show
@@ -81,15 +81,6 @@ class Public::WritingsController < ApplicationController
 
   def writing_params
     params.require(:writing).permit(:title, :summary, :writing_type, :max_players, :min_players, :max_play_time, :min_play_time, :difficulty, :trpg_rule_id)
-  end
-
-  def is_matching_login_user
-    @writing = Writing.find(params[:id])
-    user_id = @writing.member.id
-    login_user_id = current_member.id
-    if (user_id != login_user_id )
-      redirect_to writings_path
-    end
   end
 
   def select_trpg_rules

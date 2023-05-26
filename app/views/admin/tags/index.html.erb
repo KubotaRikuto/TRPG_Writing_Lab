@@ -20,7 +20,8 @@
     <table class="">
       <thead class="">
         <tr>
-          <th  class="" style="width: 50%">タグ名</th>
+          <th  class="" style="width: 30%">タグ名</th>
+          <th style="width: 30%">作成区分</th>
           <th style="width: 50%"></th>
         </tr>
       </thead>
@@ -29,6 +30,9 @@
           <tr>
             <td>
               <%= tags.tag_name %>
+            </td>
+            <td>
+              <%= tags.admin_created ? '管理者' : '会員' %>
             </td>
             <td>
               <%= link_to "編集", edit_admin_tag_path(tags.id), class: "" %></br>
