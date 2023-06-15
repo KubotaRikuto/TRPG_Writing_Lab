@@ -8,7 +8,7 @@ class Public::WritingCommentsController < ApplicationController
       flash[:notice] = "コメントを投稿しました。"
       redirect_to writing_path(writing)
     else
-      flash[:notice] = "コメントの投稿に失敗しました。"
+      flash[:alert] = "コメントの投稿に失敗しました。"
       redirect_to writing_path(writing)
     end
   end
@@ -19,7 +19,7 @@ class Public::WritingCommentsController < ApplicationController
       flash[:notice] = "コメントは削除されました。"
       redirect_to writing_path(writing.id)
     else
-      flash[:notice] = "コメントの削除に失敗しました。"
+      flash[:alert] = "コメントの削除に失敗しました。"
       redirect_to writing_path(writing.id)
     end
   end

@@ -1,5 +1,5 @@
 <!-- 検索機能 -->
-<%= render 'search' %>
+<%= render 'search', tag_list: @tag_list %>
 <!-- 作品詳細画面-->
 <h1><%= @writing.title%>の内容</h1>
 <div>
@@ -72,7 +72,7 @@
 </div>
 <% if member_signed_in? && current_member.id == @writing.member_id %>
   <%= link_to "作品の編集", edit_writing_path(@writing.id), class: "" %>
-  <%= link_to "作品を削除", writing_path(@writing.id), class: "" %>
+  <%= link_to "作品を削除", writing_path(@writing.id),data: { confirm: "削除しますか？", cancel: "やめる", commit: "退会する"}, class: "" %>
 <% end %>
 <!-- コメント欄 -->
 <div>
@@ -95,8 +95,6 @@
       <%= time_ago_in_words(writing_comment.created_at) %>前
     </p>
     <p>
-      <%= link_to "編集", writing_writing_comment_path(writing_comment.id), class: "" %>
-      |
       <%= link_to "削除", writing_writing_comment_path(writing_comment.id), class: "" %>
     </p>
   <% end %>

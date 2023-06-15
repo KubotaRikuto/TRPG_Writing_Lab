@@ -1,5 +1,5 @@
 <!-- 検索機能 -->
-<%= render 'search' %>
+<%= render 'search', tag_list: @tag_list %>
 <!-- 作品詳細画面-->
 <h1><%= @writing.title%>の内容</h1>
 <div>
@@ -50,7 +50,8 @@
   <div>
     <% if @writing_tags.present? %>
       <% @writing_tags.each do |tag| %>
-        <%= "#{tag.tag_name}(#{tag.writings.count})" %>
+        <%= link_to tag.tag_name, admin_tag_search_path(tag_id: tag.id) %>
+        <%= "(#{tag.writings.count})" %>
       <% end %>
     <% end%>
   </div>

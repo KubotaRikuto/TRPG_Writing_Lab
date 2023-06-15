@@ -1,5 +1,3 @@
-<!-- 検索機能 -->
-<%= render 'search' %>
 <!-- 作品編集画面 -->
 <div>
   <h1>シナリオ・ルールを編集する</h1>
@@ -64,8 +62,14 @@
           <td>タグ</td>
           <td>
             <p>カンマで区切ることで複数のタグを付けることができます。タグにスペースはご使用できません。</br>
-            例：音楽,文芸,スポーツ</p>
-            <%= f.text_field :tag_name, value: @writing_tags %>
+            例：初心者向け,ホラー,短時間セッション</p>
+            <p>既存のタグ一覧</p>
+            <% @tag_list.each do |tags| %>
+              <%= tags.tag_name %>
+            <% end %>
+            <div>
+              <%= f.text_field :tag_name, value: @writing_tags %>
+            </div>
           </td>
         </tr>
       </tbody>

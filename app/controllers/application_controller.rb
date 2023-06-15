@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # ログインユーザー以外の編集不可
+  # ログインユーザー以外の情報編集・削除不可
   def is_matching_login_user
     @writing = Writing.find(params[:id])
     user_id = @writing.member.id
@@ -21,4 +21,5 @@ class ApplicationController < ActionController::Base
       redirect_to writings_path
     end
   end
+
 end

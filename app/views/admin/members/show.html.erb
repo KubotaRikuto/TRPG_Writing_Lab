@@ -1,6 +1,6 @@
 <h1>ユーザー情報</h1>
 
-<div class="">
+<div>
   <%= image_tag @member.get_profile_image(100,100) %>
   <p>
     作品がいいねされた回数：
@@ -8,11 +8,11 @@
   </p>
 </div>
 <div class="">
+
   <p><%= @member.name %></p>
-  <p>
-    <自己紹介></br>
-    <%= @member.introduction %>
-  </p>
+  <p><%= @member.introduction %></p>
+  <p>アカウント状況</p>
+  <p><%= @member.is_deleted ? '利用停止' : '利用中' %></p>
   <p>
     最終ログイン日
     <%= @member.last_sign_in_date %>
@@ -24,12 +24,5 @@
   </p>
 </div>
 <div>
-  <% if current_member == @member %>
-    <%= link_to "ユーザー情報の編集", edit_member_path(@member.id) %>
-  <% end %>
-</div>
-<!-- 投稿作品一覧 -->
-<div>
-  <h1>投稿作品</h1>
-  <%= render 'public/writings/list', writings: @writings %>
+  <%= link_to "ユーザー情報の編集", edit_admin_member_path(@member.id) %>
 </div>

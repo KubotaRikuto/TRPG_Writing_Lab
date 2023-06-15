@@ -1,6 +1,6 @@
 <h1>プロフィールを編集</h1>
 
-<%= form_with model: @member, url: member_path(@member.id), method: :patch do |f| %>
+<%= form_with model: @member, url: admin_member_path(@member.id), method: :patch do |f| %>
   <div>
     <%= image_tag @member.get_profile_image(100,100)%>
     <%= f.file_field :profile_image, placeholder: "ファイルを選択", accept: "image/*", class: "", id: "" %>
@@ -18,7 +18,11 @@
     <%= f.text_area :introduction, id:"inputIntroduction", placeholder:"よろしくお願いします！" %>
   </div>
   <div>
-    <%= link_to "退会する", members_unsubscribe_path(@member), class: "" %>
+    <label>アカウント状況</label>
+    <%= f.select :is_deleted, {"利用中" => false, "利用停止" => true} %>
+  </div>
+  <div>
+    <!--= link_to "退会する", admin_members_nonpublic_path(@member.id), method: :patch, class: "" %>-->
     <%= f.submit "変更を保存"%>
   </div>
 

@@ -20,7 +20,7 @@ class Member < ApplicationRecord
   has_one_attached :profile_image
   #-----------------
 
-  # --- スコープ ---
+  # --- scope ---
   # 退会ユーザーは非表示
   scope :active, -> { where(is_deleted: false) }
   #-----------------
@@ -31,7 +31,6 @@ class Member < ApplicationRecord
     find_or_create_by(email: 'guest@example.com') do |member|
       member.password = SecureRandom.urlsafe_base64
       member.name = "ゲストプレイヤー"
-      # member.confirmabled_at = Time.now
     end
   end
 
@@ -47,5 +46,10 @@ class Member < ApplicationRecord
       profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
+  end
+
+  # いいね総数
+  def total_likes
+    writings.joins(:writing_likes).count
   end
 end

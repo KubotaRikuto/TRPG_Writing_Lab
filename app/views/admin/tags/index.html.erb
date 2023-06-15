@@ -20,7 +20,7 @@
     <table class="">
       <thead class="">
         <tr>
-          <th  class="" style="width: 30%">タグ名</th>
+          <th  class="" style="width: 30%">タグ名<small>(タグ使用作品数)</small></th>
           <th style="width: 30%">作成区分</th>
           <th style="width: 50%"></th>
         </tr>
@@ -29,14 +29,15 @@
         <tbody>
           <tr>
             <td>
-              <%= tags.tag_name %>
+              <%= link_to tags.tag_name,admin_tag_search_path(tag_id: tags.id) %>
+              <%= "(#{tags.writings.count})" %>
             </td>
             <td>
               <%= tags.admin_created ? '管理者' : '会員' %>
             </td>
             <td>
               <%= link_to "編集", edit_admin_tag_path(tags.id), class: "" %></br>
-              <%= link_to "削除", admin_tag_path(tags.id), method: :delete, class: "" %>
+              <%= link_to "削除", admin_tag_path(tags.id), method: :delete, data: { confirm: "本当に削除しますか？", cancel: "やめる", commit: "退会する"}, class: "" %>
             </td>
           </tr>
         </tbody>

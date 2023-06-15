@@ -1,4 +1,4 @@
-  <table>
+  <table class="table">
     <thead>
       <tr>
         <th colspan="2">タイトル</th>
@@ -31,6 +31,7 @@
           <td><%= writings.min_players %> ~ <%= writings.max_players %>人</td>
           <td><%= writings.min_play_time %> ~ <%= writings.max_play_time %>時間</td>
           <td><%= writings.difficulty%></td>
+          <td><%= writings.writing_likes.count %></td>
           <td>
             <% writings.tags.each do |list| %>
               <%= list.tag_name %><br>

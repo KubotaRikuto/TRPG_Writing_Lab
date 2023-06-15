@@ -12,7 +12,7 @@
 
   <body>
     <!-- ヘッダー -->
-    <header>
+    <header class="container-fluid">
       <nav>
         <div>
           <%= link_to root_path do %>
@@ -30,9 +30,10 @@
           <%= link_to "ログアウト", destroy_member_session_path, method: :delete %>
         <!-- 管理者 -->
         <% elsif admin_signed_in? %>
-          <!-- メンバー -->
+          <%= link_to "メンバー", admin_members_path %>
           <%= link_to "シナリオ・ルール", admin_writings_path %>
           <!-- テストプレイ -->
+          <!--TRPGジャンル-->
           <%= link_to "タグ", admin_tags_path %>
           <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
 
@@ -49,7 +50,7 @@
       </div>
     </header>
     <!-- メイン -->
-    <main>
+    <main class="container">
       <%= yield %>
     </main>
     <!-- フッター -->

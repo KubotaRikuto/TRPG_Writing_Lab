@@ -28,6 +28,7 @@ class Writing < ApplicationRecord
   scope :unpublished, -> {where(is_public: false)}
   # ------
 
+  # --- カスタムメソッド ---
   # 作品サムネイル画像のサイズ変更
   def get_thumbnail_image(width,height)
     unless writing_image.attached?

@@ -1,0 +1,10 @@
+<!-- 一覧 -->
+<div>
+  <h1>タグ一覧</h1>
+</div>
+<div>
+  <% @tags.each do |tags| %>
+    <%= link_to tags.tag_name,tag_search_path(tag_id: tags.id) %>
+    <%= "(#{tags.writings.count})" %>
+  <% end %>
+</div>

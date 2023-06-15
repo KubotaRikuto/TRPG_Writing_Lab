@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
+  namespace :public do
     get 'tags/index'
-    get 'tags/edit'
   end
   # TOPページ
   root to: 'public/homes#top'
@@ -22,8 +21,8 @@ Rails.application.routes.draw do
 
   scope module: :public do
     # members
-    resources :members, only: [:index, :show, :edit, :update]
-    patch 'members/withdrawl/:id' => 'members#withdrawl', as: 'members_withdrawl'
+    resources :members, only: [:index, :show, :edit, :update, :destroy]
+    get "members/:id/unsubscribe" => 'members#unsubscribe', as: 'members_unsubscribe'
     # writings
     resources :writings do
       resource :writing_likes, only: [:create, :destroy]
@@ -47,11 +46,18 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
+    # members
+    resources :members, only: [:index, :show, :edit, :update]
     # writings
     resources :writings, only: [:index, :show, :update] do
       resources :writing_comments, only: [:destroy]
     end
-    resources :tags, only: [:index, :edit, :create, :update, :destroy]
+    # search(key_word)
+    get 'search' => 'writings#word_search'
+    resources :tags, only: [:index, :edit, :create, :update, :destroy] do
+      # search(tag)
+      get 'writings' => 'writings#tag_search', as: 'search'
+    end
   end
   # ------
 
