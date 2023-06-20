@@ -15,6 +15,13 @@
       </p>
     <% end %>
   </div>
+  <div>
+    <% if @writing.writing_zip.present? %>
+      <%= link_to 'ダウンロード', rails_blob_path(@writing.writing_zip, disposition: "attachment") %>
+    <% else %>
+      <p>ダウンロード</p>
+    <% end %>
+  </div>
 </div>
 <div>
   <div>

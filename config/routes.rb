@@ -25,9 +25,11 @@ Rails.application.routes.draw do
     get "members/:id/unsubscribe" => 'members#unsubscribe', as: 'members_unsubscribe'
     # writings
     resources :writings do
+      # get 'download'
       resource :writing_likes, only: [:create, :destroy]
       resources :writing_comments, only: [:create, :destroy]
     end
+ 
     # search(key_word)
     get 'search' => 'writings#word_search'
     # tags

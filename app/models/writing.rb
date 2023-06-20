@@ -17,9 +17,12 @@ class Writing < ApplicationRecord
   validates :max_players, numericality: { only_integer: true, message: '数字を入力してください' }
   validates :max_players, numericality: { only_integer: true, message: '数字を入力してください' }
   #-----------------
+  # validate :validate_zip_file_mime_type
+  #-----------------
 
   # --- Active Storage ---
   has_one_attached :writing_image
+  has_one_attached :writing_zip
   #-----------------
 
   # --- scope ---
@@ -38,6 +41,18 @@ class Writing < ApplicationRecord
     writing_image.variant(resize_to_limit: [width, height]).processed
   end
 
+  # # アップロードデータ形式設定
+  # def validate_zip_file_mime_type
+  #   if writing_zip.attached? && !writing_zip.content_type.in?(%w(application/zip application/x-zip-compressed))
+  #     errors.add(:writing_zip, "はZIPファイルのみが許可されています")
+  #     writing_zip.purge # 不正なファイルを削除する
+  #   end
+  # end
+
+ # 最小最大判定
+ def min_or_max
+
+ end
   # 平均プレイ時間
   def avg_play_time
     (max_play_time + min_play_time)/2

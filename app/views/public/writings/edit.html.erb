@@ -35,7 +35,9 @@
         </tr>
         <tr>
           <td>シナリオ・ルール</br>データの添付</td>
-          <td></td>
+          <td>
+            <%= f.file_field :writing_zip, accept: 'application/zip' %>
+          </td>
         </tr>
         <tr>
           <td>想定人数</td>

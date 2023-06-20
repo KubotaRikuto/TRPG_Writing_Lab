@@ -70,6 +70,18 @@ class Public::WritingsController < ApplicationController
     redirect_to writings_path
   end
 
+  # def download
+  #   writing = Writing.find(params[:id])
+  #   file = writing.file.blob.download
+  #   if send_data(file, disposition: 'attachment',  # ダウンロードしたファイルを送信する
+  #     filename: upload_file.file.blob.filename.to_s, # ファイル名の取得
+  #     type: upload_file.file.blob.content_type) # content_typeの取得
+  #     head :no_content # 送信出来たら、no_contentを返す
+  #   else
+  #     render json: upload_file.errors, status: :not_found  # エラーを返す
+  #   end
+  # end
+
   def word_search
     @tag_list = Tag.all
     keyword = params[:word]
@@ -97,9 +109,10 @@ class Public::WritingsController < ApplicationController
   private
 
   def writing_params
-    params.require(:writing).permit(:title, :summary, :writing_type, :max_players, :min_players, :max_play_time, :min_play_time, :difficulty, :trpg_rule_id)
+    params.require(:writing).permit(:title, :summary, :writing_type, :max_players, :min_players, :max_play_time, :min_play_time, :difficulty, :trpg_rule_id, :writing_image, :writing_zip)
   end
 
+  # 非公開投稿への画面遷移不可
   def require_public_writing
     writing = Writing.find(params[:id])
     unless writing.is_public

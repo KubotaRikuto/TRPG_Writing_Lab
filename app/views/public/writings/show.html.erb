@@ -19,6 +19,13 @@
       </p>
     <% end %>
   </div>
+  <div>
+    <% if @writing.writing_zip.present? %>
+      <%= link_to 'ダウンロード', rails_blob_path(@writing.writing_zip, disposition: "attachment") %>
+    <% else %>
+      <p>ダウンロード</p>
+    <% end %>
+  </div>
 </div>
 <div>
   <div>
@@ -72,30 +79,7 @@
 </div>
 <% if member_signed_in? && current_member.id == @writing.member_id %>
   <%= link_to "作品の編集", edit_writing_path(@writing.id), class: "" %>
-  <%= link_to "作品を削除", writing_path(@writing.id),data: { confirm: "削除しますか？", cancel: "やめる", commit: "退会する"}, class: "" %>
+  <%= link_to "作品を削除", writing_path(@writing.id), method: :delete, data: { confirm: "削除しますか？", cancel: "やめる", commit: "退会する"}, class: "" %>
 <% end %>
 <!-- コメント欄 -->
-<div>
-  <h3>コメント<span><%= @writing.writing_comments.count %>件</span></h3>
-</div>
-<!-- コメントフォーム -->
-<div>
-  <%= form_with model: [@writing, @writing_comment] do |f| %>
-    <%= f.text_area :comment, placeholder: "コメントをする" %>
-    <%= f.submit "送信する" %>
-  <% end %>
-</div>
-<!-- コメント一覧 -->
-<div>
-  <% @writing.writing_comments.each do |writing_comment| %>
-    <p><%= image_tag writing_comment.member.get_profile_image(100,100) %></p>
-    <p>
-      <%= writing_comment.member.name %></br>
-      <%= writing_comment.comment %></br>
-      <%= time_ago_in_words(writing_comment.created_at) %>前
-    </p>
-    <p>
-      <%= link_to "削除", writing_writing_comment_path(writing_comment.id), class: "" %>
-    </p>
-  <% end %>
-</div>
+<%= render 'comment', writing: @writing, writing_comment: @writing_comment %>

@@ -1,0 +1,25 @@
+<!-- コメント欄 -->
+<div>
+  <h3>コメント<span><%= writing.writing_comments.count %>件</span></h3>
+</div>
+<!-- コメントフォーム -->
+<div>
+  <%= form_with model: [writing, writing_comment] do |f| %>
+    <%= f.text_area :comment, placeholder: "コメントをする" %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>
+<!-- コメント一覧 -->
+<div>
+  <% writing.writing_comments.each do |comment| %>
+    <p><%= image_tag comment.member.get_profile_image(100,100) %></p>
+    <p>
+      <%= comment.member.name %></br>
+      <%= comment.comment %></br>
+      <%= time_ago_in_words(comment.created_at) %>前
+    </p>
+    <p>
+      <%= link_to "削除", writing_writing_comment_path(comment.id), class: "" %>
+    </p>
+  <% end %>
+</div>
