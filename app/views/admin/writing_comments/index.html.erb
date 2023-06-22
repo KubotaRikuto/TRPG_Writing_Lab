@@ -1,0 +1,19 @@
+コメント一覧
+<div>
+<% @comments.each do |comment| %>
+  <div>
+    <%= image_tag comment.member.get_profile_image(50,50)%>
+  </div>
+  <div>
+    <%= comment.member.name %></br>
+    <%= comment.comment %></br>
+    <%= comment.updated_at.strftime('%Y/%m/%d') %>
+  </div>
+  <div>
+    <%= comment.writing.member.name %></br>
+    <%= link_to admin_writing_path(comment.writing.id, anchor: "comment-#{comment.id}") do %>
+    <%= comment.writing.title %>
+    <% end %>
+  </div>
+<% end %>
+</div>

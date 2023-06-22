@@ -51,7 +51,27 @@
         </tr>
         <tr>
           <td>想定難易度</td>
-          <td><%= f.text_field :difficulty %></td>
+          <td>
+            <span class="post_form">
+              <span class="text">難しい</span>
+              <%= f.radio_button :difficulty, 5 ,id: 'star5'%>
+              <label for="star5">★</label>
+
+              <%= f.radio_button :difficulty, 4 ,id: 'star4'%>
+              <label for="star4">★</label>
+
+              <%= f.radio_button :difficulty, 3 ,id: 'star3'%>
+              <label for="star3">★</label>
+
+              <%= f.radio_button :difficulty, 2 ,id: 'star2'%>
+              <label for="star2">★</label>
+
+              <%= f.radio_button :difficulty, 1 ,id: 'star1'%>
+              <label for="star1">★</label>
+              <span class="text">簡単</span>
+            </span>
+            <!--%= f.text_field :difficulty %>-->
+          </td>
         </tr>
         <tr>
           <td>概要</td>

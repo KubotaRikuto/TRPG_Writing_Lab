@@ -29,8 +29,7 @@ Rails.application.routes.draw do
       resource :writing_likes, only: [:create, :destroy]
       resources :writing_comments, only: [:create, :destroy]
     end
- 
-    # search(key_word)
+     # search(key_word)
     get 'search' => 'writings#word_search'
     # tags
     resources :tags do
@@ -54,6 +53,8 @@ Rails.application.routes.draw do
     resources :writings, only: [:index, :show, :update] do
       resources :writing_comments, only: [:destroy]
     end
+    #  writing_comments
+    resources :writing_comments, only: [:index]
     # search(key_word)
     get 'search' => 'writings#word_search'
     resources :tags, only: [:index, :edit, :create, :update, :destroy] do

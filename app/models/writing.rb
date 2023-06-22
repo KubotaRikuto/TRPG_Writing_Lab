@@ -17,7 +17,7 @@ class Writing < ApplicationRecord
   validates :max_players, numericality: { only_integer: true, message: '数字を入力してください' }
   validates :max_players, numericality: { only_integer: true, message: '数字を入力してください' }
   #-----------------
-  # validate :validate_zip_file_mime_type
+  validate :validate_zip_file_mime_type
   #-----------------
 
   # --- Active Storage ---
@@ -42,12 +42,24 @@ class Writing < ApplicationRecord
   end
 
   # # アップロードデータ形式設定
-  # def validate_zip_file_mime_type
-  #   if writing_zip.attached? && !writing_zip.content_type.in?(%w(application/zip application/x-zip-compressed))
-  #     errors.add(:writing_zip, "はZIPファイルのみが許可されています")
-  #     writing_zip.purge # 不正なファイルを削除する
-  #   end
-  # end
+  def validate_zip_file_mime_type
+    return unless writing_zip.attached?
+    if writing_zip.blob.content_type != 'application/zip'
+      errors.add(:writing_zip, 'はZIP形式のファイルのみアップロードできます')
+      writing_zip.purge # 非許可のファイルを削除する
+    end
+  end
+
+  # 星レビュー機能
+  def getPercent(number)
+   if number.present?
+     calPercent = number/5.to_f * 100
+     percent = calPercent.round
+     return percent.to_s
+   else
+     return 0
+   end
+  end
 
  # 最小最大判定
  def min_or_max

@@ -30,7 +30,12 @@
           <td><%= writings.member.name %></td>
           <td><%= writings.min_players %> ~ <%= writings.max_players %>人</td>
           <td><%= writings.min_play_time %> ~ <%= writings.max_play_time %>時間</td>
-          <td><%= writings.difficulty%></td>
+          <td>
+            <span class="star-rating">
+              <span class="star-rating-front" style="width: <%= writings.getPercent(writings.difficulty) %>%;">★★★★★</span>
+              <span class="star-rating-back">★★★★★</span>
+            </span>
+          </td>
           <td><%= writings.writing_likes.count %></td>
           <td>
             <% writings.tags.each do |list| %>

@@ -15,6 +15,7 @@ import '@popperjs/core'
 import "bootstrap"; // @^5.2.3
 import "../stylesheets/application"
 import '@fortawesome/fontawesome-free/js/all' // @6.4.0
+import "../stylesheets/mystyle.css" // オリジナルCSS
 
 Rails.start()
 Turbolinks.start()

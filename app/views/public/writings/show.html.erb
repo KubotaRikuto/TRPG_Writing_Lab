@@ -53,8 +53,13 @@
     <%= @writing.min_play_time %> ~ <%= @writing.max_play_time %>時間
   </div>
   <div>
-    <div>難しさ</div>
-    <%= @writing.difficulty %>
+    <div>想定難易度</div>
+    簡単
+    <span class="star-rating">
+      <span class="star-rating-front" style="width: <%= @writing.getPercent(@writing.difficulty) %>%;">★★★★★</span>
+      <span class="star-rating-back">★★★★★</span>
+    </span>
+    難しい
   </div>
   <!--タグ欄-->
   <div>タグ欄</div>

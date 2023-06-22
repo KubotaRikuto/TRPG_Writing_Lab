@@ -3,16 +3,22 @@
   <h3>コメント<span><%= writing.writing_comments.count %>件</span></h3>
 </div>
 <!-- コメント一覧 -->
-<div>
-  <% writing.writing_comments.each do |writing_comment| %>
-    <p><%= image_tag writing_comment.member.get_profile_image(100,100) %></p>
-    <p>
-      <%= writing_comment.member.name %></br>
-      <%= writing_comment.comment %></br>
-      <%= time_ago_in_words(writing_comment.created_at) %>前
-    </p>
-    <p>
-      <%= link_to "削除", admin_writing_writing_comment_path(writing_comment.id), class: "" %>
-    </p>
-  <% end %>
-</div>
+<% writing.writing_comments.each do |writing_comment| %>
+  <div class="row">
+    <div style="width: 50px; height: 50px;" class="col-3">
+      <%= image_tag writing_comment.member.get_profile_image(50,50) %>
+    </div>
+    <div class="col-4" id="comment-<%= writing_comment.id %>">
+      <p>
+        <small><%= writing_comment.member.name %></small></br>
+        <%= writing_comment.comment %></br>
+        <small><%= time_ago_in_words(writing_comment.created_at) %>前</small>
+      </p>
+    </div>
+    <div class="col-3">
+      <p>
+        <%= link_to "削除", admin_writing_writing_comment_path(writing_comment.id), class: "" %>
+      </p>
+    </div>
+  </div>
+<% end %>

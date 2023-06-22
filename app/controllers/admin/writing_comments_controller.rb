@@ -1,6 +1,11 @@
 class Admin::WritingCommentsController < ApplicationController
   before_action :authenticate_admin!
 
+  def index
+    @comments = WritingComment.all
+    # @newcomments = WritingCommnet.order(updated_at: :desc)
+  end
+
   def destroy
     writing = Writing.find(params[:writing_id])
     if WritingComment.find(params[:id]).destroy

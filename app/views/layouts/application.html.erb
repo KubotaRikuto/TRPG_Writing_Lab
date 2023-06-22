@@ -16,7 +16,7 @@
       <nav>
         <div>
           <%= link_to root_path do %>
-            <h1>ロゴ</h1>
+            <h1>TRPG Writing Lab</h1>
           <% end %>
           <% if member_signed_in? %>
             <p>ようこそ、<%= current_member.name %>さん！</p>
@@ -26,6 +26,7 @@
         <% if member_signed_in? %>
           <%= link_to "メンバー", members_path %>
           <%= link_to "シナリオ・ルール", writings_path %>
+          <%= link_to "タグ", tags_path %>
           <!-- テストプレイ -->
           <%= link_to "ログアウト", destroy_member_session_path, method: :delete %>
         <!-- 管理者 -->
@@ -35,6 +36,7 @@
           <!-- テストプレイ -->
           <!--TRPGジャンル-->
           <%= link_to "タグ", admin_tags_path %>
+          <%= link_to "コメント", admin_writing_comments_path %>
           <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
 
         <!-- ログアウト時 -->

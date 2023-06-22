@@ -2,76 +2,92 @@
 <%= render 'search', tag_list: @tag_list %>
 <!-- 作品詳細画面-->
 <h1><%= @writing.title%>の内容</h1>
-<div>
-  <%= image_tag @writing.get_thumbnail_image(100,100) %>
-  <div>
-    <% if @writing.writing_likes.exists? %>
-      <p>
-        ♥<%= @writing.writing_likes.count %> いいね
-      </p>
-      <% else %>
-      <p>
-        ♡<%= @writing.writing_likes.count %> いいね
-      </p>
-    <% end %>
-  </div>
-  <div>
-    <% if @writing.writing_zip.present? %>
-      <%= link_to 'ダウンロード', rails_blob_path(@writing.writing_zip, disposition: "attachment") %>
-    <% else %>
-      <p>ダウンロード</p>
-    <% end %>
-  </div>
-</div>
-<div>
-  <div>
-    <div>
-      タイトル：
+<div class="row">
+  <div class="col">
+    <div class="row">
+      <div class="col">
+        <%= image_tag @writing.get_thumbnail_image(100,100) %>
+        <div>
+          <% if @writing.writing_likes.exists? %>
+            <p>
+              ♥<%= @writing.writing_likes.count %> いいね
+            </p>
+            <% else %>
+            <p>
+              ♡<%= @writing.writing_likes.count %> いいね
+            </p>
+          <% end %>
+        </div>
+        <div>
+          <% if @writing.writing_zip.present? %>
+            <%= link_to 'ダウンロード', rails_blob_path(@writing.writing_zip, disposition: "attachment") %>
+          <% else %>
+            <p>ダウンロード</p>
+          <% end %>
+        </div>
+      </div>
+      <div class="col">
+        <div>
+          <div>
+            タイトル：
+          </div>
+          <%= @writing.title %>
+        </div>
+        <div>
+          <div>TRPGルール：</div>
+          <div>
+            <%= @writing.trpg_rule.title %>
+          </div>
+        </div>
+        <div>
+          <div>シナリオ・ルール</div>
+          <%= @writing.writing_type ? 'シナリオ' : 'ルール' %>
+        </div>
+        <div>
+          <div>想定人数：</div>
+          <%= @writing.min_players %> ~ <%= @writing.max_players %> 人
+        </div>
+        <div>
+          <div>想定時間：</div>
+          <%= @writing.min_play_time %> ~ <%= @writing.max_play_time %>時間
+        </div>
+        <div>
+          <div>想定難易度</div>
+          簡単
+          <span class="star-rating">
+            <span class="star-rating-front" style="width: <%= @writing.getPercent(@writing.difficulty) %>%;">★★★★★</span>
+            <span class="star-rating-back">★★★★★</span>
+          </span>
+          難しい
+        </div>
+        <!--タグ欄-->
+        <div>タグ欄</div>
+        <div>
+          <% if @writing_tags.present? %>
+            <% @writing_tags.each do |tag| %>
+              <%= link_to tag.tag_name, admin_tag_search_path(tag_id: tag.id) %>
+              <%= "(#{tag.writings.count})" %>
+            <% end %>
+          <% end%>
+        </div>
+        <div>
+          更新日：<%= @writing.updated_at.strftime('%Y年%m月%d日 %H:%M')%>
+        </div>
+      </div>
     </div>
-    <%= @writing.title %>
-  </div>
-  <div>
-    <div>TRPGルール：</div>
-    <div>
-      <%= @writing.trpg_rule.title %>
+    <!---->
+    <!-- 概要 -->
+    <div class="row">
+      <div>概要：</div>
+      <div>
+        <%= @writing.summary %>
+      </div>
     </div>
   </div>
-  <div>
-    <div>シナリオ・ルール</div>
-    <%= @writing.writing_type ? 'シナリオ' : 'ルール' %>
-  </div>
-  <div>
-    <div>想定人数：</div>
-    <%= @writing.min_players %> ~ <%= @writing.max_players %> 人
-  </div>
-  <div>
-    <div>想定時間：</div>
-    <%= @writing.min_play_time %> ~ <%= @writing.max_play_time %>時間
-  </div>
-  <div>
-    <div>難しさ</div>
-    <%= @writing.difficulty %>
-  </div>
-  <!--タグ欄-->
-  <div>タグ欄</div>
-  <div>
-    <% if @writing_tags.present? %>
-      <% @writing_tags.each do |tag| %>
-        <%= link_to tag.tag_name, admin_tag_search_path(tag_id: tag.id) %>
-        <%= "(#{tag.writings.count})" %>
-      <% end %>
-    <% end%>
-  </div>
-  <div>
-    更新日：<%= @writing.updated_at.strftime('%Y年%m月%d日 %H:%M')%>
-  </div>
-</div>
-<!---->
-<!-- 概要 -->
-<div>
-  <div>概要：</div>
-  <div>
-    <%= @writing.summary %>
+  <div class="col">
+    <div class="row">
+    <!--ユーザー情報-->
+    </div>
   </div>
 </div>
 <%= form_with model: @writing, url: admin_writing_path(@writing.id), method: :patch do |f| %>

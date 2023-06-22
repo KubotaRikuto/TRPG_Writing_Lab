@@ -1,3 +1,15 @@
+ <!--エラーメッセージ-->
+<% if @writing.errors.any? %>
+  <div class="error-box"><!--エラーメッセージ表示start-->
+    <h2><%= @writing.errors.count %> errors prohibited this book from being saved:</h2>
+    <ul>
+      <% @writing.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<!--エラーメッセージ表示end-->
 <!-- 新規作成 -->
 <h1>シナリオ・ルールを新しく作る</h1>
 <%= form_with model: @writing, method: :post, local: true , class: ""  do |f| %>
@@ -33,6 +45,7 @@
       <tr>
         <td>シナリオ・ルール</br>データの添付</td>
         <td>
+          <p>*データはzip形式にした後、アップロードしてください。</p>
           <%= f.file_field :writing_zip, accept: 'application/zip' %>
         </td>
       </tr>
@@ -48,7 +61,29 @@
       </tr>
       <tr>
         <td>想定難易度<span>*</span></td>
-        <td><%= f.text_field :difficulty %></td>
+        <td>
+          <!--%= f.text_field :difficulty %>-->
+
+          <span class="post_form">
+            <span class="text">難しい</span>
+            <%= f.radio_button :difficulty, 5 ,id: 'star5'%>
+            <label for="star5">★</label>
+
+            <%= f.radio_button :difficulty, 4 ,id: 'star4'%>
+            <label for="star4">★</label>
+
+            <%= f.radio_button :difficulty, 3 ,id: 'star3'%>
+            <label for="star3">★</label>
+
+            <%= f.radio_button :difficulty, 2 ,id: 'star2'%>
+            <label for="star2">★</label>
+
+            <%= f.radio_button :difficulty, 1 ,id: 'star1'%>
+            <label for="star1">★</label>
+            <span class="text">簡単</span>
+          </span>
+
+        </td>
       </tr>
       <tr>
         <td>概要</td>
