@@ -1,19 +1,12 @@
-コメント一覧
-<div>
-<% @comments.each do |comment| %>
-  <div>
-    <%= image_tag comment.member.get_profile_image(50,50)%>
-  </div>
-  <div>
-    <%= comment.member.name %></br>
-    <%= comment.comment %></br>
-    <%= comment.updated_at.strftime('%Y/%m/%d') %>
-  </div>
-  <div>
-    <%= comment.writing.member.name %></br>
-    <%= link_to admin_writing_path(comment.writing.id, anchor: "comment-#{comment.id}") do %>
-    <%= comment.writing.title %>
-    <% end %>
-  </div>
-<% end %>
+<!-- 最新コメント -->
+<div class="row">
+  <h1>最新コメント</h1>
 </div>
+<%= render 'list', comments: @new_comments %>
+<!-- コメント一覧 -->
+<div class="row">
+  <h1>コメント一覧</h1>
+</div>
+<%= render 'list', comments: @comments %>
+
+

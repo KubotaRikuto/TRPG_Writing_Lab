@@ -1,10 +1,22 @@
-<h1>TRPG Writing Lab へようこそ！</h1>
-<p>ここでは、TRPGシナリオ・ルールの投稿や閲覧、</br>
-自分の作品にテストプレイヤーを募集したり、</br >
-他の人のテストプレイに参加したりする事ができます。</p>
-
-<p>投稿された作品に関してはログイン無しでも閲覧いただけます。</p>
-
-<%= link_to "アカウントを作成", new_member_registration_path %>
-<%= link_to "ログイン", new_member_session_path %>
-<%= link_to "ログアウト", destroy_member_session_path, method: :delete %>
+<div class="row my-5">
+  <div class="col-lg-7 col-md-8 mx-auto border border-dark">
+    <div class="row my-3">
+      <h1 class="text-center">TRPG Writing Lab へようこそ！</h1>
+    </div>
+    <div class="row mb-5">
+      <p class="text-center">ここでは、オリジナルのTRPGシナリオ・ルールの投稿や</br>
+      他のメンバーの投稿した作品を閲覧することができ、</br>
+      投稿した作品には感想を送り合うことができます。</p>
+    </div>
+    <div class="row">
+      <small><p class="text-center">作品の閲覧、コメントの投稿はゲストログインからでも行えます。</p></small>
+    </div>
+    <div class="row mb-5 d-flex justify-content-center">
+      <div class="col-md-4 col-sm-5 col-7 d-grid">
+      <%= link_to "アカウントを作成", new_member_registration_path, class:"mb-1 btn btn-primary" %>
+      <%= link_to "ログイン", new_member_session_path, class:"mb-2 btn btn-secondary" %>
+      <%= link_to "ゲストログイン", member_guest_sign_in_path, method: :post, class:"btn btn-warning" %>
+      </div>
+    </div>
+  </div>
+</div>

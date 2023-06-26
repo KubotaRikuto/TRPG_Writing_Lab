@@ -1,9 +1,17 @@
 <!-- 検索機能 -->
 <%= render 'search', tag_list: @tag_list %>
 <!-- 作品一覧 -->
-<h1>シナリオ・ルール一覧</h1>
+<div class="row">
+  <div class="col">
+    <h1>シナリオ・ルール一覧</h1>
+  </div>
+  <div class="col d-flex align-items-center mt-1">
 
-<%= link_to new_writing_path do %>
-  新規作成
-<% end %>
+    <%= link_to new_writing_path, class:"btn  rounded-circle p-0", style:"width:2rem;height:2rem;" do %>
+      <span class=""><i class="fa-solid fa-plus"></i></span>
+    <% end %>
+  </div>
+</div>
 <%= render 'list', writings: @writings %>
+
+<%= paginate(@writings) %>

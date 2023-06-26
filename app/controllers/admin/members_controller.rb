@@ -8,7 +8,7 @@ class Admin::MembersController < ApplicationController
 
   def show
     @member = Member.find(params[:id])
-    @like_count = @member.writing_likes
+    @writings = @member.writings.page(params[:page])
   end
 
   def edit

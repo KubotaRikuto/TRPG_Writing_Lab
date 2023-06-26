@@ -26,3 +26,12 @@
 <div>
   <%= link_to "ユーザー情報の編集", edit_admin_member_path(@member.id) %>
 </div>
+<!-- 投稿作品一覧 -->
+<div>
+  <div class="" id="member_writings">
+    <h1>投稿作品</h1>
+  </div>
+
+  <%= render 'admin/writings/list', writings: @writings %>
+  <%= paginate(@writings) %>
+</div>

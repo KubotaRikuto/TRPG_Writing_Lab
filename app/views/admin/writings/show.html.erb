@@ -86,7 +86,10 @@
   </div>
   <div class="col">
     <div class="row">
-    <!--ユーザー情報-->
+      <!-- ユーザー情報 -->
+      <span><%= image_tag @writing.member.get_profile_image(50,50) %></span>
+      <%= @writing.member.name%></br>
+      <%= link_to "#{@writing.member.name}の他の投稿作品を見る", admin_member_path(@writing.member.id, anchor: "member_writings") %>
     </div>
   </div>
 </div>

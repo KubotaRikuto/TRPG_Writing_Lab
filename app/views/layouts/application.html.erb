@@ -13,38 +13,75 @@
   <body>
     <!-- ヘッダー -->
     <header class="container-fluid">
-      <nav>
-        <div>
-          <%= link_to root_path do %>
-            <h1>TRPG Writing Lab</h1>
-          <% end %>
-          <% if member_signed_in? %>
-            <p>ようこそ、<%= current_member.name %>さん！</p>
-          <% end %>
-        </div>
-        <!-- 会員側 -->
-        <% if member_signed_in? %>
-          <%= link_to "メンバー", members_path %>
-          <%= link_to "シナリオ・ルール", writings_path %>
-          <%= link_to "タグ", tags_path %>
-          <!-- テストプレイ -->
-          <%= link_to "ログアウト", destroy_member_session_path, method: :delete %>
-        <!-- 管理者 -->
-        <% elsif admin_signed_in? %>
-          <%= link_to "メンバー", admin_members_path %>
-          <%= link_to "シナリオ・ルール", admin_writings_path %>
-          <!-- テストプレイ -->
-          <!--TRPGジャンル-->
-          <%= link_to "タグ", admin_tags_path %>
-          <%= link_to "コメント", admin_writing_comments_path %>
-          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-
-        <!-- ログアウト時 -->
-        <% else %>
-          <%= link_to "アカウントを作成", new_member_registration_path %>
-          <%= link_to "ログイン", new_member_session_path %>
-          <%= link_to "ゲストログイン", member_guest_sign_in_path, method: :post %>
+      <nav class="navbar navbar-expand-md my-3 px-3 navbar-light" style="background-color: #e3f2fd;">
+        <!-- ロゴマーク -->
+        <%= link_to root_path, class:"navbar-brand" do %>
+          <h1 class="display-6">TRPG Writing Lab</h1>
         <% end %>
+        <!-- ログインメッセージ -->
+        <div class="nav-item">
+          <span class="align-middle">
+            <% if member_signed_in? %>
+              ようこそ、<%= current_member.name %>さん！
+            <% elsif admin_signed_in? %>
+              管理者としてログインしています。
+            <% end %>
+          </span>
+        </div>
+        <!-- ナビゲーションメニュー -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarToggler">
+          <ul class="navbar-nav">
+            <!-- 会員側 -->
+            <% if member_signed_in? %>
+            <li class="nav-item">
+              <%= link_to "メンバー", members_path, class:"nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "シナリオ・ルール", writings_path, class:"nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "タグ", tags_path, class:"nav-link" %>
+            </li>
+              <!-- テストプレイ -->
+            <li class="nav-item">
+              <%= link_to "ログアウト", destroy_member_session_path, method: :delete, class:"nav-link" %>
+            </li>
+            <!-- 管理者 -->
+            <% elsif admin_signed_in? %>
+            <li class="nav-item">
+              <%= link_to "メンバー", admin_members_path, class:"nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "シナリオ・ルール", admin_writings_path, class:"nav-link" %>
+            </li>
+              <!-- テストプレイ -->
+              <!--TRPGジャンル-->
+            <li class="nav-item">
+              <%= link_to "タグ", admin_tags_path, class:"nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "コメント", admin_writing_comments_path, class:"nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"nav-link" %>
+            </li>
+            <!-- ログアウト時 -->
+            <% else %>
+            <li class="nav-item">
+              <%= link_to "アカウントを作成", new_member_registration_path, class:"nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログイン", new_member_session_path, class:"nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ゲストログイン", member_guest_sign_in_path, method: :post, class:"nav-link" %>
+            </li>
+            <% end %>
+          </ul>
+        </div>
       </nav>
       <div>
         <%= flash[:notice] %>

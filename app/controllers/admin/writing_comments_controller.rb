@@ -3,7 +3,7 @@ class Admin::WritingCommentsController < ApplicationController
 
   def index
     @comments = WritingComment.all
-    # @newcomments = WritingCommnet.order(updated_at: :desc)
+    @new_comments = WritingComment.all.order(updated_at: :desc).limit(10)
   end
 
   def destroy
