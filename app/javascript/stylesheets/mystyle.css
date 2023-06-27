@@ -1,3 +1,8 @@
+/* border */
+.dotted-border {
+    border: 1px dotted;
+  }
+
 /*new edit*/
 .post_form{
   display: flex;
@@ -48,4 +53,18 @@
   display: inline-block;
   color: #ccc;
 
+}
+@media (min-width: 992px) {
+  .custom-nav-border {
+    border: solid #000;
+    border-width: 0 0 0 1px;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar-brand {
+    display: flex;
+    justify-content: center; /* 左右中央寄せ */
+    width: 100%; /* 幅を100%に設定 */
+  }
 }

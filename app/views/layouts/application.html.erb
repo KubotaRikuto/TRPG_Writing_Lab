@@ -12,80 +12,102 @@
 
   <body>
     <!-- ヘッダー -->
-    <header class="container-fluid">
-      <nav class="navbar navbar-expand-md my-3 px-3 navbar-light" style="background-color: #e3f2fd;">
-        <!-- ロゴマーク -->
-        <%= link_to root_path, class:"navbar-brand" do %>
-          <h1 class="display-6">TRPG Writing Lab</h1>
-        <% end %>
-        <!-- ログインメッセージ -->
-        <div class="nav-item">
-          <span class="align-middle">
-            <% if member_signed_in? %>
-              ようこそ、<%= current_member.name %>さん！
-            <% elsif admin_signed_in? %>
-              管理者としてログインしています。
-            <% end %>
-          </span>
-        </div>
-        <!-- ナビゲーションメニュー -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarToggler">
-          <ul class="navbar-nav">
+    <header>
+      <nav class="navbar navbar-expand-lg py-0" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+          <!-- ロゴマーク -->
+          <%= link_to root_path, class:"navbar-brand" do %>
+            <span class="justify-content-center">
+              <h1 class="display-6">TRPG Writing Lab</h1>
+            </span>
+          <% end %>
+          <!-- ログインメッセージ -->
+          <div class="nav-item w-lg-25 me-3 ps-3">
+            <span class="align-middle">
+              <% if member_signed_in? %>
+                ようこそ、<%= current_member.name %>さん！
+              <% elsif admin_signed_in? %>
+                管理者としてログインしています。
+              <% end %>
+            </span>
+          </div>
+          <!-- ナビゲーションメニュー -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggler">
             <!-- 会員側 -->
             <% if member_signed_in? %>
-            <li class="nav-item">
-              <%= link_to "メンバー", members_path, class:"nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "シナリオ・ルール", writings_path, class:"nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "タグ", tags_path, class:"nav-link" %>
-            </li>
-              <!-- テストプレイ -->
-            <li class="nav-item">
-              <%= link_to "ログアウト", destroy_member_session_path, method: :delete, class:"nav-link" %>
-            </li>
+            <div class="w-50 ms-3 me-auto">
+              <ul class="navbar-nav justify-content-between">
+                <li class="nav-item">
+                  <%= link_to "メンバー", members_path, class:"nav-link" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "シナリオ・ルール", writings_path, class:"nav-link" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "タグ", tags_path, class:"nav-link" %>
+                </li>
+              </ul>
+            </div>
+            <ul class="navbar-nav custom-nav-border py-3 ps-3">
+              <li class="nav-item">
+                <%= link_to "マイページ", member_path(current_member.id), class:"nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_member_session_path, method: :delete, class:"nav-link" %>
+              </li>
+            </ul>
             <!-- 管理者 -->
             <% elsif admin_signed_in? %>
-            <li class="nav-item">
-              <%= link_to "メンバー", admin_members_path, class:"nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "シナリオ・ルール", admin_writings_path, class:"nav-link" %>
-            </li>
-              <!-- テストプレイ -->
-              <!--TRPGジャンル-->
-            <li class="nav-item">
-              <%= link_to "タグ", admin_tags_path, class:"nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "コメント", admin_writing_comments_path, class:"nav-link" %>
-            </li>
+            <div class="w-50 ms-3 me-auto">
+              <ul class="navbar-nav justify-content-between text-nowrap">
+                <li class="nav-item">
+                  <%= link_to "メンバー", admin_members_path, class:"nav-link" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "シナリオ・ルール", admin_writings_path, class:"nav-link" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "タグ", admin_tags_path, class:"nav-link" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "コメント", admin_writing_comments_path, class:"nav-link" %>
+                </li>
+              </ul>
+            </div>
+            <ul class="navbar-nav custom-nav-border py-3 ps-3">
             <li class="nav-item">
               <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"nav-link" %>
             </li>
+            </ul>
             <!-- ログアウト時 -->
             <% else %>
-            <li class="nav-item">
-              <%= link_to "アカウントを作成", new_member_registration_path, class:"nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "ログイン", new_member_session_path, class:"nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "ゲストログイン", member_guest_sign_in_path, method: :post, class:"nav-link" %>
-            </li>
+            <div class="w-50 ms-3 me-auto">
+              <ul class="navbar-nav justify-content-between">
+                <li class="nav-item">
+                  <%= link_to "アカウントを作成", new_member_registration_path, class:"nav-link" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "ログイン", new_member_session_path, class:"nav-link" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "ゲストログイン", member_guest_sign_in_path, method: :post, class:"nav-link" %>
+                </li>
+              </ul>
+            </div>
             <% end %>
-          </ul>
+          </div>
         </div>
       </nav>
-      <div>
-        <%= flash[:notice] %>
-        <%= flash[:alert] %>
+      <div class="mb-3">
+        <div class="bg-success text-white">
+          <%= flash[:notice] %>
+        </div>
+        <div class="bg-warning text-white">
+          <%= flash[:alert] %>
+        </div>
       </div>
     </header>
     <!-- メイン -->
