@@ -1,15 +1,15 @@
   <table class="table">
     <thead>
-      <tr>
-        <th colspan="2">タイトル</th>
-        <th>シナリオ・ルール</th>
-        <th>作者名</th>
-        <th>人数</th>
-        <th>時間</th>
-        <th>難しさ</th>
-        <th>いいね！</th>
-        <th>タグ</th>
-        <th>更新日</th>
+      <tr class="text-center">
+        <th colspan="2" style="width: 20%" class="h6">タイトル</th>
+        <th style="width: 12%" class="h6">シナリオ・ルール</th>
+        <th style="width: 14%">作者名</th>
+        <th style="width: 8%">人数</th>
+        <th style="width: 10%">時間</th>
+        <th style="width: 10%">難しさ</th>
+        <th style="width: 8%">いいね！</th>
+        <th style="width: 10%">タグ</th>
+        <th style="width: 8%">更新日</th>
       </tr>
     </thead>
     <% writings.each do |writings| %>
@@ -17,32 +17,48 @@
         <tr>
           <td>
             <%= link_to writing_path(writings.id) do %>
-              <%= image_tag writings.get_thumbnail_image(80,80) %></br>
+              <%= image_tag writings.get_thumbnail_image(60,60) %></br>
             <% end %>
           </td>
           <td>
-            <%= writings.trpg_rule.title %></br>
+            <span class="fs-6 fw-light"><%= writings.trpg_rule.title %></span></br>
             <%= link_to writing_path(writings.id) do %>
               <%= writings.title %>
             <% end %>
           </td>
-          <td><%= writings.writing_type ? 'シナリオ' : 'ルール' %></td>
-          <td><%= writings.member.name %></td>
-          <td><%= writings.min_players %> ~ <%= writings.max_players %>人</td>
-          <td><%= writings.min_play_time %> ~ <%= writings.max_play_time %>時間</td>
-          <td>
+          <td class="align-middle">
+            <div class="text-center">
+              <%= writings.writing_type ? 'シナリオ' : 'ルール' %>
+            </div>
+          </td>
+          <td class="align-middle"><%= writings.member.name %></td>
+          <td class="align-middle">
+            <div class="text-center">
+              <%= writings.min_players %> ~ <%= writings.max_players %>人
+            </div>
+          </td>
+          <td class="align-middle">
+            <div class="text-center">
+              <%= writings.min_play_time %> ~ <%= writings.max_play_time %>時間
+            </div>
+          </td>
+          <td class="align-middle">
             <span class="star-rating">
               <span class="star-rating-front" style="width: <%= writings.getPercent(writings.difficulty) %>%;">★★★★★</span>
               <span class="star-rating-back">★★★★★</span>
             </span>
           </td>
-          <td><%= writings.writing_likes.count %></td>
-          <td>
+          <td class="align-middle">
+            <div class="text-center">
+              <%= writings.writing_likes.count %>
+            </div>
+          </td>
+          <td class="align-middle">
             <% writings.tags.each do |list| %>
               <%= list.tag_name %><br>
             <% end %>
           </td>
-          <td><%= writings.updated_at.strftime('%Y/%m/%d') %></td>
+          <td class="align-middle"><%= writings.updated_at.strftime('%Y/%m/%d') %></td>
         </tr>
       </tbody>
     <% end %>

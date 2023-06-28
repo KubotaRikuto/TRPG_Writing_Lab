@@ -1,90 +1,120 @@
-<!-- 検索機能 -->
-<%= render 'search', tag_list: @tag_list %>
-<!-- 作品詳細画面-->
-<h1><%= @writing.title%>の内容</h1>
-<div>
-  <%= image_tag @writing.get_thumbnail_image(100,100) %>
-  <div>
-    <% if @writing.liked_by?(current_member) %>
-      <p>
-        <%= link_to writing_writing_likes_path(@writing), method: :delete do %>
-          ♥<%= @writing.writing_likes.count %> いいね
-        <% end %>
-      </p>
-      <% else %>
-      <p>
-        <%= link_to writing_writing_likes_path(@writing), method: :post do %>
-          ♡<%= @writing.writing_likes.count %> いいね
-        <% end %>
-      </p>
-    <% end %>
-  </div>
-  <div>
-    <% if @writing.writing_zip.present? %>
-      <%= link_to 'ダウンロード', rails_blob_path(@writing.writing_zip, disposition: "attachment") %>
-    <% else %>
-      <p>ダウンロード</p>
-    <% end %>
-  </div>
-</div>
-<div>
-  <div>
-    <div>
-      タイトル：
+<div class="row my-5 justify-content-center">
+  <div class="col-xl-10 col-12">
+    <!-- 検索機能 -->
+    <div class="row justify-content-center">
+      <%= render 'search', tag_list: @tag_list %>
     </div>
-    <%= @writing.title %>
-  </div>
-  <div>
-    <div>TRPGルール：</div>
-    <div>
-      <%= @writing.trpg_rule.title %>
+    <!-- 作品詳細画面-->
+    <div class="row my-3 mx-5 border-bottom border-dark border-2">
+      <h2 class="fw-bold"><%= @writing.title%><span class="fw-normal h4">の内容</span></h2>
     </div>
-  </div>
-  <div>
-    <div>シナリオ・ルール</div>
-    <%= @writing.writing_type ? 'シナリオ' : 'ルール'  %>
-  </div>
-  <div>
-    <div>想定人数：</div>
-    <%= @writing.min_players %> ~ <%= @writing.max_players %> 人
-  </div>
-  <div>
-    <div>想定時間：</div>
-    <%= @writing.min_play_time %> ~ <%= @writing.max_play_time %>時間
-  </div>
-  <div>
-    <div>想定難易度</div>
-    簡単
-    <span class="star-rating">
-      <span class="star-rating-front" style="width: <%= @writing.getPercent(@writing.difficulty) %>%;">★★★★★</span>
-      <span class="star-rating-back">★★★★★</span>
-    </span>
-    難しい
-  </div>
-  <!--タグ欄-->
-  <div>タグ欄</div>
-  <div>
-    <% if @writing_tags.present? %>
-      <% @writing_tags.each do |tag| %>
-        <%= "#{tag.tag_name}(#{tag.writings.count})" %>
+    <div class="row mx-5">
+      <div class="col-9 border p-3">
+        <div class="row">
+          <div class="col-4">
+            <%= image_tag @writing.get_thumbnail_image(100,100) %>
+            <div>
+              <% if @writing.liked_by?(current_member) %>
+                <p>
+                  <%= link_to writing_writing_likes_path(@writing), method: :delete do %>
+                    ♥<%= @writing.writing_likes.count %> いいね
+                  <% end %>
+                </p>
+                <% else %>
+                <p>
+                  <%= link_to writing_writing_likes_path(@writing), method: :post do %>
+                    ♡<%= @writing.writing_likes.count %> いいね
+                  <% end %>
+                </p>
+              <% end %>
+            </div>
+            <div>
+              <% if @writing.writing_zip.present? %>
+                <%= link_to 'ダウンロード', rails_blob_path(@writing.writing_zip, disposition: "attachment") %>
+              <% else %>
+                <p>ダウンロード</p>
+              <% end %>
+            </div>
+          </div>
+          <div class="col-8">
+            <div>
+              <div>
+                タイトル：
+              </div>
+              <%= @writing.title %>
+            </div>
+            <div>
+              <div>TRPGルール：</div>
+              <div>
+                <%= @writing.trpg_rule.title %>
+              </div>
+            </div>
+            <div>
+              <div>シナリオ・ルール</div>
+              <%= @writing.writing_type ? 'シナリオ' : 'ルール'  %>
+            </div>
+            <div>
+              <div>想定人数：</div>
+              <%= @writing.min_players %> ~ <%= @writing.max_players %> 人
+            </div>
+            <div>
+              <div>想定時間：</div>
+              <%= @writing.min_play_time %> ~ <%= @writing.max_play_time %>時間
+            </div>
+            <div>
+              <div>想定難易度</div>
+              簡単
+              <span class="star-rating">
+                <span class="star-rating-front" style="width: <%= @writing.getPercent(@writing.difficulty) %>%;">★★★★★</span>
+                <span class="star-rating-back">★★★★★</span>
+              </span>
+              難しい
+            </div>
+            <!--タグ欄-->
+            <div>タグ欄</div>
+            <div>
+              <% if @writing_tags.present? %>
+                <% @writing_tags.each do |tag| %>
+                  <%= "#{tag.tag_name}(#{tag.writings.count})" %>
+                <% end %>
+              <% end%>
+            </div>
+            <div>
+              更新日：<%= @writing.updated_at.strftime('%Y年%m月%d日 %H:%M')%>
+            </div>
+          </div>
+        </div>
+        <!---->
+        <!-- 概要 -->
+        <div class="row my-2 border-top border-bottom border-dark">
+          <div>概要：</div>
+          <div>
+            <%= @writing.summary %>
+          </div>
+        </div>
+      </div>
+      <div class="col-3 border px-3">
+        <div class="row mx-2 pt-3 px-3 pb-5 border border-dark">
+          <!-- ユーザー情報 -->
+          <div class="text-center"><%= image_tag @writing.member.get_profile_image(50,50), class:"border" %></div>
+          <div class="text-center">
+            <%= @writing.member.name%></br>
+            <%= link_to member_path(@writing.member.id, anchor: "member_writings") do %>
+              他の作品を見る
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <% if member_signed_in? && current_member.id == @writing.member_id %>
+        <div class="col">
+          <%= link_to "作品の編集", edit_writing_path(@writing.id), class: "" %>
+        </div>
+        <div class="col">
+          <%= link_to "作品を削除", writing_path(@writing.id), method: :delete, data: { confirm: "削除しますか？", cancel: "やめる", commit: "退会する"}, class: "" %>
+        </div>
       <% end %>
-    <% end%>
-  </div>
-  <div>
-    更新日：<%= @writing.updated_at.strftime('%Y年%m月%d日 %H:%M')%>
-  </div>
-</div>
-<!---->
-<!-- 概要 -->
-<div>
-  <div>概要：</div>
-  <div>
-    <%= @writing.summary %>
+    </div>
+    <!-- コメント欄 -->
+    <%= render 'comment', writing: @writing, writing_comment: @writing_comment %>
   </div>
 </div>
-<% if member_signed_in? && current_member.id == @writing.member_id %>
-  <%= link_to "作品の編集", edit_writing_path(@writing.id), class: "" %>
-  <%= link_to "作品を削除", writing_path(@writing.id), method: :delete, data: { confirm: "削除しますか？", cancel: "やめる", commit: "退会する"}, class: "" %>
-<% end %>
-<!-- コメント欄 -->
-<%= render 'comment', writing: @writing, writing_comment: @writing_comment %>

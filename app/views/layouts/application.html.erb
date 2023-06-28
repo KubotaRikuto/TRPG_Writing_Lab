@@ -78,9 +78,9 @@
               </ul>
             </div>
             <ul class="navbar-nav custom-nav-border py-3 ps-3">
-            <li class="nav-item">
-              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"nav-link" %>
-            </li>
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"nav-link" %>
+              </li>
             </ul>
             <!-- ログアウト時 -->
             <% else %>
@@ -102,16 +102,11 @@
         </div>
       </nav>
       <div class="mb-3">
-        <div class="bg-success text-white">
-          <%= flash[:notice] %>
-        </div>
-        <div class="bg-warning text-white">
-          <%= flash[:alert] %>
-        </div>
+       <%= render "layouts/flash" %>
       </div>
     </header>
     <!-- メイン -->
-    <main class="container">
+    <main class="container-lg container-fluid">
       <%= yield %>
     </main>
     <!-- フッター -->

@@ -1,15 +1,31 @@
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "パスワードを忘れましたか?", new_password_path(resource_name) %><br />
+  <div class="row mb-3 justify-content-center">
+    <div class="col-5 mx-5 text-center">
+      <%= link_to "パスワードを忘れましたか?", new_password_path(resource_name), class:" form-text" %>
+    </div>
+  </div>
 <% end %>
 
 <%- if controller_name != 'sessions' %>
-  既に登録済みの方はこちら<br/>
-  <%= link_to "ログイン", new_session_path(resource_name) %><br />
+  <div class="row justify-content-center">
+    <div class="col-5 mx-5 text-center">
+      <p class="border-bottom border-dark border-1 fw-bold">既に登録済みの方はこちら</p>
+    </div>
+  </div>
+  <div class="row mb-5 justify-content-center">
+    <%= link_to "ログイン", new_session_path(resource_name), class:"col-md-3 col-4 btn btn-secondary" %><br />
+  </div>
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  アカウントを作成はこちら<br/>
-  <%= link_to "アカウントを作成", new_registration_path(resource_name) %><br />
+  <div class="row justify-content-center">
+    <div class="col-5 mx-5 text-center">
+      <p class="border-bottom border-dark border-1 fw-bold">アカウントを作成はこちら</p>
+    </div>
+  </div>
+  <div class="row mb-5 justify-content-center">
+    <%= link_to "アカウントを作成", new_registration_path(resource_name), class:"col-md-3 col-4 btn btn-secondary" %><br />
+  </div>
 <% end %>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
