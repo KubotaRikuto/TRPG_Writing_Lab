@@ -1,37 +1,42 @@
-<h1>ユーザー情報</h1>
-
-<div class="">
-  <%= image_tag @member.get_profile_image(100,100) %>
-  <p>
-    作品がいいねされた回数：
-    <%= @member.total_likes %>
-  </p>
-</div>
-<div class="">
-  <p><%= @member.name %></p>
-  <p>
-    <自己紹介></br>
-    <%= @member.introduction %>
-  </p>
-  <p>
-    最終ログイン日
-    <%= @member.last_sign_in_date %>
-    <!--% if @member.last_sign_in_at > 7.days.ago %>-->
-    <!--  %= "最終ログイン: #{time_ago_in_words(@member.last_sign_in_at)}前" %>-->
-    <!--% else %>-->
-    <!--  %= "最終ログイン: #{@member.last_sign_in_at.strftime('%Y年%m月%d日')}" %>-->
-    <!--% end %>-->
-  </p>
-</div>
-<div>
-  <% if current_member == @member %>
-    <%= link_to "ユーザー情報の編集", edit_member_path(@member.id) %>
-  <% end %>
-</div>
-<!-- 投稿作品一覧 -->
-<div>
-  <div class="" id="member_writings">
-    <h1>投稿作品</h1>
+<div class="row my-5 justify-content-center">
+  <div class="col-xl-10 col-12">
+    <div class="row my-3 mx-5 border-bottom border-dark border-2">
+      <h1>ユーザー情報</h1>
+    </div>
+      <div class="">
+        <%= image_tag @member.get_profile_image(100,100) %>
+        <p>
+          作品がいいねされた回数：
+          <%= @member.total_likes %>
+        </p>
+      </div>
+      <div class="">
+        <p><%= @member.name %></p>
+        <p>
+          <自己紹介></br>
+          <%= @member.introduction %>
+        </p>
+        <p>
+          最終ログイン日
+          <%= @member.last_sign_in_date %>
+          <!--% if @member.last_sign_in_at > 7.days.ago %>-->
+          <!--  %= "最終ログイン: #{time_ago_in_words(@member.last_sign_in_at)}前" %>-->
+          <!--% else %>-->
+          <!--  %= "最終ログイン: #{@member.last_sign_in_at.strftime('%Y年%m月%d日')}" %>-->
+          <!--% end %>-->
+        </p>
+      </div>
+      <div>
+        <% if current_member == @member %>
+          <%= link_to "ユーザー情報の編集", edit_member_path(@member.id) %>
+        <% end %>
+      </div>
+      <!-- 投稿作品一覧 -->
+      <div>
+        <div class="" id="member_writings">
+          <h1>投稿作品</h1>
+        </div>
+        <%= render 'public/writings/list', writings: @writings %>
+    </div>
   </div>
-  <%= render 'public/writings/list', writings: @writings %>
 </div>

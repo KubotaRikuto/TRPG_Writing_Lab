@@ -1,31 +1,39 @@
-<div class="row mx-5">
+<div class="row">
   <h3>コメント<span><%= writing.writing_comments.count %>件</span></h3>
 </div>
 <!-- コメントフォーム -->
-<div class="row mb-3 mx-5">
-  <%= form_with model: [writing, writing_comment], class:"form-inline" do |f| %>
-    <div class="form-group">
-      <%= f.text_area :comment, placeholder: "コメントをする", class:"form-control" %>
+<%= form_with model: [writing, writing_comment], class:"" do |f| %>
+  <div class="row mb-3">
+    <div class="col-1 text-center">
+      <!--<div class="rounded-circle">-->
+          <%= image_tag current_member.get_profile_image(40,40), class:"border rounded-circle" %>
+      <!--</div>-->
     </div>
+    <div class="col-8">
+      <%= f.text_field :comment, placeholder: "コメントをする", class:"form-control" %>
+    </div>
+    <div class="col-2 text-center">
       <%= f.submit "送信する", class:"btn btn-secondary" %>
+    </div>
+    <!--</div>-->
+  </div>
+<% end %>
 
-  <% end %>
-</div>
 <!-- コメント一覧 -->
 <% writing.writing_comments.each do |comment| %>
-  <div class="row mx-5">
-    <div style="width: 50px; height: 50px;" class="col-3">
-      <p><%= image_tag comment.member.get_profile_image(50,50) %></p>
+  <div class="row d-flex align-items-center">
+    <div style="height: 40px;" class="col-1 text-center">
+      <%= image_tag comment.member.get_profile_image(40,40), class:"border rounded-circle" %>
     </div>
-    <div class="col-4" id="comment-<%= writing_comment.id %>">
+    <div class="col-8" id="comment-<%= writing_comment.id %>">
       <p>
-        <%= comment.member.name %></br>
+        <small><%= comment.member.name %></small></br>
         <%= comment.comment %></br>
-        <%= time_ago_in_words(comment.created_at) %>前
+        <small><span class="fw-light"><%= time_ago_in_words(comment.created_at) %>前</span></small>
       </p>
     </div>
-    <div class="col-3">
-      <p><%= link_to "削除", writing_writing_comment_path(comment.id), class: "" %></p>
+    <div class="col-2 text-center">
+      <%= link_to "削除", writing_writing_comment_path(comment.id), class: "text-decoration-none text-dark" %>
     </div>
   </div>
 <% end %>

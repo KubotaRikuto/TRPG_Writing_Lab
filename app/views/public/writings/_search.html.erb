@@ -2,8 +2,8 @@
   <!-- ワード検索機能 -->
   <%= form_with url: search_path, local: true, method: :get, class:"col-10 input-group" do |f| %>
     <%= f.text_field :word, placeholder: "作品検索", class: "form-control" %>
-    <%= f.submit "検索", class: "btn btn-outline-success" do %>
-      <i class="fa-regular fa-magnifying-glass"></i>
+    <%= f.button :submit, class: "btn btn-outline-success" do %>
+      <i class="fa-solid fa-magnifying-glass"></i>
     <% end %>
   <% end %>
 </div>
