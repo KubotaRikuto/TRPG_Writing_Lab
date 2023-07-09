@@ -20,7 +20,7 @@
 <% end %>
 
 <!-- コメント一覧 -->
-<% writing.writing_comments.each do |comment| %>
+<% comment_list.each do |comment| %>
   <div class="row d-flex align-items-center">
     <div style="height: 40px;" class="col-1 text-center">
       <%= image_tag comment.member.get_profile_image(40,40), class:"border rounded-circle" %>
@@ -37,3 +37,8 @@
     </div>
   </div>
 <% end %>
+<div class="row justify-content-center">
+  <div class="col-2">
+    <%= paginate(comment_list) %>
+  </div>
+</div>

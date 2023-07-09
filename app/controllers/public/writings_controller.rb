@@ -17,6 +17,7 @@ class Public::WritingsController < ApplicationController
     @writing_tags = @writing.tags
     @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
     @writing_comment = WritingComment.new
+    @comment_list = @writing.writing_comments.page(params[:page])
   end
 
   def new

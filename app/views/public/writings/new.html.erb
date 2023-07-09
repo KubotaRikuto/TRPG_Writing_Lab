@@ -21,19 +21,21 @@
     <%= form_with model: @writing, method: :post, local: true , class: ""  do |f| %>
       <table class="table table-bordered">
         <thead>
-          <th colspan="4" class="align-middle">
-            シナリオ・ルール情報(*は必須項目)
-          </th>
-        </thead>
-        <tbody class="">
           <tr>
-            <td class="align-middle">タイトル名</td>
+            <th colspan="4" class="align-middle">
+              シナリオ・ルール情報(*は必須項目)
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th style="width: 10%;" class="align-middle">タイトル名</th>
             <td colspan="3" class="">
               <%= f.text_field :title, class: "form-control form-control-sm border-dark", placeholder: "タイトル名" %>
             </td>
           </tr>
           <tr>
-            <td class="align-middle">サムネイル画像</td>
+            <th style="width: 10%;" class="align-middle">サムネイル画像</th>
             <td>
               <%= f.file_field :writing_image, accept: "image/*", class: "" %>
             </td>
@@ -41,32 +43,56 @@
             <!--<td></td>-->
           </tr>
           <tr>
-            <td class="align-middle">シナリオ・ルール</td>
-            <td class="pe-5">
-              <%= f.select :writing_type, options_for_select({"シナリオ" => true, "ルール" => false}),{}, class:"" %>
+            <th style="width: 10%;" class="align-middle">シナリオ・ルール</th>
+            <td style="width: 40%;" class="pe-5 align-middle">
+              <%= f.select :writing_type, options_for_select({"シナリオ" => true, "ルール" => false}),{}, class:"form-select" %>
             </td>
-            <td class="align-middle">TRPGルール</td>
-            <td><%= f.collection_select :trpg_rule_id, @trpg_rules, :id, :title %></td>
+            <th style="width: 10%;" class="align-middle">TRPGルール</th>
+            <td style="width: 40%;" class="align-middle">
+              <%= f.collection_select :trpg_rule_id, @trpg_rules, :id, :title, {}, class:"form-select"  %>
+            </td>
           </tr>
           <tr>
-            <td class="align-middle">シナリオ・ルール</br>データの添付</td>
+            <th style="width: 10%;" class="align-middle">シナリオ・ルール</br>データの添付</th>
             <td>
               <p>*データはzip形式にした後、アップロードしてください。</p>
               <%= f.file_field :writing_zip, accept: 'application/zip' %>
             </td>
           </tr>
           <tr>
-            <td class="align-middle">想定人数<span>*</span></td>
-            <td>
-              <%= f.text_field :min_players, placeholder: "00" %> ~ <%= f.text_field :max_players, placeholder: "00" %> 人
+            <th style="width: 10%;" class="align-middle">想定人数<span>*</span></th>
+            <td style="width: 40%;">
+              <div class="row justify-content-center">
+                <div class="col-2">
+                  <%= f.text_field :min_players, placeholder: "00", class:"form-control border-dark" %>
+                </div>
+                <div class="col-1 d-flex align-items-center">~</div>
+                <div class="col-2">
+                  <%= f.text_field :max_players, placeholder: "00", class:"form-control border-dark" %>
+                </div>
+                <div class="col-1 d-flex align-items-center">人</div>
+              </div>
             </td>
-            <td class="align-middle">想定時間<span>*</span></td>
-            <td>
-              <%= f.text_field :min_play_time, placeholder: "00" %> ~ <%= f.text_field :max_play_time, placeholder: "00" %> 時間
+            <th style="width: 10%;" class="align-middle">想定時間<span>*</span></th>
+            <td style="width: 40%;">
+              <div class="row justify-content-center">
+                <div class="col-2">
+                  <%= f.text_field :min_play_time, placeholder: "00", class:"form-control border-dark" %>
+                </div>
+                <div class="col-1 d-flex align-items-center">
+                  ~
+                </div>
+                <div class="col-2">
+                  <%= f.text_field :max_play_time, placeholder: "00", class:"form-control border-dark" %>
+                </div>
+                <div class="col-2 d-flex align-items-center">
+                  時間
+                </div>
+              </div>
             </td>
           </tr>
           <tr>
-            <td class="align-middle">想定難易度<span>*</span></td>
+            <th style="width: 10%;" class="align-middle">想定難易度<span>*</span></th>
             <td colspan="3">
               <span class="post_form">
                 <span class="text">難しい</span>
@@ -89,14 +115,14 @@
             </td>
           </tr>
           <tr>
-            <td class="align-middle">概要</td>
+            <th style="width: 10%;" class="align-middle">概要</th>
             <td colspan="3">
               <p>作品の概要を記述できます。</p>
               <%= f.text_area :summary, class:"form-control border-dark", rows: '10', placeholder: "作品概要をここに記述してください。" %>
             </td>
           </tr>
           <tr>
-            <td class="align-middle">タグ</td>
+            <th style="width: 10%;" class="align-middle">タグ</th>
             <td colspan="3">
               <p>カンマで区切ることで複数のタグを付けることができます。タグにスペースはご使用できません。</br>
               例：初心者向け,ホラー,短時間セッション</p>
