@@ -9,26 +9,26 @@ class Public::WritingsController < ApplicationController
 
   def index
     @writings = Writing.published.page(params[:page])
-    @tag_list = Tag.find(WritingTag.group(:tag_id).order('count(writing_id) desc').limit(10).pluck(:tag_id))
+    @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
   end
 
   def show
     @writing = Writing.find(params[:id])
     @writing_tags = @writing.tags
-    @tag_list = Tag.find(WritingTag.group(:tag_id).order('count(writing_id) desc').limit(10).pluck(:tag_id))
+    @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
     @writing_comment = WritingComment.new
   end
 
   def new
     @writing = Writing.new
-    @tag_list = Tag.all
+    @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
     @trpg_rules = TrpgRule.all
   end
 
   def edit
     @writing = current_member.writings.find(params[:id])
     @tag_list = Tag.all
-    @trpg_rules = TrpgRule.all
+    @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
     @writing_tags = @writing.tags.pluck(:tag_name).join(',')
   end
 

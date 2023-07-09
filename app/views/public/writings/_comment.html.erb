@@ -33,7 +33,7 @@
       </p>
     </div>
     <div class="col-2 text-center">
-      <%= link_to "削除", writing_writing_comment_path(comment.id), class: "text-decoration-none text-dark" %>
+      <%= link_to "削除", writing_writing_comment_path(writing_id: writing.id,id: comment.id), method: :delete, class: "text-decoration-none text-dark" %>
     </div>
   </div>
 <% end %>
