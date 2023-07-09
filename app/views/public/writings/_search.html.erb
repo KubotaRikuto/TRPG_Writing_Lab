@@ -8,17 +8,17 @@
   <% end %>
 </div>
   <!--タグ検索機能-->
-<div class="col-10 mb-3 border border-dark">
+<div class="col-10 mb-3 pt-1 border border-dark">
   <div class="row">
     <p class ="col">人気タグ</p>
-    <%= link_to tags_path, class: "col ml-auto" do %>
-     <p class="text-end">タグ一覧へ</p>
+    <%= link_to tags_path, class: "col ml-auto text-end " do %>
+     <span class="btn border btn-sm shadow-sm">タグ一覧へ</span>
    <% end %>
   </div>
   <div class="mb-2">
   <% tag_list.each do |tag| %>
-    <span class="border mx-1">
-      <%= link_to tag.tag_name, tag_search_path(tag_id: tag.id) %>
+    <span class="border mx-1 p-1">
+      <%= link_to tag.tag_name, tag_search_path(tag_id: tag.id), class:"text-black" %>
       <%= "(#{tag.writings.published.count})" %>
     </span>
   <% end %>

@@ -3,40 +3,48 @@
     <div class="row my-3 mx-5 border-bottom border-dark border-2">
       <h1>ユーザー情報</h1>
     </div>
-      <div class="">
-        <%= image_tag @member.get_profile_image(100,100) %>
-        <p>
-          作品がいいねされた回数：
-          <%= @member.total_likes %>
-        </p>
+    <div class="row mb-5 mx-5 border">
+      <div class="col-4">
+        <div class="text-center mb-1">
+          <%= image_tag @member.get_profile_image(100,100), class:"border rounded-circle" %>
+        </div>
+        <div class="my-3">
+          <p class="text-center m-1">
+          　<span class="p-1 border rounded-circle"><i class="fa-solid fa-heart fa-lg heart-color"></i></span>
+        　</p>
+          <p class="text-center">
+            いいね総数：<%= @member.total_likes %>
+          </p>
+        </div>
       </div>
-      <div class="">
-        <p><%= @member.name %></p>
+      <div class="col-8">
+        <div class="row  double-border">
+        <p><ニックネーム></br><%= @member.name %></p>
         <p>
           <自己紹介></br>
           <%= @member.introduction %>
         </p>
-        <p>
+        <p class="mb-0 text-end">
+          <i class="fa-regular fa-clock"></i>
           最終ログイン日
           <%= @member.last_sign_in_date %>
-          <!--% if @member.last_sign_in_at > 7.days.ago %>-->
-          <!--  %= "最終ログイン: #{time_ago_in_words(@member.last_sign_in_at)}前" %>-->
-          <!--% else %>-->
-          <!--  %= "最終ログイン: #{@member.last_sign_in_at.strftime('%Y年%m月%d日')}" %>-->
-          <!--% end %>-->
         </p>
-      </div>
-      <div>
-        <% if current_member == @member %>
-          <%= link_to "ユーザー情報の編集", edit_member_path(@member.id) %>
-        <% end %>
-      </div>
-      <!-- 投稿作品一覧 -->
-      <div>
-        <div class="" id="member_writings">
-          <h1>投稿作品</h1>
         </div>
-        <%= render 'public/writings/list', writings: @writings %>
+        <div class="row my-2 justify-content-end">
+          <div class="col-4 pe-0 text-end">
+            <% if current_member == @member %>
+              <%= link_to "ユーザー情報の編集", edit_member_path(@member.id), class:"btn btn-secondary" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 投稿作品一覧 -->
+    <div class="row my-3 mx-5 border-bottom border-dark border-2" id="member_writings">
+      <h1>投稿作品</h1>
+    </div>
+    <div class="row mb-5 mx-5">
+      <%= render 'list', writings: @writings %>
     </div>
   </div>
 </div>

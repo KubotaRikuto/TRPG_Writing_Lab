@@ -3,10 +3,9 @@
       <tr class="text-center">
         <th colspan="2" style="width: 20%" class="h6">タイトル</th>
         <th style="width: 12%" class="h6">シナリオ・ルール</th>
-        <th style="width: 14%">作者名</th>
         <th style="width: 8%">人数</th>
         <th style="width: 10%">時間</th>
-        <th style="width: 8%">難しさ</th>
+        <th style="width: 10%">難しさ</th>
         <th style="width: 8%">いいね！</th>
         <th style="width: 10%">タグ</th>
         <th style="width: 8%">更新日</th>
@@ -31,15 +30,14 @@
               <%= writings.writing_type ? 'シナリオ' : 'ルール' %>
             </div>
           </td>
-          <td class="align-middle"><%= writings.member.name %></td>
           <td class="align-middle">
             <div class="text-center">
-              <%= writings.min_players %>~<%= writings.max_players %>人
+              <%= writings.min_players %> ~ <%= writings.max_players %>人
             </div>
           </td>
           <td class="align-middle">
             <div class="text-center">
-              <%= writings.min_play_time %>~<%= writings.max_play_time %>時間
+              <%= writings.min_play_time %> ~ <%= writings.max_play_time %>時間
             </div>
           </td>
           <td class="align-middle">

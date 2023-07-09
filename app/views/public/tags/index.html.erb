@@ -1,10 +1,19 @@
-<!-- 一覧 -->
-<div>
-  <h1>タグ一覧</h1>
-</div>
-<div>
-  <% @tags.each do |tags| %>
-    <%= link_to tags.tag_name,tag_search_path(tag_id: tags.id) %>
-    <%= "(#{tags.writings.count})" %>
-  <% end %>
+<div class="row my-5 justify-content-center">
+  <div class="col-xl-10 col-12">
+    <div class="row my-3 border-bottom border-dark border-2">
+      <div class="col">
+      <h1>タグ一覧</h1>
+      </div>
+    </div>
+    <div class="row">
+      <% @tags.each do |tags| %>
+        <div class="col-3">
+          <span class="p-1 border">
+            <%= link_to tags.tag_name,tag_search_path(tag_id: tags.id), class:"text-black" %>
+            <%= "(#{tags.writings.count})" %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

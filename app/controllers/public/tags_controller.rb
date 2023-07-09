@@ -1,6 +1,6 @@
 class Public::TagsController < ApplicationController
   def index
-    @tags = Tag.all
+    @tags = Tag.order(:tag_name)
   end
 
   private
