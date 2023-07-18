@@ -80,7 +80,7 @@
     <div class="row">
       <div>概要：</div>
       <div>
-        <%= @writing.summary %>
+        <%= safe_join(@writing.summary.split("\n"),tag(:br)) %>
       </div>
     </div>
   </div>

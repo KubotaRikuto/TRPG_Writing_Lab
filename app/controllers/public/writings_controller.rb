@@ -22,13 +22,13 @@ class Public::WritingsController < ApplicationController
 
   def new
     @writing = Writing.new
-    @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
     @trpg_rules = TrpgRule.all
+    @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
   end
 
   def edit
     @writing = current_member.writings.find(params[:id])
-    @tag_list = Tag.all
+    @trpg_rules = TrpgRule.all
     @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
     @writing_tags = @writing.tags.pluck(:tag_name).join(',')
   end

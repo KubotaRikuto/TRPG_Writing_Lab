@@ -24,6 +24,10 @@
           <自己紹介></br>
           <%= @member.introduction %>
         </p>
+        <p class="mb-3">
+          <好きなTRPG></br>
+          <%= @member.favorite_trpg %>
+        </p>
         <p class="mb-0 text-end">
           <i class="fa-regular fa-clock"></i>
           最終ログイン日
@@ -45,6 +49,13 @@
     </div>
     <div class="row mb-5 mx-5">
       <%= render 'list', writings: @writings %>
+    </div>
+    <!-- お気に入りの作品一覧 -->
+    <div class="row my-3 mx-5 border-bottom border-dark border-2" id="member_writings">
+      <h1>いいねした作品</h1>
+    </div>
+    <div class="row mb-5 mx-5">
+      <%= render 'public/writings/list', writings: @like_writings %>
     </div>
   </div>
 </div>

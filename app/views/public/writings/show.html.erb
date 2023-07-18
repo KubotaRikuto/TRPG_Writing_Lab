@@ -41,32 +41,40 @@
             </div>
           </div>
           <div class="col-9">
-            <div>
-              <div>
+            <div class="row">
+              <div class="col-3">
                 タイトル：
               </div>
               <%= @writing.title %>
             </div>
-            <div>
-              <div>TRPGルール：</div>
-              <div>
-                <%= @writing.trpg_rule.title %>
+            <div class="row">
+              <div class="col-3">
+                TRPGルール：
               </div>
+              <%= @writing.trpg_rule.title %>
             </div>
-            <div>
-              <div>シナリオ・ルール</div>
+            <div class="row">
+              <div class="col-3">
+                シナリオ・ルール：
+              </div>
               <%= @writing.writing_type ? 'シナリオ' : 'ルール'  %>
             </div>
-            <div>
-              <div>想定人数：</div>
+            <div class="row">
+              <div class="col-3">
+                想定人数：
+              </div>
               <%= @writing.min_players %> ~ <%= @writing.max_players %> 人
             </div>
-            <div>
-              <div>想定時間：</div>
+            <div class="row">
+              <div class="col-3">
+                想定時間：
+              </div>
               <%= @writing.min_play_time %> ~ <%= @writing.max_play_time %>時間
             </div>
-            <div>
-              <div>想定難易度</div>
+            <div class="row">
+              <div class="col-3">
+                想定難易度：
+              </div>
               簡単
               <span class="star-rating">
                 <span class="star-rating-front" style="width: <%= @writing.getPercent(@writing.difficulty) %>%;">★★★★★</span>
@@ -75,31 +83,39 @@
               難しい
             </div>
             <!--タグ欄-->
-            <div>タグ欄</div>
-            <div>
-              <% if @writing_tags.present? %>
-                <% @writing_tags.each do |tag| %>
-                  <%= "#{tag.tag_name}(#{tag.writings.count})" %>
-                <% end %>
-              <% end%>
+            <div class="row">
+              <!--<div class="col my-2">タグ欄</div>-->
+              <div class="col mt-3">
+                <% if @writing_tags.present? %>
+                  <% @writing_tags.each do |tag| %>
+                    <span class="border mx-1 p-1">
+                      <%= "#{tag.tag_name}(#{tag.writings.count})" %>
+                    </span>
+                  <% end %>
+                <% end%>
+              </div>
             </div>
-            <div>
-              更新日：<%= @writing.updated_at.strftime('%Y年%m月%d日 %H:%M')%>
+            <div class="row mt-4 justify-content-end">
+              <div class="col-5 text-end">
+              <small>
+                更新日：<%= @writing.updated_at.strftime('%Y年%m月%d日 %H:%M')%>
+              </small>
+              </div>
             </div>
           </div>
         </div>
         <!---->
         <!-- 概要 -->
-        <div class="row my-3 border-top border-bottom border-dark">
+        <div class="row my-3 py-2 border-top border-bottom border-dark">
           <div>概要：</div>
           <div>
-            <%= @writing.summary %>
+            <%= safe_join(@writing.summary.split("\n"),tag(:br)) %>
           </div>
         </div>
         <% if member_signed_in? && current_member.id == @writing.member_id %>
             <div class="row justify-content-end">
               <div class="col-lg-3 col-md-4 col-12 text-md-end text-center mb-2">
-                <%= link_to "作品の編集", edit_writing_path(@writing.id), class: "btn fw-bold border border-dark fw-bold px-4" %>
+                <%= link_to "作品の編集", edit_writing_path(@writing.id), class: "btn text-primary fw-bold border border-dark px-4" %>
               </div>
               <div class="col-lg-3 col-md-4 col-12 text-md-end text-center mb-2">
                 <%= link_to "作品を削除", writing_path(@writing.id), method: :delete, data: { confirm: "削除しますか？", cancel: "やめる", commit: "退会する"}, class: "btn text-danger fw-bold border border-dark px-4" %>

@@ -54,7 +54,7 @@
           </tr>
           <tr>
             <th style="width: 10%;" class="align-middle">シナリオ・ルール</br>データの添付</th>
-            <td>
+            <td colspan="4">
               <p>*データはzip形式にした後、アップロードしてください。</p>
               <%= f.file_field :writing_zip, accept: 'application/zip' %>
             </td>
@@ -94,8 +94,8 @@
           <tr>
             <th style="width: 10%;" class="align-middle">想定難易度<span>*</span></th>
             <td colspan="3">
-              <span class="post_form">
-                <span class="text">難しい</span>
+              <span class="post_form d-flex align-items-center">
+                <span class="text pt-2">難しい</span>
                 <%= f.radio_button :difficulty, 5 ,id: 'star5'%>
                 <label for="star5">★</label>
 
@@ -110,7 +110,7 @@
 
                 <%= f.radio_button :difficulty, 1 ,id: 'star1'%>
                 <label for="star1">★</label>
-                <span class="text">簡単</span>
+                <span class="text pt-2">簡単</span>
               </span>
             </td>
           </tr>

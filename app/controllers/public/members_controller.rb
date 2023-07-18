@@ -14,6 +14,7 @@ class Public::MembersController < ApplicationController
   def show
     @member = Member.find(params[:id])
     @writings = @member.writings.published.page(params[:page])
+    @like_writings = @member.writing_likes.map(&:writing).select { |writing| writing.is_public }
   end
 
   def edit
