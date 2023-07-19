@@ -1,14 +1,22 @@
 <!--admin/tags/editページ-->
-<div>
-  <h1>タグ編集画面</h1>
+<div class="row my-5 justify-content-center">
+  <div class="col-11">
+  <div>
+    <div class="row my-3 border-bottom border-dark border-2">
+      <h1 class="">タグ編集</h1>
+    </div>
 
   <!-- タグ編集 -->
   <%= form_with model: @tag, url: admin_tag_path(@tag.id), method: :patch, local: true do |f| %>
-    <div class="">
-      <div class="">
-        <label>タグ名</label>
+    <div class="row form-group mb-5">
+      <div class="col-auto">
+        <label class="col-form-label">タグ名</label>
       </div>
-      <%= f.text_field :tag_name, autofocus: true, :placeholder => "タグ名", class: "" %>
-      <%= f.submit  "更新して保存", class: ""%>
+      <div class="col-auto">
+        <%= f.text_field :tag_name, autofocus: true, :placeholder => "タグ名", class: "form-control" %>
+      </div>
+      <%= f.submit  "更新して保存", class: "col-auto btn btn-success" %>
     </div>
   <% end %>
+  </div>
+</div>

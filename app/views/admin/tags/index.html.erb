@@ -1,45 +1,61 @@
 <!--admin/tags/indexページ-->
-<div>
-  <h1>タグ登録画面</h1>
-  <!-- 新規登録 -->
-  <%= form_with model: @tag, url: admin_tags_path, method: :post do |f| %>
-    <div class="">
-      <div class="">
-        <label>タグ名</label>
-      </div>
-      <%= f.text_field :tag_name, autofocus: true, :placeholder => "タグ名", class: "" %>
-      <%= f.hidden_field :admin_created, :value => true %>
-      <%= f.submit  "新規登録", class: ""%>
+<div class="row my-5 justify-content-center">
+  <div class="col-11">
+    <div class="row my-3 border-bottom border-dark border-2">
+      <h1 class="">タグ新規作成</h1>
     </div>
-  <% end %>
-
-  <!-- 一覧 -->
-  <div>
-    <table class="">
-      <thead class="">
-        <tr>
-          <th  class="" style="width: 30%">タグ名<small>(タグ使用作品数)</small></th>
-          <th style="width: 30%">作成区分</th>
-          <th style="width: 50%"></th>
-        </tr>
-      </thead>
+    <!-- 新規登録 -->
+    <%= form_with model: @tag, url: admin_tags_path, method: :post do |f| %>
+      <div class="row form-group mb-5">
+        <div class="col-auto">
+          <label class="col-form-label">タグ名</label>
+        </div>
+        <div class="col-auto">
+          <%= f.text_field :tag_name, autofocus: true, :placeholder => "タグ名", class: "form-control" %>
+          <%= f.hidden_field :admin_created, :value => true %>
+        </div>
+        <%= f.submit  "新規登録", class: "col-auto btn btn-success"%>
+      </div>
+    <% end %>
+    <!-- 一覧 -->
+    <div class="row my-3 border-bottom border-dark border-2">
+      <h1 class="">タグ一覧</h1>
+    </div>
+    <div class="row">
+      <% 3.times do %>
+      <div class="col-4">
+        <div class="row border-bottom">
+          <div class="col-5 ">
+            <p>タグ名<small>(タグ使用数)</small></p>
+          </div>
+          <div class="col-3 text-center">
+            <p>作成区分</p>
+          </div>
+          <div class="col-4 text-center">
+            <p>編集・削除</p>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+    <div class="row border-bottom">
       <% @tags.each do |tags| %>
-        <tbody>
-          <tr>
-            <td>
+        <div class="col-4 me-0 mb-3">
+          <div class="row">
+            <div class="col-5 d-flex align-items-center">
               <%= link_to tags.tag_name,admin_tag_search_path(tag_id: tags.id) %>
               <%= "(#{tags.writings.count})" %>
-            </td>
-            <td>
+            </div>
+            <div class="col-3 text-center d-flex align-items-center justify-content-center">
               <%= tags.admin_created ? '管理者' : '会員' %>
-            </td>
-            <td>
-              <%= link_to "編集", edit_admin_tag_path(tags.id), class: "" %></br>
-              <%= link_to "削除", admin_tag_path(tags.id), method: :delete, data: { confirm: "本当に削除しますか？", cancel: "やめる", commit: "退会する"}, class: "" %>
-            </td>
-          </tr>
-        </tbody>
+            </div>
+            <div class="col-4 text-center">
+              <%= link_to "編集", edit_admin_tag_path(tags.id), class: "text-dark" %></br>
+              <%= link_to "削除", admin_tag_path(tags.id), method: :delete, data: { confirm: "本当に削除しますか？", cancel: "やめる", commit: "退会する"}, class: "text-dark" %>
+            </div>
+          </div>
+        </div>
       <% end %>
-    </table>
+    </div>
   </div>
 </div>
