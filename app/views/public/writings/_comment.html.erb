@@ -2,12 +2,10 @@
   <h3>コメント<span><%= writing.writing_comments.count %>件</span></h3>
 </div>
 <!-- コメントフォーム -->
-<%= form_with model: [writing, writing_comment], class:"" do |f| %>
+<%= form_with model: [writing, writing_comment] do |f| %>
   <div class="row mb-3">
     <div class="col-1 text-center">
-      <!--<div class="rounded-circle">-->
-          <%= image_tag current_member.get_profile_image(40,40), class:"border rounded-circle" %>
-      <!--</div>-->
+      <%= image_tag current_member.get_profile_image(40,40), class:"border rounded-circle" %>
     </div>
     <div class="col-8">
       <%= f.text_field :comment, placeholder: "コメントをする", class:"form-control" %>
@@ -15,7 +13,6 @@
     <div class="col-2 text-center">
       <%= f.submit "送信する", class:"btn btn-secondary" %>
     </div>
-    <!--</div>-->
   </div>
 <% end %>
 

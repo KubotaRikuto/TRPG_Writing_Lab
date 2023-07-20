@@ -6,7 +6,8 @@
   border: 3px double #000;
   padding: 10px;
 }
-/*new edit*/
+
+/*star review*/
 .post_form{
   display: flex;
   flex-direction: row-reverse;
@@ -36,11 +37,6 @@
 .post_form input[type='radio']:checked ~ label{
   color: #ffcc00;
 }
-/* heart color*/
-.heart-color {
-    color: #f91880;
-  }
-/*star review*/
 .star-rating {
   position: relative;
   display: inline-block;
@@ -59,9 +55,14 @@
 .star-rating-back {
   display: inline-block;
   color: #ccc;
-
 }
-/*navbar custom*/
+
+/* heart color*/
+.heart-color {
+    color: #f91880;
+}
+
+/*nav-bar custom*/
 @media (min-width: 992px) {
   .custom-nav-border {
     border: solid #000;

@@ -4,13 +4,14 @@ class Admin::WritingsController < ApplicationController
 
   def index
     @writings = Writing.page(params[:page])
-    @tag_list = Tag.all
+    @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
   end
 
   def show
     @writing = Writing.find(params[:id])
     @writing_tags = @writing.tags
-    @tag_list = Tag.all
+    @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
+    @comment_list = @writing.writing_comments.page(params[:page])
   end
 
   def update

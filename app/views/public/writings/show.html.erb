@@ -45,47 +45,59 @@
               <div class="col-3">
                 タイトル：
               </div>
-              <%= @writing.title %>
+              <div class="col ps-0">
+                <%= @writing.title %>
+              </div>
             </div>
             <div class="row">
               <div class="col-3">
                 TRPGルール：
               </div>
-              <%= @writing.trpg_rule.title %>
+              <div class="col ps-0">
+                <%= @writing.trpg_rule.title %>
+              </div>
             </div>
             <div class="row">
               <div class="col-3">
                 シナリオ・ルール：
               </div>
-              <%= @writing.writing_type ? 'シナリオ' : 'ルール'  %>
+              <div class="col ps-0">
+                <%= @writing.writing_type ? 'シナリオ' : 'ルール'  %>
+              </div>
             </div>
             <div class="row">
               <div class="col-3">
                 想定人数：
               </div>
-              <%= @writing.min_players %> ~ <%= @writing.max_players %> 人
+              <div class="col ps-0">
+                <%= @writing.min_players %> ~ <%= @writing.max_players %> 人
+              </div>
             </div>
             <div class="row">
               <div class="col-3">
                 想定時間：
               </div>
-              <%= @writing.min_play_time %> ~ <%= @writing.max_play_time %>時間
+              <div class="col ps-0">
+                <%= @writing.min_play_time %> ~ <%= @writing.max_play_time %>時間
+              </div>
             </div>
             <div class="row">
               <div class="col-3">
                 想定難易度：
               </div>
-              簡単
-              <span class="star-rating">
-                <span class="star-rating-front" style="width: <%= @writing.getPercent(@writing.difficulty) %>%;">★★★★★</span>
-                <span class="star-rating-back">★★★★★</span>
-              </span>
-              難しい
+              <div class="col ps-0">
+                簡単
+                <span class="star-rating">
+                  <span class="star-rating-front" style="width: <%= @writing.getPercent(@writing.difficulty) %>%;">★★★★★</span>
+                  <span class="star-rating-back">★★★★★</span>
+                </span>
+                難しい
+              </div>
             </div>
             <!--タグ欄-->
             <div class="row">
               <!--<div class="col my-2">タグ欄</div>-->
-              <div class="col mt-3">
+              <div class="col mt-3 py-1">
                 <% if @writing_tags.present? %>
                   <% @writing_tags.each do |tag| %>
                     <span class="border mx-1 p-1">

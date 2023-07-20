@@ -1,101 +1,148 @@
-<!-- 検索機能 -->
-<%= render 'search', tag_list: @tag_list %>
-<!-- 作品詳細画面-->
-<h1><%= @writing.title%>の内容</h1>
-<div class="row">
-  <div class="col">
-    <div class="row">
-      <div class="col">
-        <%= image_tag @writing.get_thumbnail_image(100,100) %>
-        <div>
-          <% if @writing.writing_likes.exists? %>
-            <p>
-              ♥<%= @writing.writing_likes.count %> いいね
-            </p>
-            <% else %>
-            <p>
-              ♡<%= @writing.writing_likes.count %> いいね
-            </p>
-          <% end %>
+<div class="row my-5 justify-content-center">
+  <div class="col-xl-11 col-12">
+    <!-- 検索機能 -->
+    <div class="row justify-content-center">
+      <%= render 'search', tag_list: @tag_list %>
+    </div>
+    <!-- 作品詳細画面-->
+    <div class="row my-3 mx-5 border-bottom border-dark border-2">
+      <h2 class="fw-bold"><%= @writing.title%>の内容<span class="fw-normal h4">の内容</span></h2>
+    </div>
+     <div class="row mx-5 mb-5 flex-row">
+      <div class="col-9 double-border p-3">
+        <div class="row">
+          <div class="col-3 text-center">
+            <div class="mb-2">
+              <%= image_tag @writing.get_thumbnail_image(120,120) %>
+            </div>
+            <div class="mb-2">
+              <% if @writing.writing_likes.exists? %>
+                <p>
+                  <i class="fa-solid fa-heart fa-lg heart-color"></i> <%= @writing.writing_likes.count %> いいね
+                </p>
+                <% else %>
+                <p>
+                  <i class="fa-solid fa-heart fa-lg text-secondary"></i> <%= @writing.writing_likes.count %> いいね
+                </p>
+              <% end %>
+            </div>
+            <div class="m-2">
+              <% if @writing.writing_zip.present? %>
+                <%= link_to 'ダウンロード', rails_blob_path(@writing.writing_zip, disposition: "attachment"), class:"btn btn-sm btn-primary px-3" %>
+              <% else %>
+                <button type="button" class="btn btn-sm btn-primary text-white-50 px-3" disabled="disabled">ダウンロード</button>
+              <% end %>
+            </div>
+          </div>
+          <div class="col-9">
+            <div class="row">
+              <div class="col-3">
+                タイトル：
+              </div>
+              <div class="col ps-0">
+                <%= @writing.title %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3">
+                TRPGルール：
+              </div>
+              <div class="col ps-0">
+                <%= @writing.trpg_rule.title %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3">
+                シナリオ・ルール：
+              </div>
+              <div class="col ps-0">
+                <%= @writing.writing_type ? 'シナリオ' : 'ルール' %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3">
+                想定人数：
+              </div>
+              <div class="col ps-0">
+                <%= @writing.min_players %> ~ <%= @writing.max_players %> 人
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3">
+                想定時間：
+              </div>
+              <div class="col ps-0">
+              <%= @writing.min_play_time %> ~ <%= @writing.max_play_time %>時間
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3">
+                想定難易度：
+              </div>
+              <div class="col ps-0">
+                簡単
+                <span class="star-rating">
+                  <span class="star-rating-front" style="width: <%= @writing.getPercent(@writing.difficulty) %>%;">★★★★★</span>
+                  <span class="star-rating-back">★★★★★</span>
+                </span>
+                難しい
+              </div>
+            </div>
+            <!--タグ欄-->
+            <div class="row">
+              <!--<div class="col my-2">タグ欄</div>-->
+              <div class="col mt-3 py-1">
+                <% if @writing_tags.present? %>
+                  <% @writing_tags.each do |tag| %>
+                    <span class="border mx-1 p-1">
+                      <%= "#{tag.tag_name}(#{tag.writings.count})" %>
+                    </span>
+                  <% end %>
+                <% end%>
+              </div>
+            </div>
+            <div class="row mt-4 justify-content-end">
+              <div class="col-5 text-end">
+              <small>
+                更新日：<%= @writing.updated_at.strftime('%Y年%m月%d日 %H:%M')%>
+              </small>
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-          <% if @writing.writing_zip.present? %>
-            <%= link_to 'ダウンロード', rails_blob_path(@writing.writing_zip, disposition: "attachment") %>
-          <% else %>
-            <p>ダウンロード</p>
-          <% end %>
+        <!---->
+        <!-- 概要 -->
+        <div class="row my-3 py-2 border-top border-bottom border-dark">
+          <div>概要：</div>
+          <div>
+            <%= safe_join(@writing.summary.split("\n"),tag(:br)) %>
+          </div>
         </div>
+        <%= form_with model: @writing, url: admin_writing_path(@writing.id), method: :patch, class:"row justify-content-end me-2" do |f| %>
+          <div class="col-auto">
+          <%= f.select :is_public, [['公開',true],['非公開',false]] %>
+          </div>
+          <%= f.submit "公開情報を更新", class: "col-auto btn btn-outline-primary fw-bold" %>
+        <% end %>
       </div>
-      <div class="col">
-        <div>
-          <div>
-            タイトル：
+      <div class="col-3 px-3 border">
+        <div class="row mx-3 pt-3 px-3 pb-5 border border-dark">
+          <!-- ユーザー情報 -->
+          <div class="text-center mb-1">
+            <%= image_tag @writing.member.get_profile_image(50,50), class:"border rounded-circle" %>
           </div>
-          <%= @writing.title %>
-        </div>
-        <div>
-          <div>TRPGルール：</div>
-          <div>
-            <%= @writing.trpg_rule.title %>
+          <div class="text-center">
+            <%= @writing.member.name%></br>
+            <%= link_to "他の作品を見る", admin_member_path(@writing.member.id, anchor: "member_writings") %>
           </div>
-        </div>
-        <div>
-          <div>シナリオ・ルール</div>
-          <%= @writing.writing_type ? 'シナリオ' : 'ルール' %>
-        </div>
-        <div>
-          <div>想定人数：</div>
-          <%= @writing.min_players %> ~ <%= @writing.max_players %> 人
-        </div>
-        <div>
-          <div>想定時間：</div>
-          <%= @writing.min_play_time %> ~ <%= @writing.max_play_time %>時間
-        </div>
-        <div>
-          <div>想定難易度</div>
-          簡単
-          <span class="star-rating">
-            <span class="star-rating-front" style="width: <%= @writing.getPercent(@writing.difficulty) %>%;">★★★★★</span>
-            <span class="star-rating-back">★★★★★</span>
-          </span>
-          難しい
-        </div>
-        <!--タグ欄-->
-        <div>タグ欄</div>
-        <div>
-          <% if @writing_tags.present? %>
-            <% @writing_tags.each do |tag| %>
-              <%= link_to tag.tag_name, admin_tag_search_path(tag_id: tag.id) %>
-              <%= "(#{tag.writings.count})" %>
-            <% end %>
-          <% end%>
-        </div>
-        <div>
-          更新日：<%= @writing.updated_at.strftime('%Y年%m月%d日 %H:%M')%>
         </div>
       </div>
     </div>
-    <!---->
-    <!-- 概要 -->
-    <div class="row">
-      <div>概要：</div>
-      <div>
-        <%= safe_join(@writing.summary.split("\n"),tag(:br)) %>
+    <!-- コメント欄 -->
+    <div class="row mx-5 mb-5">
+      <div class="col-9 p-3 border border-dark">
+        <%= render 'comment', writing: @writing, comment_list: @comment_list %>
       </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="row">
-      <!-- ユーザー情報 -->
-      <span><%= image_tag @writing.member.get_profile_image(50,50) %></span>
-      <%= @writing.member.name%></br>
-      <%= link_to "#{@writing.member.name}の他の投稿作品を見る", admin_member_path(@writing.member.id, anchor: "member_writings") %>
     </div>
   </div>
 </div>
-<%= form_with model: @writing, url: admin_writing_path(@writing.id), method: :patch do |f| %>
-  <%= f.select :is_public, [['公開',true],['非公開',false]] %>
-  <%= f.submit "公開情報を更新", class: "" %>
-<% end %>
-<!-- コメント欄 -->
-<%= render 'comment', writing: @writing %>

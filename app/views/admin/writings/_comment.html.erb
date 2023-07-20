@@ -1,23 +1,26 @@
-<div>
+<div class="row">
   <h3>コメント<span><%= writing.writing_comments.count %>件</span></h3>
 </div>
 <!-- コメント一覧 -->
 <% writing.writing_comments.each do |writing_comment| %>
-  <div class="row">
-    <div style="height: 50px;" class="col-3">
+  <div class="row d-flex align-items-center">
+    <div style="height: 40px;" class="col-1 text-center">
       <%= image_tag writing_comment.member.get_profile_image(50,50) %>
     </div>
-    <div class="col-4" id="comment-<%= writing_comment.id %>">
+    <div class="col-8" id="comment-<%= writing_comment.id %>">
       <p>
         <small><%= writing_comment.member.name %></small></br>
         <%= writing_comment.comment %></br>
-        <small><%= time_ago_in_words(writing_comment.created_at) %>前</small>
+        <small><span class="fw-light"><%= time_ago_in_words(writing_comment.created_at) %>前</span></small>
       </p>
     </div>
-    <div class="col-3">
-      <p>
-        <%= link_to "削除", admin_writing_writing_comment_path(writing_comment.id), class: "" %>
-      </p>
+    <div class="col-2 text-center">
+      <%= link_to "削除", admin_writing_writing_comment_path(writing_comment.id), method: :delete, class: "text-decoration-none text-dark" %>
     </div>
   </div>
 <% end %>
+<div class="row justify-content-center">
+  <div class="col-2">
+    <%= paginate(comment_list) %>
+  </div>
+</div>

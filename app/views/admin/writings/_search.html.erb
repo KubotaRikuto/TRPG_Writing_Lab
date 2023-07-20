@@ -1,15 +1,26 @@
 <!-- ワード検索機能 -->
-<%= form_with url: admin_search_path, local: true, method: :get do |f| %>
-  <%= f.text_field :word, placeholder: "作品検索", class: "form-box" %>
-  <%= f.submit "検索", class: "btn" %>
-<% end %>
-
-<!--タグ検索機能-->
-<div class="row">
-  <p class ="col">人気タグ</p>
-  <%= link_to "タグ一覧へ", admin_tags_path, class: "col ml-auto" %>
+<div class="col-8 mb-3">
+  <%= form_with url: admin_search_path, local: true, method: :get, class:"col-10 input-group" do |f| %>
+    <%= f.text_field :word, placeholder: "作品検索", class: "form-control" %>
+    <%= f.button :submit, class: "btn btn-outline-success" do %>
+        <i class="fa-solid fa-magnifying-glass"></i>
+      <% end %>
+  <% end %>
 </div>
-<% tag_list.each do |tag| %>
-  <%= link_to tag.tag_name, admin_tag_search_path(tag_id: tag.id) %>
-  <%= "(#{tag.writings.count})" %>
-<% end %>
+<!--タグ検索機能-->
+<div class="col-10 mb-3 pt-1 border border-dark">
+  <div class="row">
+    <p class ="col">人気タグ</p>
+    <%= link_to admin_tags_path, class: "col ml-auto text-end" do %>
+      <span class="btn border btn-sm shadow-sm">タグ一覧へ</span>
+    <% end %>
+  </div>
+  <div class="mb-2">
+  <% tag_list.each do |tag| %>
+    <span class="border mx-1 p-1">
+      <%= link_to tag.tag_name, admin_tag_search_path(tag_id: tag.id), class:"text-black" %>
+      <%= "(#{tag.writings.count})" %>
+    </span>
+  <% end %>
+  </div>
+</div>
