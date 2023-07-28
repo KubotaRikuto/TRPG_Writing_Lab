@@ -11,7 +11,7 @@ class Admin::WritingsController < ApplicationController
     @writing = Writing.find(params[:id])
     @writing_tags = @writing.tags
     @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
-    @comment_list = @writing.writing_comments.page(params[:page])
+    @comment_list = @writing.writing_comments.order(created_at: :desc).page(params[:page])
   end
 
   def update
@@ -28,7 +28,7 @@ class Admin::WritingsController < ApplicationController
   end
 
   def word_search
-    @tag_list = Tag.all
+    @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
     keyword = params[:word]
     @writings = Writing.joins(:member, :trpg_rule).search(keyword)
     if @writings.count > 0 && keyword.present?
@@ -40,7 +40,7 @@ class Admin::WritingsController < ApplicationController
   end
 
   def tag_search
-    @tag_list = Tag.all
+    @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
     @tag = Tag.find(params[:tag_id])
     @writings = @tag.writings.page(params[:page]).per(10)
     if @writings.count > 0

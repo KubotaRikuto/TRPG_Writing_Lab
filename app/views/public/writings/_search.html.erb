@@ -1,7 +1,7 @@
 <!-- ワード検索機能 -->
 <div class="col-8 mb-3">
   <%= form_with url: search_path, local: true, method: :get, class:"col-10 input-group" do |f| %>
-    <%= f.text_field :word, placeholder: "作品検索", class: "form-control" %>
+    <%= f.text_field :word, placeholder: "タイトル・作成者の検索", class: "form-control" %>
     <%= f.button :submit, class: "btn btn-outline-success" do %>
       <i class="fa-solid fa-magnifying-glass"></i>
     <% end %>
@@ -18,7 +18,7 @@
   <div class="mb-2">
   <% tag_list.each do |tag| %>
     <span class="border mx-1 p-1">
-      <%= link_to tag.tag_name, tag_search_path(tag_id: tag.id), class:"text-black" %>
+      <%= link_to tag.tag_name, tag_search_path(tag_id: tag.id), class:"text-black text-decoration-none" %>
       <%= "(#{tag.writings.published.count})" %>
     </span>
   <% end %>

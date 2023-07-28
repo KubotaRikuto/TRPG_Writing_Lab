@@ -1,19 +1,38 @@
 <!-- コメント一覧-->
-<% comments.each do |comment| %>
-  <div class="row">
-    <div class="col">
-      <%= image_tag comment.member.get_profile_image(50,50)%>
+<div class="row mb-4">
+  <div class="col">
+    <div class="row">
+      <div class="col">
+        <div class="row border-bottom mb-2">
+          <div class="col-9 text-center">
+            <p>コメント</p>
+          </div>
+          <div class="col-2">
+            <p>コメントされた作品</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="col">
-      <%= comment.member.name %></br>
-      <%= comment.comment %></br>
-      <%= comment.updated_at.strftime('%Y/%m/%d') %>
-    </div>
-    <div class="col">
-      <%= comment.writing.member.name %></br>
-      <%= link_to admin_writing_path(comment.writing.id, anchor: "comment-#{comment.id}") do %>
-      <%= comment.writing.title %>
-      <% end %>
-    </div>
+    <% comments.each do |comment| %>
+      <div class="row mb-2 d-flex align-items-center">
+        <div style="height: 60px;" class="col-1 d-flex align-items-center justify-content-center">
+          <%= image_tag comment.member.get_profile_image(50,50), class:"border rounded-circle" %>
+        </div>
+        <div class="col-6">
+          <%= comment.member.name %></br>
+          <span class="fs-5"><%= comment.comment %></span></br>
+          <%= comment.updated_at.strftime('%Y/%m/%d %H:%M') %>
+        </div>
+        <div class="col-2">
+          <%= link_to "削除", admin_writing_writing_comment_path(writing_id: comment.writing.id,id: comment.id), method: :delete, class: "text-decoration-none text-dark" %>
+        </div>
+        <div class="col-2">
+          <%= link_to admin_writing_path(comment.writing.id, anchor: "comment"), class: "link-dark" do %>
+          <span class="fs-4"><%= comment.writing.title %></span>
+          <% end %></br>
+          作成者：<%= comment.writing.member.name %>
+        </div>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>

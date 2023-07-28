@@ -1,26 +1,21 @@
-<div class="row">
+<div class="row" id="comment">
   <h3>コメント<span><%= writing.writing_comments.count %>件</span></h3>
 </div>
 <!-- コメント一覧 -->
-<% writing.writing_comments.each do |writing_comment| %>
+<% comment_list.each do |comment| %>
   <div class="row d-flex align-items-center">
     <div style="height: 40px;" class="col-1 text-center">
-      <%= image_tag writing_comment.member.get_profile_image(50,50) %>
+      <%= image_tag comment.member.get_profile_image(40,40), class:"border rounded-circle" %>
     </div>
-    <div class="col-8" id="comment-<%= writing_comment.id %>">
+    <div class="col-8">
       <p>
-        <small><%= writing_comment.member.name %></small></br>
-        <%= writing_comment.comment %></br>
-        <small><span class="fw-light"><%= time_ago_in_words(writing_comment.created_at) %>前</span></small>
+        <small><%= comment.member.name %></small></br>
+        <%= comment.comment %></br>
+        <small><span class="fw-light"><%= time_ago_in_words(comment.created_at) %>前</span></small>
       </p>
     </div>
     <div class="col-2 text-center">
-      <%= link_to "削除", admin_writing_writing_comment_path(writing_comment.id), method: :delete, class: "text-decoration-none text-dark" %>
+      <%= link_to "削除", admin_writing_writing_comment_path(writing_id: writing.id,id: comment.id), method: :delete, class: "text-decoration-none link-dark" %>
     </div>
   </div>
 <% end %>
-<div class="row justify-content-center">
-  <div class="col-2">
-    <%= paginate(comment_list) %>
-  </div>
-</div>

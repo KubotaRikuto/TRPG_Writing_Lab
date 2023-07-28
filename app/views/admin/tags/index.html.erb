@@ -2,7 +2,7 @@
 <div class="row my-5 justify-content-center">
   <div class="col-11">
     <div class="row my-3 border-bottom border-dark border-2">
-      <h1 class="">タグ新規作成</h1>
+      <h1>タグ新規作成</h1>
     </div>
     <!-- 新規登録 -->
     <%= form_with model: @tag, url: admin_tags_path, method: :post do |f| %>
@@ -47,7 +47,11 @@
               <%= "(#{tags.writings.count})" %>
             </div>
             <div class="col-3 text-center d-flex align-items-center justify-content-center">
-              <%= tags.admin_created ? '管理者' : '会員' %>
+              <% if tags.admin_created %>
+                <span class="text-danger">管理者</span>
+              <% else %>
+                <span class="text-success">会員</span>
+              <% end %>
             </div>
             <div class="col-4 text-center">
               <%= link_to "編集", edit_admin_tag_path(tags.id), class: "text-dark" %></br>

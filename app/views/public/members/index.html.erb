@@ -4,27 +4,27 @@
       <h1 class="">メンバーリスト</h1>
     </div>
     <div class="row mb-3">
-      <table class="table table-bordered">
+      <table class="table table-sm table-bordered">
         <thead>
           <tr class="text-center">
             <th colspan="2" style="width: 40%">メンバー名</th>
-            <th style="width: 30%">好きなTRPG</th>
+            <th style="width: 40%">好きなTRPG</th>
             <th style="width: 10%">いいね！</th>
-            <th style="width: 20%">最終ログイン日</th>
+            <th style="width: 10%">最終ログイン日</th>
           </tr>
         </thead>
         <% @members.each do |member| %>
         <tbody>
           <tr>
-            <td rowspan="2" style="width: 10%" class="align-middle">
+            <td rowspan="2" style="width: 5%" class="align-middle">
               <div class="text-center">
                 <%= link_to member_path(member.id) do %>
-                  <%= image_tag member.get_profile_image(60,60) %>
+                  <%= image_tag member.get_profile_image(60,60), class: "border rounded-circle" %>
                 <% end %>
               </div>
             </td>
             <td>
-              <%= link_to member_path(member.id), class:"link-dark" do %>
+              <%= link_to member_path(member.id), class:"link-dark text-decoration-none" do %>
                 <%= member.name %>
               <% end %>
             </td>

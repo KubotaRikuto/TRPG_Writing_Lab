@@ -1,30 +1,40 @@
-<h1>プロフィールを編集</h1>
-
-<%= form_with model: @member, url: admin_member_path(@member.id), method: :patch do |f| %>
-  <div>
-    <%= image_tag @member.get_profile_image(100,100)%>
-    <%= f.file_field :profile_image, placeholder: "ファイルを選択", accept: "image/*", class: "", id: "" %>
+<div class="row my-5 justify-content-center">
+  <div class="col-xl-10 col-12">
+    <div class="row my-3 mx-5 border-bottom border-dark border-2">
+      <h1>プロフィールを編集</h1>
+    </div>
+    <%= form_with model: @member, url: admin_member_path(@member.id), method: :patch do |f| %>
+    <div class="row my-3 mx-5 p-4 double-border">
+      <div class="mb-3">
+        <%= image_tag @member.get_profile_image(100,100), class: "border rounded-circle me-4" %>
+        <%= f.file_field :profile_image, placeholder: "ファイルを選択", accept: "image/*", class: "", id: "" %>
+      </div>
+      <div class="mb-3">
+        <label for="inputName" class="form-label">ニックネーム</label>
+        <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"ニックネーム", class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">メールアドレス</label>
+        <%= f.email_field :email, id:"email", placeholder:"sample@sample.com", class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <label for="inputIntroduction" class="form-label">自己紹介</label>
+        <%= f.text_area :introduction, id:"inputIntroduction", placeholder:"よろしくお願いします！", class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <label for="inputFavoriteTrpg" class="form-label">好きなTRPG</label>
+        <%= f.text_area :favorite_trpg, id:"inputFavoriteTrpg", placeholder:"好きなTRPG", class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <label for="inputIsDeleted" class="form-label">アカウント状況</label>
+        <%= f.select :is_deleted, {"利用中" => false, "利用停止" => true}, { class: "form-select", id: "inputIsDeleted"} %>
+      </div>
+    </div>
+    <div class="row my-3 mx-5 justify-content-between">
+      <div class="col pe-0 text-end">
+        <%= f.submit "変更を保存", class: "btn btn-outline-primary fw-bold" %>
+      </div>
+    </div>
+    <% end %>
   </div>
-  <div>
-    <label for="inputName">ニックネーム</label>
-    <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前" %>
-  </div>
-  <div>
-    <label for="email">メールアドレス</label>
-    <%= f.email_field :email, id:"email", placeholder:"sample@sample.com" %>
-  </div>
-  <div>
-    <label for="inputIntroduction">自己紹介</label>
-    <%= f.text_area :introduction, id:"inputIntroduction", placeholder:"よろしくお願いします！" %>
-  </div>
-  <div>
-    <label>アカウント状況</label>
-    <%= f.select :is_deleted, {"利用中" => false, "利用停止" => true} %>
-  </div>
-  <div>
-    <!--= link_to "退会する", admin_members_nonpublic_path(@member.id), method: :patch, class: "" %>-->
-    <%= f.submit "変更を保存"%>
-  </div>
-
-<% end %>
-
+</div>

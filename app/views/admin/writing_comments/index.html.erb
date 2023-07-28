@@ -1,12 +1,14 @@
-<!-- 最新コメント -->
-<div class="row">
-  <h1>最新コメント</h1>
+<div class="row my-5 justify-content-center">
+  <div class="col-xl-11 col-12">
+    <!-- 最新コメント -->
+    <div class="row my-3 border-bottom border-dark border-2">
+      <h1>最新コメント</h1>
+    </div>
+    <%= render 'list', comments: @new_comments %>
+    <!-- コメント一覧 -->
+    <div class="row my-3 border-bottom border-dark border-2">
+      <h1>コメント一覧</h1>
+    </div>
+    <%= render 'list', comments: @comments %>
+  </div>
 </div>
-<%= render 'list', comments: @new_comments %>
-<!-- コメント一覧 -->
-<div class="row">
-  <h1>コメント一覧</h1>
-</div>
-<%= render 'list', comments: @comments %>
-
-

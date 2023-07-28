@@ -101,7 +101,9 @@
                 <% if @writing_tags.present? %>
                   <% @writing_tags.each do |tag| %>
                     <span class="border mx-1 p-1">
-                      <%= "#{tag.tag_name}(#{tag.writings.count})" %>
+                      <%= link_to tag_search_path(tag_id: tag.id), class:"text-black text-decoration-none" do %>
+                        <%= "#{tag.tag_name}(#{tag.writings.count})" %>
+                      <% end %>
                     </span>
                   <% end %>
                 <% end%>

@@ -10,10 +10,10 @@ class Admin::WritingCommentsController < ApplicationController
     writing = Writing.find(params[:writing_id])
     if WritingComment.find(params[:id]).destroy
       flash[:notice] = "コメントは削除されました。"
-      redirect_to admin_writing_path(writing.id)
+      redirect_back(fallback_location: admin_writing_path(writing.id))
     else
       flash[:notice] = "コメントの削除に失敗しました。"
-      redirect_to admin_writing_path(writing.id)
+      redirect_back(fallback_location: admin_writing_path(writing.id))
     end
   end
 

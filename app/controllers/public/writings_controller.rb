@@ -6,7 +6,6 @@ class Public::WritingsController < ApplicationController
   # 非公開投稿への画面遷移不可
   before_action :require_public_writing, only: [:show, :edit]
 
-
   def index
     @writings = Writing.published.page(params[:page])
     @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
@@ -17,7 +16,7 @@ class Public::WritingsController < ApplicationController
     @writing_tags = @writing.tags
     @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
     @writing_comment = WritingComment.new
-    @comment_list = @writing.writing_comments.page(params[:page])
+    @comment_list = @writing.writing_comments.order(created_at: :desc).page(params[:page])
   end
 
   def new
@@ -71,20 +70,8 @@ class Public::WritingsController < ApplicationController
     redirect_to writings_path
   end
 
-  # def download
-  #   writing = Writing.find(params[:id])
-  #   file = writing.file.blob.download
-  #   if send_data(file, disposition: 'attachment',  # ダウンロードしたファイルを送信する
-  #     filename: upload_file.file.blob.filename.to_s, # ファイル名の取得
-  #     type: upload_file.file.blob.content_type) # content_typeの取得
-  #     head :no_content # 送信出来たら、no_contentを返す
-  #   else
-  #     render json: upload_file.errors, status: :not_found  # エラーを返す
-  #   end
-  # end
-
   def word_search
-    @tag_list = Tag.all
+    @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
     keyword = params[:word]
     @writings = Writing.joins(:member, :trpg_rule).published.search(keyword)
     if @writings.count > 0 && keyword.present?
@@ -96,7 +83,7 @@ class Public::WritingsController < ApplicationController
   end
 
   def tag_search
-    @tag_list = Tag.all
+    @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
     @tag = Tag.find(params[:tag_id])
     @writings = @tag.writings.published.page(params[:page]).per(10)
     if @writings.count > 0

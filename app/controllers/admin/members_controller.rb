@@ -9,6 +9,7 @@ class Admin::MembersController < ApplicationController
   def show
     @member = Member.find(params[:id])
     @writings = @member.writings.page(params[:page])
+    @like_writings = @member.writing_likes.map(&:writing)
   end
 
   def edit

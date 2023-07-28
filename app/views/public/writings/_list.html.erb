@@ -26,21 +26,15 @@
             <%= writings.title %>
           <% end %>
         </td>
-        <td class="align-middle">
-          <div class="text-center">
-            <%= writings.writing_type ? 'シナリオ' : 'ルール' %>
-          </div>
+        <td class="align-middle text-center">
+          <%= writings.writing_type ? 'シナリオ' : 'ルール' %>
         </td>
-        <td class="align-middle"><%= writings.member.name %></td>
-        <td class="align-middle">
-          <div class="text-center">
-            <%= writings.min_players %>~<%= writings.max_players %>人
-          </div>
+        <td class="align-middle text-center"><%= writings.member.name %></td>
+        <td class="align-middle text-center">
+          <%= writings.min_players %>~<%= writings.max_players %>人
         </td>
-        <td class="align-middle">
-          <div class="text-center">
-            <%= writings.min_play_time %>~<%= writings.max_play_time %>時間
-          </div>
+        <td class="align-middle text-center">
+          <%= writings.min_play_time %>~<%= writings.max_play_time %>時間
         </td>
         <td class="align-middle">
           <span class="star-rating">
@@ -48,10 +42,8 @@
             <span class="star-rating-back">★★★★★</span>
           </span>
         </td>
-        <td class="align-middle">
-          <div class="text-center">
-            <%= writings.writing_likes.count %>
-          </div>
+        <td class="align-middle text-center">
+          <%= writings.writing_likes.count %>
         </td>
         <td class="align-middle">
           <% writings.tags.each do |list| %>

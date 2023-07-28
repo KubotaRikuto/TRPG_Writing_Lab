@@ -2,15 +2,16 @@
   <div class="col-xl-10 col-12">
     <div class="row my-3 border-bottom border-dark border-2">
       <div class="col">
-      <h1>タグ一覧</h1>
+      <h1>タグリスト</h1>
       </div>
     </div>
     <div class="row">
-      <% @tags.each do |tags| %>
+      <% @tags.each do |tag| %>
         <div class="col-3">
           <span class="p-1 border">
-            <%= link_to tags.tag_name,tag_search_path(tag_id: tags.id), class:"text-black" %>
-            <%= "(#{tags.writings.count})" %>
+            <%= link_to tag_search_path(tag_id: tag.id), class:"text-black text-decoration-none" do %>
+              <%= "#{tag.tag_name}(#{tag.writings.count})" %>
+            <% end %>
           </span>
         </div>
       <% end %>

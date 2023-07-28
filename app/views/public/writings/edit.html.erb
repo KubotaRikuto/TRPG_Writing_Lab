@@ -54,11 +54,15 @@
                 <div class="col-2">
                   <%= f.text_field :min_players, placeholder: "00", class:"form-control border-dark" %>
                 </div>
-                <div class="col-1 d-flex align-items-center">~</div>
+                <div class="col-auto d-flex align-items-center">
+                  ~
+                </div>
                 <div class="col-2">
                   <%= f.text_field :max_players, placeholder: "00", class:"form-control border-dark" %>
                 </div>
-                <div class="col-1 d-flex align-items-center">人</div>
+                <div class="col-auto d-flex align-items-center">
+                  人
+                </div>
               </div>
             </td>
             <th style="width: 10%;" class="align-middle">想定時間<span>*</span></th>
@@ -67,13 +71,13 @@
                 <div class="col-2">
                   <%= f.text_field :min_play_time, placeholder: "00", class:"form-control border-dark" %>
                 </div>
-                <div class="col-1 d-flex align-items-center">
+                <div class="col-auto d-flex align-items-center">
                   ~
                 </div>
                 <div class="col-2">
                   <%= f.text_field :max_play_time, placeholder: "00", class:"form-control border-dark" %>
                 </div>
-                <div class="col-2 d-flex align-items-center">
+                <div class="col-auto d-flex align-items-center">
                   時間
                 </div>
               </div>

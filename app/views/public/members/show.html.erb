@@ -3,41 +3,46 @@
     <div class="row my-3 mx-5 border-bottom border-dark border-2">
       <h1>ユーザー情報</h1>
     </div>
-    <div class="row mb-5 mx-5 border">
-      <div class="col-4">
-        <div class="text-center mb-1">
-          <%= image_tag @member.get_profile_image(100,100), class:"border rounded-circle" %>
-        </div>
-        <div class="my-3">
-          <p class="text-center m-1">
-          　<span class="p-1 border rounded-circle"><i class="fa-solid fa-heart fa-lg heart-color"></i></span>
-        　</p>
-          <p class="text-center">
-            いいね総数：<%= @member.total_likes %>
-          </p>
+    <div class="row mb-5 mx-5">
+      <div class="col-4 pt-3">
+        <div class="row justify-content-end">
+          <div class="col-auto">
+            <div class="text-center mb-1">
+              <%= image_tag @member.get_profile_image(100,100), class:"border rounded-circle" %>
+            </div>
+            <div class="my-3">
+              <p class="text-center m-1">
+              　<span class="p-1 border rounded-circle"><i class="fa-solid fa-heart fa-lg heart-color"></i></span>
+              　いいねされた回数：<%= @member.total_likes %>
+            　</p>
+            </div>
+          </div>
         </div>
       </div>
       <div class="col-8">
-        <div class="row  double-border">
-        <p><ニックネーム></br><%= @member.name %></p>
-        <p>
-          <自己紹介></br>
-          <%= @member.introduction %>
-        </p>
-        <p class="mb-3">
-          <好きなTRPG></br>
-          <%= @member.favorite_trpg %>
-        </p>
-        <p class="mb-0 text-end">
-          <i class="fa-regular fa-clock"></i>
-          最終ログイン日
-          <%= @member.last_sign_in_date %>
-        </p>
+        <div class="row double-border">
+          <p>
+            <ニックネーム></br>
+            <span class="fs-5"><%= "#{@member.name}" %></span>
+          </p>
+          <p>
+            <自己紹介></br>
+            <span class="fs-5"><%= @member.introduction %></span>
+          </p>
+          <p class="mb-3">
+            <好きなTRPG></br>
+            <span class="fs-5"><%= @member.favorite_trpg %></span>
+          </p>
+          <p class="mb-0 text-end">
+            <i class="fa-regular fa-clock"></i>
+            最終ログイン日
+            <%= @member.last_sign_in_date %>
+          </p>
         </div>
         <div class="row my-2 justify-content-end">
-          <div class="col-4 pe-0 text-end">
+          <div class="col-auto pe-0 text-end">
             <% if current_member == @member %>
-              <%= link_to "ユーザー情報の編集", edit_member_path(@member.id), class:"btn btn-secondary" %>
+              <%= link_to "ユーザー情報の編集", edit_member_path(@member.id), class:"btn text-primary fw-bold border border-dark" %>
             <% end %>
           </div>
         </div>
@@ -51,7 +56,7 @@
       <%= render 'list', writings: @writings %>
     </div>
     <!-- お気に入りの作品一覧 -->
-    <div class="row my-3 mx-5 border-bottom border-dark border-2" id="member_writings">
+    <div class="row my-3 mx-5 border-bottom border-dark border-2">
       <h1>いいねした作品</h1>
     </div>
     <div class="row mb-5 mx-5">

@@ -120,7 +120,7 @@
         </div>
         <%= form_with model: @writing, url: admin_writing_path(@writing.id), method: :patch, class:"row justify-content-end me-2" do |f| %>
           <div class="col-auto">
-          <%= f.select :is_public, [['公開',true],['非公開',false]] %>
+          <%= f.select :is_public, [['公開',true],['非公開',false]], {}, class:"form-select border-dark" %>
           </div>
           <%= f.submit "公開情報を更新", class: "col-auto btn btn-outline-primary fw-bold" %>
         <% end %>
@@ -142,6 +142,11 @@
     <div class="row mx-5 mb-5">
       <div class="col-9 p-3 border border-dark">
         <%= render 'comment', writing: @writing, comment_list: @comment_list %>
+        <div class="row justify-content-center">
+          <div class="col-2">
+            <%= paginate @comment_list %>
+          </div>
+        </div>
       </div>
     </div>
   </div>

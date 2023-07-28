@@ -18,8 +18,9 @@
   <div class="mb-2">
   <% tag_list.each do |tag| %>
     <span class="border mx-1 p-1">
-      <%= link_to tag.tag_name, admin_tag_search_path(tag_id: tag.id), class:"text-black" %>
-      <%= "(#{tag.writings.count})" %>
+      <%= link_to admin_tag_search_path(tag_id: tag.id), class:"text-black text-decoration-none" do %>
+        <%= "#{tag.tag_name}(#{tag.writings.count})" %>
+      <% end %>
     </span>
   <% end %>
   </div>
