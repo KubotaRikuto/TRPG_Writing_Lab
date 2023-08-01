@@ -1,9 +1,9 @@
-<div class="row" id="comment">
+<div class="row mb-3" id="comment">
   <h3>コメント<span><%= writing.writing_comments.count %>件</span></h3>
 </div>
 <!-- コメント一覧 -->
 <% comment_list.each do |comment| %>
-  <div class="row d-flex align-items-center">
+  <div class="row d-flex align-items-center shadow-sm">
     <div style="height: 40px;" class="col-1 text-center">
       <%= image_tag comment.member.get_profile_image(40,40), class:"border rounded-circle" %>
     </div>
@@ -11,7 +11,7 @@
       <p>
         <small><%= comment.member.name %></small></br>
         <%= comment.comment %></br>
-        <small><span class="fw-light"><%= time_ago_in_words(comment.created_at) %>前</span></small>
+        <small><%= time_ago_in_words(comment.created_at) %>前</small>
       </p>
     </div>
     <div class="col-2 text-center">

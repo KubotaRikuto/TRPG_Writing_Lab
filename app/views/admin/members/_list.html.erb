@@ -16,7 +16,7 @@
         <tr>
           <td>
             <%= link_to admin_writing_path(writings.id) do %>
-              <%= image_tag writings.get_thumbnail_image(60,60) %></br>
+              <%= image_tag writings.get_thumbnail_image(60,60), class:"border shadow-sm" %></br>
             <% end %>
           </td>
           <td>

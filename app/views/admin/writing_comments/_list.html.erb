@@ -14,8 +14,8 @@
       </div>
     </div>
     <% comments.each do |comment| %>
-      <div class="row mb-2 d-flex align-items-center">
-        <div style="height: 60px;" class="col-1 d-flex align-items-center justify-content-center">
+      <div class="row mb-2 d-flex align-items-center align-items-stretch shadow-sm">
+        <div class="col-1 d-flex align-items-center justify-content-center">
           <%= image_tag comment.member.get_profile_image(50,50), class:"border rounded-circle" %>
         </div>
         <div class="col-6">
@@ -23,7 +23,7 @@
           <span class="fs-5"><%= comment.comment %></span></br>
           <%= comment.updated_at.strftime('%Y/%m/%d %H:%M') %>
         </div>
-        <div class="col-2">
+        <div class="col-2 d-flex align-items-center ">
           <%= link_to "削除", admin_writing_writing_comment_path(writing_id: comment.writing.id,id: comment.id), method: :delete, class: "text-decoration-none text-dark" %>
         </div>
         <div class="col-2">

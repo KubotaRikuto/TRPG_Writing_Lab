@@ -35,8 +35,8 @@ class Writing < ApplicationRecord
   # 作品サムネイル画像のサイズ変更
   def get_thumbnail_image(width,height)
     unless writing_image.attached?
-      file_path = Rails.root.join('app/assets/images/l_e_others_501.jpg')
-      writing_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+      file_path = Rails.root.join('app/assets/images/AdobeStock_301378170.jpeg')
+      writing_image.attach(io: File.open(file_path), filename: 'default-image.jpeg', content_type: 'image/jpeg')
     end
     writing_image.variant(resize_to_limit: [width, height]).processed
   end
