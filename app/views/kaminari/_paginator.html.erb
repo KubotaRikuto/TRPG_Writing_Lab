@@ -8,18 +8,30 @@
 -%>
 <%= paginator.render do -%>
   <nav class="pagination" role="navigation" aria-label="pager">
-    <%= first_page_tag unless current_page.first? %>
-    <%= prev_page_tag unless current_page.first? %>
+    <div class="mx-1">
+      <%= first_page_tag unless current_page.first? %>
+    </div>
+    <div class="mx-1">
+      <%= prev_page_tag unless current_page.first? %>
+    </div>
     <% each_page do |page| -%>
       <% if page.display_tag? -%>
-        <%= page_tag page %>
+        <div class="mx-1">
+          <%= page_tag page %>
+        </div>
       <% elsif !page.was_truncated? -%>
-        <%= gap_tag %>
+        <div class="mx-1">
+          <%= gap_tag %>
+        </div>
       <% end -%>
     <% end -%>
     <% unless current_page.out_of_range? %>
-      <%= next_page_tag unless current_page.last? %>
-      <%= last_page_tag unless current_page.last? %>
+      <div class="mx-1">
+        <%= next_page_tag unless current_page.last? %>
+      </div>
+      <div class="mx-1">
+        <%= last_page_tag unless current_page.last? %>
+      </div>
     <% end %>
   </nav>
 <% end -%>
