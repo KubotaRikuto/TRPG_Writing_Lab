@@ -8,14 +8,14 @@
 
   <!-- タグ編集 -->
   <%= form_with model: @tag, url: admin_tag_path(@tag.id), method: :patch, local: true do |f| %>
-    <div class="row form-group mb-5">
-      <div class="col-auto">
+    <div class="row form-group mx-2 mb-5">
+      <div class="col-sm-auto col-12 float-start pe-sm-3 px-0">
         <label class="col-form-label">タグ名</label>
       </div>
-      <div class="col-auto">
+      <div class="col-sm-auto col-12 float-start pe-sm-3 px-0">
         <%= f.text_field :tag_name, autofocus: true, :placeholder => "タグ名", class: "form-control" %>
       </div>
-      <%= f.submit  "更新して保存", class: "col-auto btn btn-success" %>
+      <%= f.submit  "更新して保存", class: "col-sm-auto col-12 float-start btn btn-success mt-sm-0 mt-3" %>
     </div>
   <% end %>
   </div>

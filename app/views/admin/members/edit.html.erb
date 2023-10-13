@@ -23,10 +23,10 @@
       </div>
       <div class="mb-3">
         <label for="inputFavoriteTrpg" class="form-label">好きなTRPG</label>
-        <%= f.text_area :favorite_trpg, id:"inputFavoriteTrpg", placeholder:"好きなTRPG", class: "form-control" %>
+        <%= f.text_field :favorite_trpg, id:"inputFavoriteTrpg", placeholder:"好きなTRPG", class: "form-control" %>
       </div>
       <div class="d-flex mb-3">
-        <label for="inputIsDeleted" class="form-label me-2">アカウント状況</label>
+        <label for="inputIsDeleted" class="col-form-label mb-0 me-2">アカウント状況</label>
         <div class="col-4">
           <%= f.select :is_deleted, {"利用中" => false, "利用停止" => true},{}, class: "form-select", id: "inputIsDeleted" %>
         </div>

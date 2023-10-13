@@ -6,6 +6,9 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -16,42 +19,42 @@
       <nav class="navbar navbar-expand-lg py-0" style="background-color: #e3f2fd;">
         <div class="container-fluid">
           <!-- ロゴマーク -->
-          <%= link_to root_path, class:"navbar-brand ms-3" do %>
+          <%= link_to root_path, class:"navbar-brand mx-5 mx-sm-3" do %>
             <span class="justify-content-center">
               <%= image_tag 'TRPG Writing Lab.png', size: "200x90" %>
             </span>
           <% end %>
           <!-- ログインメッセージ -->
-          <div class="nav-item w-lg-25 me-3 ps-3">
+          <div class="nav-item ps-3 my-1 me-sm-3 me-0">
             <span class="align-middle">
               <% if member_signed_in? %>
-                ようこそ、<%= current_member.name %>さん！
+                ようこそ、<br class="d-xl-none d-sm-none d-lg-inline d-inline"><%= current_member.name %>さん！
               <% elsif admin_signed_in? %>
-                管理者としてログインしています。
+                管理者として<br class="d-xl-none d-sm-none d-lg-inline d-inline">ログインしています。
               <% end %>
             </span>
           </div>
           <!-- ナビゲーションメニュー -->
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler ms-auto my-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarToggler">
             <!-- 会員側 -->
             <% if member_signed_in? %>
-            <div class="w-50 ms-3 me-auto">
-              <ul class="navbar-nav justify-content-between">
-                <li class="nav-item">
+            <div class="ms-3">
+              <ul class="navbar-nav justify-content-between text-nowrap">
+                <li class="nav-item me-4">
                   <%= link_to "メンバー", members_path, class:"nav-link" %>
                 </li>
-                <li class="nav-item">
-                  <%= link_to "シナリオ・ルール", writings_path, class:"nav-link" %>
+                <li class="nav-item me-4">
+                  <%= link_to "作品(シナリオ・ルール)", writings_path, class:"nav-link" %>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item me-4">
                   <%= link_to "タグ", tags_path, class:"nav-link" %>
                 </li>
               </ul>
             </div>
-            <ul class="navbar-nav custom-nav-border py-3 ps-3">
+            <ul class="navbar-nav custom-nav-border py-3 ps-3 ms-auto text-nowrap">
               <li class="nav-item">
                 <%= link_to "マイページ", member_path(current_member.id), class:"nav-link" %>
               </li>
@@ -61,23 +64,23 @@
             </ul>
             <!-- 管理者 -->
             <% elsif admin_signed_in? %>
-            <div class="w-50 ms-3 me-auto">
+            <div class="ms-3">
               <ul class="navbar-nav justify-content-between text-nowrap">
-                <li class="nav-item">
+                <li class="nav-item me-2">
                   <%= link_to "メンバー", admin_members_path, class:"nav-link" %>
                 </li>
-                <li class="nav-item">
-                  <%= link_to "シナリオ・ルール", admin_writings_path, class:"nav-link" %>
+                <li class="nav-item me-2">
+                  <%= link_to "作品(シナリオ・ルール)", admin_writings_path, class:"nav-link" %>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item me-2">
                   <%= link_to "タグ", admin_tags_path, class:"nav-link" %>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item me-2">
                   <%= link_to "コメント", admin_writing_comments_path, class:"nav-link" %>
                 </li>
               </ul>
             </div>
-            <ul class="navbar-nav custom-nav-border py-3 ps-3">
+            <ul class="navbar-nav custom-nav-border text-nowrap py-3 ps-3 ms-auto">
               <li class="nav-item">
                 <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"nav-link" %>
               </li>
@@ -85,7 +88,7 @@
             <!-- ログアウト時 -->
             <% else %>
             <div class="w-50 ms-3 me-auto">
-              <ul class="navbar-nav justify-content-between">
+              <ul class="navbar-nav justify-content-between text-nowrap">
                 <li class="nav-item">
                   <%= link_to "アカウントを作成", new_member_registration_path, class:"nav-link" %>
                 </li>

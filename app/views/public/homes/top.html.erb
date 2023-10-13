@@ -1,21 +1,21 @@
 <div class="row my-5">
   <div class="col-lg-7 col-md-8 mx-auto border border-dark">
     <div class="row my-3">
-      <h2 class="text-center">TRPG Writing Lab へようこそ！</h2>
+      <h2 class="text-center">TRPG Writing Lab <span class="d-sm-none"><br></span>へようこそ！</h2>
     </div>
-    <div class="row mb-5">
-      <p class="text-center">ここでは、オリジナルのTRPGシナリオ・ルールの投稿や</br>
-      他のメンバーの投稿した作品を閲覧することができ、</br>
+    <div class="row mx-sm-0 mx-2 mb-5">
+      <p class="text-center">ここでは、オリジナルのTRPGシナリオ・ルールの投稿や<span class="d-none d-sm-inline"><br></span>
+      他のメンバーの投稿した作品を閲覧することができ、<span class="d-none d-sm-inline"><br></span>
       投稿した作品には感想を送り合うことができます。</p>
     </div>
     <div class="row">
-      <small><p class="text-center form-text">作品の閲覧、コメントの投稿はゲストログインからでも行えます。</p></small>
+      <small><p class="text-center form-text">作品の閲覧、コメントの投稿は<span class="d-sm-none"><br></span>ゲストログインからでも行えます。</p></small>
     </div>
     <div class="row mb-5 d-flex justify-content-center">
-      <div class="col-md-4 col-sm-5 col-7 d-grid">
-        <%= link_to "アカウントを作成", new_member_registration_path, class:"mb-1 btn btn-primary" %>
-        <%= link_to "ログイン", new_member_session_path, class:"mb-2 btn btn-secondary" %>
-        <%= link_to "ゲストログイン", member_guest_sign_in_path, method: :post, class:"btn btn-warning" %>
+      <div class="col-md-4 col-sm-5 col-12 d-grid">
+        <%= link_to "アカウント作成", new_member_registration_path, class:"mx-sm-0 mx-2 mb-1 btn btn-primary" %>
+        <%= link_to "ログイン", new_member_session_path, class:"mx-sm-0 mx-2 mb-1 btn btn-secondary" %>
+        <%= link_to "ゲストログイン", member_guest_sign_in_path, method: :post, class:"mx-sm-0 mx-2 btn btn-warning" %>
       </div>
     </div>
   </div>

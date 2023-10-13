@@ -30,6 +30,6 @@ class Admin::MembersController < ApplicationController
   private
 
   def member_params
-    params.require(:member).permit(:name, :email, :introduction, :profile_image, :is_deleted)
+    params.require(:member).permit(:name, :email, :introduction, :favorite_trpg, :profile_image, :is_deleted)
   end
 end

@@ -14,6 +14,7 @@ class Member < ApplicationRecord
   #-----------------
 
   # --- validation ---
+  validates :name, presence: true, length: { minimum: 1, maximum: 10 }
   #-----------------
 
   # --- Active Storage ---

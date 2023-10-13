@@ -1,3 +1,19 @@
+body{
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* heart color*/
+.heart-color {
+    color: #f91880;
+}
+
+/* table */
+.table_frame {
+width: 900px;
+height: auto;
+overflow: auto;
+}
+
 /* border */
 .dotted-border {
     border: 1px dotted;
@@ -55,11 +71,6 @@
 .star-rating-back {
   display: inline-block;
   color: #ccc;
-}
-
-/* heart color*/
-.heart-color {
-    color: #f91880;
 }
 
 /*nav-bar custom*/

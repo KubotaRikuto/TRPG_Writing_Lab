@@ -1,38 +1,38 @@
 <div class="row my-5">
   <div class="col-lg-7 col-md-8 mx-auto border border-dark">
     <div class="row my-3">
-      <h2 class="text-center">TRPG Writing Lab へようこそ！</h2>
+      <h2 class="text-center">TRPG Writing Lab <span class="d-sm-none"><br></span>へようこそ！</h2>
     </div>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="row justify-content-center">
-        <div class="col-5 field mb-3 mx-5">
+        <div class="col-sm-5 col-10 field mb-3 mx-5">
           <%= f.label :email, class:"form-label" %><br />
           <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス", class:"form-control" %>
         </div>
 
-        <div class="col-5 field mb-3 mx-5">
+        <div class="col-sm-5 col-10 field mb-3 mx-5">
           <%= f.label :password, class:"form-label" %><br />
           <%= f.password_field :password, autocomplete: "current-password", placeholder: "パスワード", class:"form-control" %>
         </div>
 
         <% if devise_mapping.rememberable? %>
-          <div class="col-5 field mb-3 mx-5">
+          <div class="col-sm-5 col-10 field text-nowrap mb-3 mx-5">
             <%= f.check_box :remember_me %>
             <%= f.label :remember_me %>
           </div>
         <% end %>
         <div class="col-12 actions mb-3">
           <div class="row justify-content-center">
-            <%= f.submit "ログイン", class:"col-3 btn btn-primary" %>
+            <%= f.submit "ログイン", class:"col-xl-3 col-sm-4 col-9 btn btn-primary" %>
           </div>
         </div>
         <%= render "public/shared/links" %>
-        <div class="col-5 mx-5 text-center">
-          <p class="border-bottom border-dark border-1 fw-bold">ゲストログインはこちら</p>
+        <div class="col-sm-5 col-md-6 col-10 mx-5 text-center text-nowrap">
+          <p class="border-bottom border-dark border-1 fw-bold mx-2">ゲストログインはこちら</p>
         </div>
         <div class="col-12 actions mb-3">
-          <div class="row justify-content-center">
-            <%= link_to "ゲストログイン", member_guest_sign_in_path, method: :post, class:"col-md-3 col-4 btn btn-warning" %>
+          <div class="row justify-content-center px-0">
+            <%= link_to "ゲストログイン", member_guest_sign_in_path, method: :post, class:"col-xl-3 col-sm-4 col-9 btn btn-warning" %>
           </div>
         </div>
       </div>
