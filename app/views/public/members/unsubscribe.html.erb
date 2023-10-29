@@ -1,19 +1,20 @@
 <div class="container">
-  <div class="row justify-content-center mt-5">
-    <h5>
-      <span class="font-weight-bold">本当に退会しますか？</span>
-    </h5>
+  <div class="row text-center mt-5">
+    <h4 class="font-weight-bold">
+      本当に退会しますか？
+    </h4>
   </div>
 
-  <div class="row justify-content-center mt-4">
-    <p class="text-center">
-      退会すると、会員登録情報や<br>
-      これまでの購入履歴が閲覧できなくなります。<br>
-      退会する場合は、「退会する」をクリックしてください。
-    </p>
+  <div class="row justify-content-center px-sm-0 px-2 mt-4">
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 mb-3">
+      <p class="text-start">
+        退会すると、登録したメンバー情報の使用やこれまでの投稿履歴が閲覧できなくなります。
+        <br>退会の場合は、「退会する」をクリックしてください。
+      </p>
+    </div>
   </div>
-  <div class="row justify-content-center">
-    <%= link_to "退会しない", member_path(@member.id), class: ""%>
-    <%= link_to "退会する", member_path(@member.id), method: :delete, data: { confirm: "本当に退会しますか？", cancel: "やめる", commit: "退会する"} , class: ""%>
+  <div class="row justify-content-evenly">
+    <%= link_to "退会しない", member_path(@member.id), class: "col-md-3 col-sm-5 col-12 btn btn-outline-secondary fw-bold mb-2"%>
+    <%= link_to "退会する", member_path(@member.id), method: :delete, data: { confirm: "本当に退会しますか？", cancel: "やめる", commit: "退会する"}, class: "col-md-3 col-sm-5 col-12 btn btn-outline-danger fw-bold mb-2" %>
   </div>
 </div>
