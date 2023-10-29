@@ -13,12 +13,26 @@ class Public::MembersController < ApplicationController
 
   def show
     @member = Member.find(params[:id])
-    @writings = @member.writings.published.page(params[:page])
-    @like_writings = @member.writing_likes.map(&:writing).select { |writing| writing.is_public }
+    @writings = @member.writings.published.order(created_at: :desc).limit(5)
+    @like_writings = @member.writing_likes.includes(:writing).where(writings: { is_public: true }).order(created_at: :desc).limit(5).map(&:writing)
+    # @like_writings = @member.writing_likes.map(&:writing).select { |writing| writing.is_public }
+    # @like_writings = Kaminari.paginate_array(@like_writings).limit(5)
   end
 
   def edit
     @member = current_member
+  end
+
+  def writings
+    @member = Member.find(params[:id])
+    @writings = @member.writings.published.order(created_at: :desc).page(params[:page])
+  end
+
+  def like_writings
+    @member = Member.find(params[:id])
+    @like_writings = @member.writing_likes.includes(:writing).where(writings: { is_public: true }).order(created_at: :desc).map(&:writing)
+    # @like_writings = @member.writing_likes.map(&:writing).select { |writing| writing.is_public }
+    @like_writings = Kaminari.paginate_array(@like_writings).page(params[:page])
   end
 
   def unsubscribe

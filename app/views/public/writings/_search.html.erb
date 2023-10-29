@@ -1,5 +1,5 @@
 <!-- ワード検索機能 -->
-<div class="col-8 mb-3">
+<div class="col-sm-8 col-12 px-0 mb-3">
   <%= form_with url: search_path, local: true, method: :get, class:"col-10 input-group" do |f| %>
     <%= f.text_field :word, placeholder: "タイトル・作成者の検索", class: "form-control" %>
     <%= f.button :submit, class: "btn btn-outline-success" do %>
@@ -8,7 +8,7 @@
   <% end %>
 </div>
   <!--タグ検索機能-->
-<div class="col-10 mb-3 pt-1 border border-dark">
+<div class="col-sm-10 col-12 mb-3 py-1 border border-dark">
   <div class="row">
     <p class ="col">人気タグ</p>
     <%= link_to tags_path, class: "col ml-auto text-end" do %>
@@ -17,8 +17,8 @@
   </div>
   <div class="mb-2">
   <% tag_list.each do |tag| %>
-    <span class="border mx-1 p-1">
-      <%= link_to tag.tag_name, tag_search_path(tag_id: tag.id), class:"text-black text-decoration-none" %>
+    <span class="d-inline-block border p-1 me-1 mb-1">
+      <%= link_to tag.tag_name, tag_search_path(tag_id: tag.id), class:"text-nowrap text-black text-decoration-none" %>
       <%= "(#{tag.writings.published.count})" %>
     </span>
   <% end %>

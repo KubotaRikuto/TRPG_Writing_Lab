@@ -1,91 +1,109 @@
 <div class="row my-5 justify-content-center">
   <div class="col-xl-11 col-12">
     <!-- 検索機能 -->
-    <div class="row justify-content-center">
+    <div class="row mx-0 justify-content-center">
       <%= render 'search', tag_list: @tag_list %>
     </div>
     <!-- 作品詳細画面-->
-    <div class="row my-3 mx-5 border-bottom border-dark border-2">
+    <div class="row my-3 mx-md-5 mx-0 border-bottom border-dark border-2">
       <h2 class="fw-bold"><%= @writing.title%><span class="fw-normal h4">の内容</span></h2>
     </div>
-    <div class="row mx-5 mb-5 flex-row">
-      <div class="col-9 double-border p-3">
+    <div class="row mx-md-5 mx-0 mb-5">
+      <div class="col-md-9 col-12 double-border p-3">
         <div class="row">
-          <div class="col-3 text-center">
-            <div class="mb-2">
-              <%= image_tag @writing.get_thumbnail_image(120,120), class:"border shadow-sm" %>
-            </div>
-            <div class="mb-2">
-              <% if @writing.liked_by?(current_member) %>
-                <p>
-                  <%= link_to writing_writing_likes_path(@writing), method: :delete, class:"text-decoration-none text-dark" do %>
-                    <i class="fa-solid fa-heart fa-lg heart-color"></i> <%= @writing.writing_likes.count %> いいね
-                  <% end %>
-                </p>
+          <div class="col-md-3 col-sm-5 col-6 text-center px-0">
+            <div class="row">
+              <div class="col-12 mb-2">
+                <%= image_tag @writing.get_thumbnail_image(120,120), class:"border shadow-sm" %>
+              </div>
+              <div class="col-12 mb-1">
+                <% if @writing.liked_by?(current_member) %>
+                  <p class="mb-0">
+                    <%= link_to writing_writing_likes_path(@writing), method: :delete, class:"text-decoration-none text-dark" do %>
+                      <i class="fa-solid fa-heart fa-lg heart-color"></i> <%= @writing.writing_likes.count %> いいね
+                    <% end %>
+                  </p>
                 <% else %>
-                <p>
-                  <%= link_to writing_writing_likes_path(@writing), method: :post, class:"text-decoration-none text-dark" do %>
-                    <i class="fa-solid fa-heart fa-lg text-secondary"></i> <%= @writing.writing_likes.count %> いいね
-                  <% end %>
-                </p>
-              <% end %>
-            </div>
-            <div class="m-2">
-              <% if @writing.writing_zip.present? %>
-                <%= link_to 'ダウンロード', rails_blob_path(@writing.writing_zip, disposition: "attachment"), class:"btn btn-sm btn-primary px-3" %>
-              <% else %>
-                <!--<div class="mx-2 py-1 border rounded ">-->
-                  <button type="button" class="btn btn-sm btn-primary text-white-50 px-3" disabled="disabled">ダウンロード</button>
-                <!--</div>-->
-              <% end %>
+                  <p class="mb-0">
+                    <%= link_to writing_writing_likes_path(@writing), method: :post, class:"text-decoration-none text-dark" do %>
+                      <i class="fa-solid fa-heart fa-lg text-secondary"></i> <%= @writing.writing_likes.count %> いいね
+                    <% end %>
+                  </p>
+                <% end %>
+              </div>
+              <div class="col-12 px-0 mb-2">
+                <% if @writing.writing_zip.present? %>
+                  <%= link_to 'ダウンロード', rails_blob_path(@writing.writing_zip, disposition: "attachment"), class:"btn btn-sm btn-primary text-nowrap px-3" %>
+                <% else %>
+                    <button type="button" class="btn btn-sm btn-primary text-white-50 px-3" disabled="disabled">ダウンロード</button>
+                <% end %>
+              </div>
             </div>
           </div>
-          <div class="col-9">
+          <!-- ユーザー情報 スマホサイズ -->
+          <div class="col-sm-7 col-12 d-md-none my-2">
             <div class="row">
-              <div class="col-4">
+              <div class="col-auto mb-1">
+                <%= image_tag @writing.member.get_profile_image(60,60), class:"border rounded-circle" %>
+              </div>
+              <div class="col-auto px-0">
+                <span class="fs-5">
+                  <%= @writing.member.name%></br>
+                </span>
+                <span class="small">
+                  <%= link_to member_path(@writing.member.id, anchor: "member_writings") do %>
+                    他の作品を見る
+                  <% end %>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-9 col-12">
+            <div class="row">
+              <div class="col-lg-4 col-md-5 col-6 text-nowrap">
                 タイトル：
               </div>
-              <div class="col ps-0">
+              <div class="col-auto ps-0">
                 <%= @writing.title %>
               </div>
             </div>
             <div class="row">
-              <div class="col-4">
+              <div class="col-lg-4 col-md-5 col-6 text-nowrap">
                 TRPGルール：
               </div>
-              <div class="col ps-0">
+              <div class="col-auto ps-0">
                 <%= @writing.trpg_rule.title %>
               </div>
             </div>
-            <div class="row">
-              <div class="col-4">
-                シナリオ・ルール：
+            <div class="row d-flex">
+              <div class="col-lg-4 col-md-5 col-6 text-nowrap">
+                <span class="small">シナリオ・ルール：</span>
               </div>
-              <div class="col ps-0">
+              <div class="col-auto ps-0">
                 <%= @writing.writing_type ? 'シナリオ' : 'ルール'  %>
               </div>
             </div>
             <div class="row">
-              <div class="col-4">
+              <div class="col-lg-4 col-md-5 col-6 text-nowrap">
                 想定人数：
               </div>
-              <div class="col ps-0">
+              <div class="col-auto ps-0">
                 <%= @writing.min_players %> ~ <%= @writing.max_players %> 人
               </div>
             </div>
             <div class="row">
-              <div class="col-4">
+              <div class="col-lg-4 col-md-5 col-6 text-nowrap">
                 想定時間：
               </div>
-              <div class="col ps-0">
+              <div class="col-auto ps-0">
                 <%= @writing.min_play_time %> ~ <%= @writing.max_play_time %>時間
               </div>
             </div>
             <div class="row">
-              <div class="col-4">
+              <div class="col-lg-4 col-md-5 col-6 text-nowrap">
                 想定難易度：
               </div>
-              <div class="col ps-0">
+              <div class="col-sm-auto col-12 text-center ps-0">
                 簡単
                 <span class="star-rating">
                   <span class="star-rating-front" style="width: <%= @writing.getPercent(@writing.difficulty) %>%;">★★★★★</span>
@@ -96,11 +114,10 @@
             </div>
             <!--タグ欄-->
             <div class="row">
-              <!--<div class="col my-2">タグ欄</div>-->
               <div class="col mt-3 py-1">
                 <% if @writing_tags.present? %>
                   <% @writing_tags.each do |tag| %>
-                    <span class="border mx-1 p-1">
+                    <span class="d-inline-block border p-1 me-1 mb-1">
                       <%= link_to tag_search_path(tag_id: tag.id), class:"text-black text-decoration-none" do %>
                         <%= "#{tag.tag_name}(#{tag.writings.count})" %>
                       <% end %>
@@ -110,7 +127,7 @@
               </div>
             </div>
             <div class="row mt-4 justify-content-end">
-              <div class="col-5 text-end">
+              <div class="col-auto text-end text-nowrap">
               <small>
                 更新日：<%= @writing.updated_at.strftime('%Y年%m月%d日 %H:%M')%>
               </small>
@@ -121,40 +138,38 @@
         <!---->
         <!-- 概要 -->
         <div class="row my-3 py-2 border-top border-bottom border-dark">
-          <div>概要：</div>
-          <div>
+          <p class="mb-2">概要：</p>
+          <p>
             <%= safe_join(@writing.summary.split("\n"),tag(:br)) %>
-          </div>
+          </p>
         </div>
         <% if member_signed_in? && current_member.id == @writing.member_id %>
-            <div class="row justify-content-end">
-              <div class="col-lg-3 col-md-4 col-12 text-md-end text-center mb-2">
-                <%= link_to "作品の編集", edit_writing_path(@writing.id), class: "btn text-primary fw-bold border border-dark px-4" %>
-              </div>
-              <div class="col-lg-3 col-md-4 col-12 text-md-end text-center mb-2">
-                <%= link_to "作品を削除", writing_path(@writing.id), method: :delete, data: { confirm: "削除しますか？", cancel: "やめる", commit: "退会する"}, class: "btn text-danger fw-bold border border-dark px-4" %>
-              </div>
-            </div>
+          <div class="row justify-content-end">
+            <%= link_to "作品の編集", edit_writing_path(@writing.id), class: "col-md-3 col-sm-4 col-12 btn text-primary fw-bold border border-dark mb-2" %>
+            <%= link_to "作品を削除", writing_path(@writing.id), method: :delete, data: { confirm: "削除しますか？", cancel: "やめる", commit: "退会する"}, class: "col-md-3 col-sm-4 col-12 btn text-danger fw-bold border border-dark ms-sm-3 mb-2" %>
+          </div>
         <% end %>
       </div>
-      <div class="col-3 px-3 border">
-        <div class="row mx-3 pt-3 px-3 pb-5 border border-dark">
-          <!-- ユーザー情報 -->
+      <div class="d-none d-md-block col-md-3 col-12 ps-3 pe-0 border">
+        <div class="row mx-0 ms-xl-4 pt-3 px-1 pb-5 border border-dark">
+          <!-- ユーザー情報 PCサイズ -->
           <div class="text-center mb-1">
             <%= image_tag @writing.member.get_profile_image(50,50), class:"border rounded-circle" %>
           </div>
-          <div class="text-center">
-            <%= @writing.member.name%></br>
-            <%= link_to member_path(@writing.member.id, anchor: "member_writings") do %>
-              他の作品を見る
-            <% end %>
+          <div class="text-center px-0">
+            <span class="small">
+              <%= @writing.member.name%></br>
+              <%= link_to member_path(@writing.member.id, anchor: "member_writings") do %>
+                他の作品を見る
+              <% end %>
+            </span>
           </div>
         </div>
       </div>
     </div>
     <!-- コメント欄 -->
-    <div class="row mx-5 mb-5">
-      <div class="col-9 p-3 border border-dark">
+    <div class="row mx-md-5 mx-0 mb-5">
+      <div class="col-md-9 col-12 p-3 border border-dark">
         <%= render 'comment', writing: @writing, writing_comment: @writing_comment, comment_list: @comment_list %>
       </div>
     </div>

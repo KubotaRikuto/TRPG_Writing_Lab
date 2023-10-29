@@ -1,16 +1,16 @@
 <div class="row">
-  <h3>コメント<span><%= writing.writing_comments.count %>件</span></h3>
+  <h3>コメント<span> <%= writing.writing_comments.count %><small>件</small></span></h3>
 </div>
 <!-- コメントフォーム -->
 <%= form_with model: [writing, writing_comment] do |f| %>
   <div class="row mb-3">
-    <div class="col-1 text-center">
+    <div class="col-md-2 col-auto text-center">
       <%= image_tag current_member.get_profile_image(40,40), class:"border rounded-circle" %>
     </div>
-    <div class="col-8">
-      <%= f.text_field :comment, placeholder: "コメントをする", class:"form-control" %>
+    <div class="col-lg-8 col-md-7 col-sm-8 col-5 px-sm-3 px-1">
+      <%= f.text_field :comment, placeholder: "コメント", class:"form-control" %>
     </div>
-    <div class="col-2 text-center">
+    <div class="col-sm-2 col-4 px-0 text-center">
       <%= f.submit "送信する", class:"btn btn-secondary" %>
     </div>
   </div>
@@ -19,23 +19,25 @@
 <!-- コメント一覧 -->
 <% comment_list.each do |comment| %>
   <div class="row d-flex align-items-center">
-    <div style="height: 40px;" class="col-1 text-center">
+    <div style="height: 40px;" class="col-md-2 col-auto text-center">
       <%= image_tag comment.member.get_profile_image(40,40), class:"border rounded-circle" %>
     </div>
-    <div class="col-8" id="comment-<%= writing_comment.id %>">
+    <div class="col-lg-8 col-md-7 col-sm-8 col-6" id="comment-<%= writing_comment.id %>">
       <p>
         <small><%= comment.member.name %></small></br>
-        <%= comment.comment %></br>
-        <small><span class="fw-light"><%= time_ago_in_words(comment.created_at) %>前</span></small>
+        <span class="text-break"><%= comment.comment %></span></br>
+        <span class="fw-light"><%= time_ago_in_words(comment.created_at) %>前</span></small>
       </p>
     </div>
-    <div class="col-2 text-center">
-      <%= link_to "削除", writing_writing_comment_path(writing_id: writing.id,id: comment.id), method: :delete, class: "text-decoration-none text-dark" %>
+    <div class="col-sm-2 col-3 px-sm-3 px-0 text-center ">
+      <% if comment.member == current_member %>
+        <%= link_to "削除", writing_writing_comment_path(writing_id: writing.id,id: comment.id), method: :delete, class: "text-decoration-none text-dark" %>
+      <% end %>
     </div>
   </div>
 <% end %>
 <div class="row justify-content-center">
-  <div class="col-2">
+  <div class="col-auto">
     <%= paginate(comment_list) %>
   </div>
 </div>

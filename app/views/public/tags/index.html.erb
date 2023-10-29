@@ -1,16 +1,16 @@
 <div class="row my-5 justify-content-center">
   <div class="col-xl-10 col-12">
-    <div class="row my-3 border-bottom border-dark border-2">
+    <div class="row my-3 mx-0 border-bottom border-dark border-2">
       <div class="col">
       <h1>タグリスト</h1>
       </div>
     </div>
     <div class="row">
       <% @tags.each do |tag| %>
-        <div class="col-3">
-          <span class="p-1 border">
+        <div class="col-auto me-1 mb-2">
+          <span class="d-inline-block p-1 border">
             <%= link_to tag_search_path(tag_id: tag.id), class:"text-black text-decoration-none" do %>
-              <%= "#{tag.tag_name}(#{tag.writings.count})" %>
+              <%= "#{tag.tag_name} (#{tag.writings.count})" %>
             <% end %>
           </span>
         </div>

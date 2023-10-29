@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   scope module: :public do
     # members
     resources :members, only: [:index, :show, :edit, :update, :destroy]
+    get "members/:id/writings" => 'members#writings', as: 'member_writings'
+    get "members/:id/like_writings" => 'members#like_writings', as: 'member_like_writings'
     get "members/:id/unsubscribe" => 'members#unsubscribe', as: 'members_unsubscribe'
     # writings
     resources :writings do

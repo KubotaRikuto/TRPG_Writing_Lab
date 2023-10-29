@@ -47,7 +47,9 @@
                   <%= link_to "メンバー", members_path, class:"nav-link" %>
                 </li>
                 <li class="nav-item me-4">
-                  <%= link_to "作品(シナリオ・ルール)", writings_path, class:"nav-link" %>
+                  <%= link_to writings_path, class:"nav-link" do %>
+                    作品<span class="small">(シナリオ・ルール)</span>
+                  <% end %>
                 </li>
                 <li class="nav-item me-4">
                   <%= link_to "タグ", tags_path, class:"nav-link" %>
@@ -70,7 +72,9 @@
                   <%= link_to "メンバー", admin_members_path, class:"nav-link" %>
                 </li>
                 <li class="nav-item me-2">
-                  <%= link_to "作品(シナリオ・ルール)", admin_writings_path, class:"nav-link" %>
+                  <%= link_to admin_writings_path, class:"nav-link" do %>
+                    作品<span class="small">(シナリオ・ルール)</span>
+                  <% end %>
                 </li>
                 <li class="nav-item me-2">
                   <%= link_to "タグ", admin_tags_path, class:"nav-link" %>
