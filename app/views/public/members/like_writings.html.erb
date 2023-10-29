@@ -1,7 +1,7 @@
 <div class="row my-5 justify-content-center">
   <div class="col-xl-10 col-12">
     <div class="row my-3 mx-md-5 mx-0 border-bottom border-dark border-2">
-      <h1>ユーザー情報</h1>
+      <h1>メンバー情報</h1>
     </div>
     <div class="row mb-5 mx-md-5 mx-0">
       <div class="col-sm-3 col-12 pt-3">
@@ -42,7 +42,7 @@
         <div class="row my-2 justify-content-end">
           <div class="d-grid col-sm-auto col-12 pe-sm-0 px-0 text-end">
             <% if current_member == @member %>
-              <%= link_to "ユーザー情報の編集", edit_member_path(@member.id), class:"btn text-primary fw-bold border border-dark" %>
+              <%= link_to "プロフィール編集", edit_member_path(@member.id), class:"btn text-primary fw-bold border border-dark" %>
             <% end %>
           </div>
         </div>
@@ -51,6 +51,18 @@
     <!-- お気に入りの作品一覧 -->
     <div class="row my-3 mx-md-5 mx-0 border-bottom border-dark border-2">
       <h1>いいねした作品一覧</h1>
+    </div>
+    <div class="row justify-content-sm-between justify-content-center mx-md-5 mx-0 mb-2">
+      <div class="col-auto">
+        <% if current_member == @member %>
+          <%= link_to "<< マイページに戻る", member_path(current_member.id) %>
+        <% else%>
+            <%= link_to "<< メンバー情報に戻る", member_path(@member.id) %>
+        <% end %>
+      </div>
+      <div class="col-auto">
+        <%= link_to "その他投稿した作品一覧 >>", member_writings_path(@member.id) %>
+      </div>
     </div>
     <div class="row mx-md-5 mx-0 mb-5">
       <%= render 'public/writings/list', writings: @like_writings %>
