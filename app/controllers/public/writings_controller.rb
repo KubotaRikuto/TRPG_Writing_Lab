@@ -73,11 +73,12 @@ class Public::WritingsController < ApplicationController
   def word_search
     @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
     keyword = params[:word]
-    @writings = Writing.joins(:member, :trpg_rule).published.search(keyword)
+    @writing_results = Writing.joins(:member, :trpg_rule).published.search(keyword)
+    @writings = @writing_results.page(params[:page])
     if @writings.count > 0 && keyword.present?
-      flash.now[:notice] = "#{@writings.count}件の作品が見つかりました。"
+      flash.now[:notice] = "「#{keyword}」の検索結果 - #{@writing_results.count}件"
     else
-      flash[:alert] = "作品が見つかりませんでした。"
+      flash[:alert] = "「#{keyword}」に該当する作品は見つかりませんでした。別の検索ワードをお試しください。"
       redirect_to writings_path
     end
   end
@@ -85,9 +86,10 @@ class Public::WritingsController < ApplicationController
   def tag_search
     @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
     @tag = Tag.find(params[:tag_id])
-    @writings = @tag.writings.published.page(params[:page]).per(10)
+    @writing_results = @tag.writings.published.all
+    @writings = @writing_results.page(params[:page])
     if @writings.count > 0
-      flash.now[:notice] = "「#{@tag.tag_name}」の検索結果 - #{@writings.count}件"
+      flash.now[:notice] = "「#{@tag.tag_name}」の検索結果 - #{@writing_results.count}件"
     else
       flash[:alert] = "「#{@tag.tag_name}」に該当する作品は見つかりませんでした。別の検索タグをお試しください。"
       redirect_to writings_path

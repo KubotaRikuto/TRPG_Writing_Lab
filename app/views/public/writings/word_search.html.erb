@@ -1,20 +1,27 @@
 <div class="row my-5 justify-content-center">
   <div class="col-xl-10 col-12">
     <!-- 検索機能 -->
-    <div class="row justify-content-center">
+    <div class="row mx-0 justify-content-center">
       <%= render 'search', tag_list: @tag_list %>
     </div>
     <!-- 作品一覧 -->
-   <div class="row my-3 border-bottom border-dark border-2">
+   <div class="row my-3 mx-0 border-bottom border-dark border-2">
       <div class="col">
-        <h1>シナリオ・ルールリスト</h1>
+        <h1>作品<span class="fs-3 small d-none d-sm-inline">(シナリオ・ルール)</span>一覧</h1>
       </div>
-      <div class="col-1 d-flex align-items-center mt-1 ml-auto">
-        <%= link_to new_writing_path, class:"btn rounded-circle p-0", style:"width:2rem;height:2rem;" do %>
-          <span class=""><i class="fa-solid fa-plus"></i></span>
+      <div class="col-2 d-flex align-items-center mt-1 ml-auto">
+        <%= link_to new_writing_path, class:"btn rounded-circle shadow p-0", style:"width:2rem;height:2rem;" do %>
+          <i class="fa-solid fa-plus fa-2x"></i>
         <% end %>
       </div>
     </div>
-    <%= render 'list', writings: @writings %>
+    <div class="row mx-0">
+      <%= render 'list', writings: @writings %>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-auto">
+        <%= paginate(@writings) %>
+      </div>
+    </div>
   </div>
 </div>
