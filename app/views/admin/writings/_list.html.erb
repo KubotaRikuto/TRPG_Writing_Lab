@@ -3,7 +3,6 @@
     <thead class="colgroup">
       <tr class="text-center text-nowrap">
         <th colspan="2" style="width: 32%" class="px-0">タイトル</th>
-        <!--<th style="width: 10%" class="px-0 small">シナリオ・ルール</th>-->
         <th style="width: 14%" class="px-0">作者名</th>
         <th style="width: 8%" class="px-0">人数</th>
         <th style="width: 8%" class="px-0">時間</th>
@@ -28,13 +27,10 @@
               </span>
             <%= link_to admin_writing_path(writings.id) do %>
               <span class="ps-2">
-                <%= truncate("#{writings.title}", length: 15) %>
+                <%= truncate("#{writings.title}", length: 17) %>
               </span>
             <% end %>
           </td>
-          <!--<td class="align-middle text-center">-->
-          <!--  <%= writings.writing_type ? 'シナリオ' : 'ルール' %>-->
-          <!--</td>-->
           <td class="align-middle text-center px-0">
             <small><%= writings.member.name %></small>
           </td>
@@ -44,7 +40,7 @@
           <td class="align-middle text-center">
             <%= writings.min_play_time %>~<%= writings.max_play_time %><small>時間</small>
           </td>
-          <td class="align-middle">
+          <td class="align-middle text-center">
             <span class="star-rating">
               <span class="star-rating-front" style="width: <%= writings.getPercent(writings.difficulty) %>%;">★★★★★</span>
               <span class="star-rating-back">★★★★★</span>

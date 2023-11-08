@@ -22,11 +22,11 @@
           </td>
           <td class="align-middle ps-0">
             <span class="fw-light small">
-              <%= writings.writing_type ? '【シナリオ】' : '【ルール】' %><%= truncate("#{writings.trpg_rule.title}", length: 15) %></br>
+              <%= writings.writing_type ? '【シナリオ】' : '【ルール】' %><%= truncate("#{writings.trpg_rule.title}", length: 25) %></br>
             </span>
             <%= link_to admin_writing_path(writings.id) do %>
               <span class="ps-2">
-                <%= truncate("#{writings.title}", length: 15) %>
+                <%= truncate("#{writings.title}", length: 25) %>
               </span>
             <% end %>
           </td>
@@ -36,7 +36,7 @@
           <td class="align-middle text-center">
               <%= writings.min_play_time %> ~ <%= writings.max_play_time %><small>時間</small>
           </td>
-          <td class="align-middle">
+          <td class="align-middle text-center">
             <span class="star-rating">
               <span class="star-rating-front" style="width: <%= writings.getPercent(writings.difficulty) %>%;">★★★★★</span>
               <span class="star-rating-back">★★★★★</span>
