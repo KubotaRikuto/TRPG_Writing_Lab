@@ -15,22 +15,22 @@
             <p class="text-center m-1">
               <span class="p-1 border rounded-circle"><i class="fa-solid fa-heart fa-lg heart-color"></i></span>
               <br class="d-xxl-none d-none d-sm-inline">いいねされた回数：<%= @member.total_likes %>
-            </p>
+          　</p>
           </div>
         </div>
       </div>
       <div class="col-sm-9 col-12">
-        <div class="row double-border text-break">
+        <div class="row double-border">
           <p>
-            <small><ニックネーム></small></br>
-            <%= @member.name %>
+            <span class="small"><ニックネーム></span></br>
+            <%= "#{@member.name}" %>
           </p>
           <p>
-            <small><自己紹介></small></br>
-            <%= safe_join(@member.introduction.split("\n"),tag(:br)) %>
+            <span class="small"><自己紹介></span></br>
+            <%= @member.introduction %>
           </p>
           <p class="mb-3">
-            <small><好きなTRPG></small></br>
+            <span class="small"><好きなTRPG></span></br>
             <%= @member.favorite_trpg %>
           </p>
           <p class="mb-3">アカウント状況：
@@ -55,27 +55,23 @@
     </div>
     <!-- 投稿作品一覧 -->
     <div class="row my-3 mx-md-5 mx-0 border-bottom border-dark border-2" id="member_writings">
-      <h1>投稿作品</h1>
+      <h1>投稿作品一覧</h1>
     </div>
-    <div class="row justify-content-end mx-md-5 mx-0 mb-2">
+    <div class="row justify-content-sm-between justify-content-center mx-md-5 mx-0 mb-2">
       <div class="col-auto">
-        <%= link_to "その他投稿した作品一覧 >>", admin_member_writings_path(@member.id) %>
+        <%= link_to "<< メンバー情報に戻る", admin_member_path(@member.id) %>
       </div>
-    </div>
-    <div class="row mx-md-5 mx-0 mb-5">
-      <%= render 'list', writings: @writings %>
-    </div>
-    <!-- お気に入りの作品一覧 -->
-    <div class="row my-3 mx-md-5 mx-0 border-bottom border-dark border-2">
-      <h1>いいねした作品</h1>
-    </div>
-    <div class="row justify-content-end mx-md-5 mx-0 mb-2">
       <div class="col-auto">
         <%= link_to "その他いいねした作品一覧 >>", admin_member_like_writings_path(@member.id) %>
       </div>
     </div>
-    <div class="row mx-md-5 mx-0 mb-5">
-      <%= render 'admin/writings/list', writings: @like_writings %>
+    <div class="row mx-md-5 mx-0 mb-3">
+      <%= render 'list', writings: @writings %>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-auto">
+        <%= paginate(@writings) %>
+      </div>
     </div>
   </div>
 </div>

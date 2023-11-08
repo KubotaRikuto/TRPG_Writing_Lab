@@ -5,11 +5,11 @@
     </div>
     <div class="row mx-0 mb-3">
       <div class="table-responsive shadow-sm">
-        <table class="table  table-sm table-bordered text-nowrap">
+        <table class="table table-sm table-bordered">
           <thead>
-            <tr class="text-center">
-              <th colspan="2" style="width: 40%">メンバー名</th>
-              <th style="width: 33%" class="px-5">好きなTRPG</th>
+            <tr class="text-center text-nowrap">
+              <th colspan="2" style="width: 33%">メンバー名</th>
+              <th style="width: 40% max-width: 40%" class="px-5">好きなTRPG</th>
               <th style="width: 7%">いいね！</th>
               <th style="width: 10%">公開ステータス</th>
               <th style="width: 10%">最終ログイン日</th>
@@ -30,8 +30,10 @@
                   <%= member.name %>
                 <% end %>
               </td>
-              <td rowspan="2" class="align-middle">
-                <%= truncate("#{member.favorite_trpg}", length: 60) %>
+              <td rowspan="2" class="align-middl">
+                <div class="w-100 wh-100" style="min-width: 300px; height: 71px;">
+                <%= truncate("#{member.favorite_trpg}", length: 90) %>
+                </div>
               </td>
               <td rowspan="2" class="align-middle">
                 <div class="text-center">
@@ -54,7 +56,7 @@
               </td>
             </tr>
             <tr>
-              <td>
+              <td class="text-nowrap">
                 <%= truncate("#{member.introduction}", length: 30) %>
               </td>
             </tr>
@@ -63,8 +65,10 @@
         </table>
       </div>
     </div>
-    <div>
-      <%= paginate @members %>
+    <div class="row justify-content-center">
+      <div class="col-auto">
+        <%= paginate(@members) %>
+      </div>
     </div>
   </div>
 </div>

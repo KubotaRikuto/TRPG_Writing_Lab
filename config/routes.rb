@@ -51,6 +51,8 @@ Rails.application.routes.draw do
   namespace :admin do
     # members
     resources :members, only: [:index, :show, :edit, :update]
+    get "members/:id/writings" => 'members#writings', as: 'member_writings'
+    get "members/:id/like_writings" => 'members#like_writings', as: 'member_like_writings'
     # writings
     resources :writings, only: [:index, :show, :update] do
       resources :writing_comments, only: [:destroy]

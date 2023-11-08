@@ -159,9 +159,7 @@
           <div class="text-center px-0">
             <span class="small">
               <%= @writing.member.name%></br>
-              <%= link_to member_path(@writing.member.id, anchor: "member_writings") do %>
-                他の作品を見る
-              <% end %>
+              <%= link_to "他の作品を見る", member_path(@writing.member.id, anchor: "member_writings") %>
             </span>
           </div>
         </div>

@@ -1,44 +1,44 @@
-  <table class="table">
-    <thead>
-      <tr class="text-center">
-        <th colspan="2" style="width: 20%" class="h6">タイトル</th>
-        <th style="width: 12%" class="h6">シナリオ・ルール</th>
-        <th style="width: 8%">人数</th>
-        <th style="width: 10%">時間</th>
-        <th style="width: 10%">難しさ</th>
-        <th style="width: 8%">いいね！</th>
-        <th style="width: 10%">タグ</th>
-        <th style="width: 8%">更新日</th>
+<div class="table-responsive shadow-sm">
+  <table class="table w-100">
+    <thead class="colgroup">
+      <tr class="text-center text-nowrap">
+        <th colspan="2" style="width: 36%" class="px-0">タイトル</th>
+        <!--<th style="width: 10%" class="px-0 small">シナリオ・ルール</th>-->
+        <th style="width: 8%" class="px-0">人数</th>
+        <th style="width: 8%" class="px-0">時間</th>
+        <th style="width: 8%" class="px-0">難しさ</th>
+        <th style="width: 8%" class="px-0">いいね！</th>
+        <th style="width: 10%" class="px-0">タグ</th>
+        <th style="width: 4%" class="px-0">公開ステータス</th>
+        <th style="width: 8%" class="px-0">更新日</th>
       </tr>
     </thead>
     <% writings.each do |writings| %>
-      <tbody>
+      <tbody class="text-nowrap">
         <tr>
-          <td>
+          <td style="width: 6%">
             <%= link_to admin_writing_path(writings.id) do %>
               <%= image_tag writings.get_thumbnail_image(60,60), class:"border shadow-sm" %></br>
             <% end %>
           </td>
-          <td>
-            <span class="fs-6 fw-light"><%= writings.trpg_rule.title %></span></br>
-            <%= link_to admin_writing_path(writings.id) do %>
-              <%= writings.title %>
+          <td class="align-middle">
+            <span class="fw-light small">
+              <%= writings.writing_type ? '【シナリオ】' : '【ルール】' %><%= writings.trpg_rule.title %>
+            </span>
+            <br><%= link_to admin_writing_path(writings.id) do %>
+              <span class="ps-2"><%= writings.title %>
             <% end %>
           </td>
-          <td class="align-middle">
-            <div class="text-center">
-              <%= writings.writing_type ? 'シナリオ' : 'ルール' %>
-            </div>
+          <!--<td class="align-middle">-->
+          <!--  <div class="text-center">-->
+          <!--    %= writings.writing_type ? 'シナリオ' : 'ルール' %>-->
+          <!--  </div>-->
+          <!--</td>-->
+          <td class="align-middle text-center">
+              <%= writings.min_players %> ~ <%= writings.max_players %><small>人</small>
           </td>
-          <td class="align-middle">
-            <div class="text-center">
-              <%= writings.min_players %> ~ <%= writings.max_players %>人
-            </div>
-          </td>
-          <td class="align-middle">
-            <div class="text-center">
-              <%= writings.min_play_time %> ~ <%= writings.max_play_time %>時間
-            </div>
+          <td class="align-middle text-center">
+              <%= writings.min_play_time %> ~ <%= writings.max_play_time %><small>時間</small>
           </td>
           <td class="align-middle">
             <span class="star-rating">
@@ -46,14 +46,19 @@
               <span class="star-rating-back">★★★★★</span>
             </span>
           </td>
-          <td class="align-middle">
-            <div class="text-center">
+          <td class="align-middle text-center">
               <%= writings.writing_likes.count %>
-            </div>
           </td>
           <td class="align-middle">
             <% writings.tags.each do |list| %>
               <%= list.tag_name %><br>
+            <% end %>
+          </td>
+          <td class="align-middle text-center">
+            <% if writings.is_public %>
+              <span class="text-success fw-bold">公開中</span>
+            <% else %>
+              <span class="text-danger fw-bold">非公開</span>
             <% end %>
           </td>
           <td class="align-middle"><%= writings.updated_at.strftime('%Y/%m/%d') %></td>
@@ -61,3 +66,4 @@
       </tbody>
     <% end %>
   </table>
+</div>

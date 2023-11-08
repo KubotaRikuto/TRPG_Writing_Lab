@@ -8,12 +8,23 @@ class Admin::MembersController < ApplicationController
 
   def show
     @member = Member.find(params[:id])
-    @writings = @member.writings.page(params[:page])
-    @like_writings = @member.writing_likes.map(&:writing)
+    @writings = @member.writings.order(created_at: :desc).limit(5)
+    @like_writings = @member.writing_likes.order(created_at: :desc).limit(5).map(&:writing)
   end
 
   def edit
     @member = Member.find(params[:id])
+  end
+
+  def writings
+    @member = Member.find(params[:id])
+    @writings = @member.writings.order(created_at: :desc).page(params[:page])
+  end
+
+  def like_writings
+    @member = Member.find(params[:id])
+    @like_writings = @member.writing_likes.order(created_at: :desc).map(&:writing)
+    @like_writings = Kaminari.paginate_array(@like_writings).page(params[:page])
   end
 
   def update
