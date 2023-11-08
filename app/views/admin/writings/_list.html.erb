@@ -1,8 +1,8 @@
-<div class="table-responsive shadow-sm">
-  <table class="table w-100">
+<div class="table-responsive px-1 shadow-sm">
+  <table class="table">
     <thead class="colgroup">
       <tr class="text-center text-nowrap">
-        <th colspan="2" style="width: 22%" class="px-0">タイトル</th>
+        <th colspan="2" style="width: 32%" class="px-0">タイトル</th>
         <!--<th style="width: 10%" class="px-0 small">シナリオ・ルール</th>-->
         <th style="width: 14%" class="px-0">作者名</th>
         <th style="width: 8%" class="px-0">人数</th>
@@ -17,21 +17,23 @@
     <% writings.each do |writings| %>
       <tbody class="text-nowrap">
         <tr>
-          <td style="width: 6%">
+          <td style="width: 8%">
             <%= link_to admin_writing_path(writings.id) do %>
               <%= image_tag writings.get_thumbnail_image(60,60), class:"border shadow-sm" %></br>
             <% end %>
           </td>
-          <td class="align-middle">
+          <td class="align-middle ps-0">
               <span class="fw-light small">
-                <%= writings.writing_type ? '【シナリオ】' : '【ルール】' %><%= writings.trpg_rule.title %>
+                <%= writings.writing_type ? '【シナリオ】' : '【ルール】' %><%= truncate("#{writings.trpg_rule.title}", length: 15) %></br>
               </span>
-            <br><%= link_to admin_writing_path(writings.id) do %>
-              <span class="ps-2"><%= writings.title %></span>
+            <%= link_to admin_writing_path(writings.id) do %>
+              <span class="ps-2">
+                <%= truncate("#{writings.title}", length: 15) %>
+              </span>
             <% end %>
           </td>
           <!--<td class="align-middle text-center">-->
-          <!--  %= writings.writing_type ? 'シナリオ' : 'ルール' %>-->
+          <!--  <%= writings.writing_type ? 'シナリオ' : 'ルール' %>-->
           <!--</td>-->
           <td class="align-middle text-center px-0">
             <small><%= writings.member.name %></small>
