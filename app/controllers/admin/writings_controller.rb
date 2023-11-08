@@ -3,7 +3,7 @@ class Admin::WritingsController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @writings = Writing.page(params[:page])
+    @writings = Writing.order(created_at: :desc).page(params[:page])
     @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
   end
 
@@ -31,7 +31,7 @@ class Admin::WritingsController < ApplicationController
     @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
     keyword = params[:word]
     @writing_results = Writing.joins(:member, :trpg_rule).search(keyword)
-    @writings = @writing_results.page(params[:page])
+    @writings = @writing_results.order(created_at: :desc).page(params[:page])
     if @writings.count > 0 && keyword.present?
       flash.now[:notice] = "「#{keyword}」の検索結果 - #{@writing_results.count}件"
     else
@@ -44,7 +44,7 @@ class Admin::WritingsController < ApplicationController
     @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
     @tag = Tag.find(params[:tag_id])
     @writing_results = @tag.writings.all
-    @writings = @writing_results.page(params[:page])
+    @writings = @writing_results.order(created_at: :desc).page(params[:page])
     if @writings.count > 0
       flash.now[:notice] = "「#{@tag.tag_name}」の検索結果 - #{@writing_results.count}件"
     else

@@ -7,7 +7,7 @@ class Public::MembersController < ApplicationController
   before_action :require_active_member, only: [:show, :edit]
 
   def index
-    @members = Member.active.page(params[:page])
+    @members = Member.active.order(created_at: :desc).page(params[:page])
 
   end
 

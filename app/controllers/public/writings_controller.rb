@@ -7,7 +7,7 @@ class Public::WritingsController < ApplicationController
   before_action :require_public_writing, only: [:show, :edit]
 
   def index
-    @writings = Writing.published.page(params[:page])
+    @writings = Writing.published.order(created_at: :desc).page(params[:page])
     @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
   end
 
@@ -74,7 +74,7 @@ class Public::WritingsController < ApplicationController
     @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
     keyword = params[:word]
     @writing_results = Writing.joins(:member, :trpg_rule).published.search(keyword)
-    @writings = @writing_results.page(params[:page])
+    @writings = @writing_results.order(created_at: :desc).page(params[:page])
     if @writings.count > 0 && keyword.present?
       flash.now[:notice] = "「#{keyword}」の検索結果 - #{@writing_results.count}件"
     else
@@ -87,7 +87,7 @@ class Public::WritingsController < ApplicationController
     @tag_list = Tag.left_joins(:writing_tags).group(:id).order('COUNT(writing_tags.tag_id) DESC').limit(10)
     @tag = Tag.find(params[:tag_id])
     @writing_results = @tag.writings.published.all
-    @writings = @writing_results.page(params[:page])
+    @writings = @writing_results.order(created_at: :desc).page(params[:page])
     if @writings.count > 0
       flash.now[:notice] = "「#{@tag.tag_name}」の検索結果 - #{@writing_results.count}件"
     else
