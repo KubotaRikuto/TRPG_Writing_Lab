@@ -19,7 +19,10 @@
             </thead>
             <tbody>
               <tr>
-                <th style="width: 10%;" class="align-middle">タイトル名<span class="text-danger">*</span></th>
+                <th style="width: 10%;" class="align-middle">
+                  タイトル名<span class="text-danger">*</span></br>
+                  <span class="fw-light small">(最大30文字)</span>
+                </th>
                 <td colspan="3" class="">
                   <%= f.text_field :title, class: "form-control form-control-sm border-dark", placeholder: "タイトル名" %>
                 </td>
@@ -45,7 +48,7 @@
               <tr>
                 <th style="width: 10%;" class="align-middle ">添付データの追加</th>
                 <td colspan="4">
-                  <p>*データはzip形式にした後、アップロードしてください。</p>
+                  <p>データはzip形式にした後、アップロードしてください。</p>
                   <%= f.file_field :writing_zip, accept: 'application/zip' %>
                 </td>
               </tr>
@@ -109,7 +112,10 @@
                 </td>
               </tr>
               <tr>
-                <th style="width: 10%;" class="align-middle">概要</th>
+                <th style="width: 10%;" class="align-middle">
+                  概要</br>
+                  <span class="fw-light small">(最大50000文字)</span>
+                </th>
                 <td colspan="3">
                   <p>作品の概要を記述できます。</p>
                   <%= f.text_area :summary, class:"form-control border-dark", rows: '10', placeholder: "作品概要をここに記述してください。" %>

@@ -2,7 +2,7 @@ class Admin::WritingCommentsController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @comments = WritingComment.all
+    @comments = WritingComment.page(params[:page])
     @new_comments = WritingComment.all.order(updated_at: :desc).limit(10)
   end
 

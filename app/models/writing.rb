@@ -11,7 +11,8 @@ class Writing < ApplicationRecord
   #-----------------
 
   # --- validation  ---
-  validates :title, presence: { message: "タイトルを記入していません。"}
+  validates :title, presence: { message: "タイトルを記入していません。"}, length: { minimum: 1, maximum: 30 }
+  validates :summary, presence: false, length: { maximum: 50000 }
   validates :max_play_time, numericality: { only_integer: true, message: '数字を入力してください' }
   validates :min_play_time, numericality: { only_integer: true, message: '数字を入力してください' }
   validates :max_players, numericality: { only_integer: true, message: '数字を入力してください' }

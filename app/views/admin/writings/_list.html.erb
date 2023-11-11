@@ -2,15 +2,15 @@
   <table class="table">
     <thead class="colgroup">
       <tr class="text-center text-nowrap">
-        <th colspan="2" style="width: 32%" class="px-0">タイトル</th>
-        <th style="width: 14%" class="px-0">作者名</th>
-        <th style="width: 8%" class="px-0">人数</th>
-        <th style="width: 8%" class="px-0">時間</th>
+        <th colspan="2" style="width: 24%" class="px-0">タイトル</th>
+        <th style="width: 13.5%" class="px-0">作者名</th>
+        <th style="width: 8.5%" class="px-0">人数</th>
+        <th style="width: 9%" class="px-0">時間</th>
         <th style="width: 8%" class="px-0">難しさ</th>
-        <th style="width: 8%" class="px-0">いいね！</th>
-        <th style="width: 10%" class="px-0">タグ</th>
-        <th style="width: 4%" class="px-0">公開ステータス</th>
-        <th style="width: 8%" class="px-0">更新日</th>
+        <th style="width: 7%" class="px-0">いいね！</th>
+        <th style="width: 10.5%" class="px-0">タグ</th>
+        <th style="width: 10%" class="px-0">公開ステータス</th>
+        <th style="width: 9.5%" class="px-0">更新日</th>
       </tr>
     </thead>
     <% writings.each do |writings| %>
@@ -23,24 +23,24 @@
           </td>
           <td class="align-middle ps-0">
               <span class="fw-light small">
-                <%= writings.writing_type ? '【シナリオ】' : '【ルール】' %><%= truncate("#{writings.trpg_rule.title}", length: 15) %></br>
+                <%= writings.writing_type ? '【シナリオ】' : '【ルール】' %><%= truncate("#{writings.trpg_rule.title}", length: 8) %></br>
               </span>
             <%= link_to admin_writing_path(writings.id) do %>
               <span class="ps-2">
-                <%= truncate("#{writings.title}", length: 17) %>
+                <%= truncate("#{writings.title}", length: 12) %>
               </span>
             <% end %>
           </td>
           <td class="align-middle text-center px-0">
             <small><%= writings.member.name %></small>
           </td>
-          <td class="align-middle text-center">
+          <td class="align-middle text-center px-1">
             <%= writings.min_players %>~<%= writings.max_players %><small>人</small>
           </td>
-          <td class="align-middle text-center">
+          <td class="align-middle text-center px-1">
             <%= writings.min_play_time %>~<%= writings.max_play_time %><small>時間</small>
           </td>
-          <td class="align-middle text-center">
+          <td class="align-middle text-center px-1">
             <span class="star-rating">
               <span class="star-rating-front" style="width: <%= writings.getPercent(writings.difficulty) %>%;">★★★★★</span>
               <span class="star-rating-back">★★★★★</span>
@@ -49,7 +49,7 @@
           <td class="align-middle text-center">
             <%= writings.writing_likes.count %>
           </td>
-          <td class="align-middle">
+          <td class="align-middle pe-1">
             <% writings.tags.each do |list| %>
               <%= list.tag_name %><br>
             <% end %>
@@ -61,7 +61,9 @@
               <span class="text-danger fw-bold">非公開</span>
             <% end %>
           </td>
-          <td class="align-middle"><%= writings.updated_at.strftime('%Y/%m/%d') %></td>
+          <td class="align-middle text-center px-0">
+            <%= writings.updated_at.strftime('%Y/%m/%d') %>
+          </td>
         </tr>
       </tbody>
     <% end %>

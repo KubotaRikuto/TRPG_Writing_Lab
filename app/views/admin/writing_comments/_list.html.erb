@@ -1,36 +1,41 @@
 <!-- コメント一覧-->
-<div class="row mx-0 mb-4">
+<div class="row mx-0">
   <div class="col">
     <div class="row">
       <div class="col">
         <div class="row border-bottom mb-2">
-          <div class="col-9 text-center">
+          <div class="col-md-9 col-5 text-center">
             <p>コメント</p>
           </div>
-          <div class="col-2">
+          <div class="col-3 d-md-inline d-none">
             <p>コメントされた作品</p>
           </div>
         </div>
       </div>
     </div>
     <% comments.each do |comment| %>
-      <div class="row mb-2 d-flex align-items-center align-items-stretch shadow-sm">
-        <div class="col-1 d-flex align-items-center justify-content-center">
-          <%= image_tag comment.member.get_profile_image(50,50), class:"border rounded-circle" %>
+      <div class="row d-flex align-items-center shadow-sm mb-3">
+        <div style="height: 40px;" class="col-xl-1 col-lg-auto col-md-auto col-sm-auto col-auto text-center">
+          <%= image_tag comment.member.get_profile_image(40,40), class:"border rounded-circle" %>
         </div>
-        <div class="col-6">
-          <%= comment.member.name %></br>
-          <span class="fs-5"><%= comment.comment %></span></br>
-          <%= comment.updated_at.strftime('%Y/%m/%d %H:%M') %>
+        <div class="col-lg-7 col-md-6 col-sm-8 col-6">
+          <p>
+            <small><%= comment.member.name %></small></br>
+            <span class="text-break"><%= comment.comment %></span></br>
+            <small><span class="fw-light"><%= comment.updated_at.strftime('%Y/%m/%d %H:%M') %></span></small>
+          </p>
         </div>
-        <div class="col-2 d-flex align-items-center ">
+        <div class="col-lg-1 col-md-auto col-sm-2 col-3 px-sm-3 px-0 text-center">
           <%= link_to "削除", admin_writing_writing_comment_path(writing_id: comment.writing.id,id: comment.id), method: :delete, class: "text-decoration-none text-dark" %>
         </div>
-        <div class="col-2">
+        <div class="col-12 mb-1 d-md-none d-inline">
+          <p class="mt-2 mb-0 border-top">コメントされた作品</p>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12 col-12 mt-md-1 mt-0 mb-2">
           <%= link_to admin_writing_path(comment.writing.id, anchor: "comment"), class: "link-dark" do %>
-          <span class="fs-4"><%= comment.writing.title %></span>
+          <span class="fs-6 text-break"><%= comment.writing.title %></span>
           <% end %></br>
-          作成者：<%= comment.writing.member.name %>
+          <small>作成者：<%= comment.writing.member.name %></small>
         </div>
       </div>
     <% end %>

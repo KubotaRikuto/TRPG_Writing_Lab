@@ -4,11 +4,20 @@
     <div class="row my-3 mx-0 border-bottom border-dark border-2">
       <h1>最新コメント</h1>
     </div>
-    <%= render 'list', comments: @new_comments %>
+    <div class="row mx-0 mb-5">
+      <%= render 'list', comments: @new_comments %>
+    </div>
     <!-- コメント一覧 -->
     <div class="row my-3 mx-0 border-bottom border-dark border-2">
       <h1>コメント一覧</h1>
     </div>
-    <%= render 'list', comments: @comments %>
+    <div class="row mx-0">
+      <%= render 'list', comments: @comments %>
+    </div>
+    <div class="row justify-content-center mt-3">
+      <div class="col-auto">
+        <%= paginate(@comments) %>
+      </div>
+    </div>
   </div>
 </div>

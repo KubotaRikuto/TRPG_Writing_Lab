@@ -2,14 +2,13 @@
   <table class="table">
     <thead>
       <tr class="text-center text-nowrap">
-        <th colspan="2" style="width: 46%" class="px-0">タイトル</th>
-        <!--<th style="width: 12%" class="px-0 small">シナリオ・ルール</th>-->
-        <th style="width: 8%" class="px-0">人数</th>
-        <th style="width: 8%" class="px-0">時間</th>
+        <th colspan="2" style="width: 47.5%" class="px-0">タイトル</th>
+        <th style="width: 8.5%" class="px-0">人数</th>
+        <th style="width: 9%" class="px-0">時間</th>
         <th style="width: 8%" class="px-0">難しさ</th>
-        <th style="width: 8%" class="px-0">いいね！</th>
-        <th style="width: 14%" class="px-0">タグ</th>
-        <th style="width: 8%" class="px-0">更新日</th>
+        <th style="width: 7%" class="px-0">いいね！</th>
+        <th style="width: 10.5%" class="px-0">タグ</th>
+        <th style="width: 9.5%" class="px-0">更新日</th>
       </tr>
     </thead>
     <% writings.each do |writings| %>
@@ -50,7 +49,9 @@
               <%= list.tag_name %><br>
             <% end %>
           </td>
-          <td class="align-middle text-center"><%= writings.updated_at.strftime('%Y/%m/%d') %></td>
+          <td class="align-middle text-center px-0">
+            <%= writings.updated_at.strftime('%Y/%m/%d') %>
+          </td>
         </tr>
       </tbody>
     <% end %>

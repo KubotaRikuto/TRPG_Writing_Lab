@@ -1,20 +1,20 @@
-<div class="row mb-3" id="comment">
+<div class="row" id="comment">
   <h3>コメント<span><%= writing.writing_comments.count %><small>件</small></span></h3>
 </div>
 <!-- コメント一覧 -->
 <% comment_list.each do |comment| %>
   <div class="row d-flex align-items-center shadow-sm">
-    <div style="height: 40px;" class="col-1 text-center">
+    <div style="height: 40px;" class="col-md-2 col-auto text-center">
       <%= image_tag comment.member.get_profile_image(40,40), class:"border rounded-circle" %>
     </div>
-    <div class="col-8">
+    <div class="col-lg-8 col-md-7 col-sm-8 col-6">
       <p>
         <small><%= comment.member.name %></small></br>
-        <%= comment.comment %></br>
-        <small><%= time_ago_in_words(comment.created_at) %>前</small>
+        <span class="text-break"><%= comment.comment %></span></br>
+        <small><span class="fw-light"><%= time_ago_in_words(comment.created_at) %>前</span></small>
       </p>
     </div>
-    <div class="col-2 text-center">
+    <div class="col-sm-2 col-3 px-sm-3 px-0 text-center">
       <%= link_to "削除", admin_writing_writing_comment_path(writing_id: writing.id,id: comment.id), method: :delete, class: "text-decoration-none link-dark" %>
     </div>
   </div>

@@ -26,10 +26,10 @@
       <p>
         <small><%= comment.member.name %></small></br>
         <span class="text-break"><%= comment.comment %></span></br>
-        <span class="fw-light"><%= time_ago_in_words(comment.created_at) %>前</span></small>
+        <small><span class="fw-light"><%= time_ago_in_words(comment.created_at) %>前</span></small>
       </p>
     </div>
-    <div class="col-sm-2 col-3 px-sm-3 px-0 text-center ">
+    <div class="col-sm-2 col-3 px-sm-3 px-0 text-center">
       <% if comment.member == current_member %>
         <%= link_to "削除", writing_writing_comment_path(writing_id: writing.id,id: comment.id), method: :delete, class: "text-decoration-none text-dark" %>
       <% end %>
